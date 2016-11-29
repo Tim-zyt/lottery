@@ -1,0 +1,27 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:cache="http://www.springframework.org/schema/cache"
+	   xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+
+       http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+    <!-- 开启controller注解支持 -->
+    <context:component-scan base-package="com.sf.lottery" />
+    <!--重定向路径 -->
+    <mvc:view-controller path="/" view-name="redirect:/frontend/html/index.html" />
+    <!-- 文件上传相关 解析器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+    <!--下面两个可以使用springMVC的@ResponseBody注解，并返回json串-->
+    <context:annotation-config />
+    <mvc:annotation-driven />
+    <!--静态资源不被拦截-->
+    <mvc:resources location="/frontend/" mapping="/frontend/**"/>
+
+</beans>
