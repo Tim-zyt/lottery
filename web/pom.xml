@@ -153,9 +153,8 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>**/log4j.xml</exclude>
-                        <exclude>**/dubbo.properties</exclude>
-                        <exclude>**/ambry.properties</exclude>
+                        <exclude>**/http.properties</exclude>
+                        <exclude>**/weixin.properties</exclude>
                     </excludes>
                 </configuration>
             </plugin>

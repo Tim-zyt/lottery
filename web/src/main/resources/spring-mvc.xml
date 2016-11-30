@@ -23,5 +23,12 @@
     <mvc:annotation-driven />
     <!--静态资源不被拦截-->
     <mvc:resources location="/frontend/" mapping="/frontend/**"/>
-
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:weixin.properties</value>
+                <value>classpath:http.properties</value>
+            </list>
+        </property>
+    </bean>
 </beans>

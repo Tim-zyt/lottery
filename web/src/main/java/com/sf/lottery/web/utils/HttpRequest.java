@@ -1,31 +1,26 @@
 package com.sf.lottery.web.utils;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpException;
 import org.apache.http.HttpHost;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.routing.HttpRoute;
+import org.apache.http.conn.routing.HttpRoutePlanner;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import javax.net.ssl.SSLContext;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 /**
  * @author Hash Zhang
@@ -48,86 +43,49 @@ public class HttpRequest {
      * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return URL 所代表远程资源的响应结果content的json串
      */
-    public String sendGet(String url, String param) throws IOException {
-        CloseableHttpClient httpclient = HttpClientBuilder.create().build();
+    public String sendGet(String url, String param) throws Exception {
         HttpGet httpget = new HttpGet(new StringBuilder().append(url).append("?").append(param).toString());
         //配置请求的超时设置
-        RequestConfig requestConfig = RequestConfig.custom().build();
+        RequestConfig requestConfig = null;
+        CloseableHttpClient httpclient = buildSSLCloseableHttpClient();
+
         httpget.setConfig(requestConfig);
         try {
             CloseableHttpResponse response = httpclient.execute(httpget);
             HttpEntity entity = response.getEntity();
-            String jsonStr = EntityUtils.toString(entity);
+            String jsonStr = EntityUtils.toString(entity,"utf-8");
             return jsonStr;
-        }finally {
+        } finally {
             httpget.releaseConnection();
         }
     }
 
-    /**
-     * 向指定 URL 发送POST方法的请求
-     *
-     * @param url   发送请求的 URL
-     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
-     * @return 所代表远程资源的响应结果
-     */
-    public String sendPost(String url, String param) {
-        PrintWriter out = null;
-        BufferedReader in = null;
-        String result = "";
-        try {
-            URL realUrl = new URL(url);
-            URLConnection conn = null;
-            if (isProxy) {
-                Proxy proxy = new Proxy(Proxy.Type.DIRECT.HTTP, new InetSocketAddress(proxyHost, proxyPort));
-                conn = realUrl.openConnection(proxy);
-            } else {
-                // 打开和URL之间的连接
-                conn = realUrl.openConnection();
+    private CloseableHttpClient buildSSLCloseableHttpClient() throws Exception {
+        SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+            //信任所有
+            public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                return true;
             }
-            // 设置通用的请求属性
-            conn.setRequestProperty("accept", "*/*");
-            conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent",
-                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            // 发送POST请求必须设置如下两行
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            // 获取URLConnection对象对应的输出流
-            out = new PrintWriter(conn.getOutputStream());
-            // 发送请求参数
-            out.print(param);
-            // flush输出流的缓冲
-            out.flush();
-            // 定义BufferedReader输入流来读取URL的响应
-            in = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
-            String line;
-            while ((line = in.readLine()) != null) {
-                result += line;
-            }
-        } catch (Exception e) {
-            System.out.println("发送 POST 请求出现异常！" + e);
-            e.printStackTrace();
-        }
-        //使用finally块来关闭输出流、输入流
-        finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return result;
-    }
+        }).build();
+        //ALLOW_ALL_HOSTNAME_VERIFIER:这个主机名验证器基本上是关闭主机名验证的,实现的是一个空操作，并且不会抛出javax.net.ssl.SSLException异常。
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, new String[]{"TLSv1"}, null,
+                SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        if (isProxy) {
+            HttpRoutePlanner routePlanner = new HttpRoutePlanner() {
 
-    public static void main(String[] args) throws IOException {
+                @Override
+                public HttpRoute determineRoute(HttpHost httpHost, org.apache.http.HttpRequest httpRequest, HttpContext httpContext) throws HttpException {
+                    return new HttpRoute(httpHost, null, new HttpHost(proxyHost, proxyPort),
+                            "https".equalsIgnoreCase(httpHost.getSchemeName()));
+                }
+
+            };
+            return HttpClients.custom()
+                    .setRoutePlanner(routePlanner).setSSLSocketFactory(sslsf)
+                    .build();
+        } else {
+            return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+        }
 
     }
-
 }

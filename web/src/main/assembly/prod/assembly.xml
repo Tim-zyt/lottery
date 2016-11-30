@@ -1,0 +1,22 @@
+<assembly>
+	<id></id>
+	<formats>
+		<format>war</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>src/webapps</directory>
+			<excludes>
+				<exclude>**/log4j.xml</exclude>
+				<exclude>**/weixin.properties</exclude>
+				<exclude>**/http.properties</exclude>
+			</excludes>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/assembly/prod/resources</directory>
+			<outputDirectory>WEB-INF/classes</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>
