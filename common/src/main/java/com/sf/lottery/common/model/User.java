@@ -3,11 +3,6 @@ package com.sf.lottery.common.model;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author wujiang
- * @version 1.0.0.
- * @date 2016/11/30
- */
 public class User implements Serializable {
     private Integer id;
 
@@ -19,7 +14,7 @@ public class User implements Serializable {
 
     private Boolean isSign;
 
-    private Date timeSign;
+    private Date signedTime;
 
     private String wxOpenid;
 
@@ -45,9 +40,9 @@ public class User implements Serializable {
         return id;
     }
 
-    //public void setId(Integer id) {
-    //    this.id = id;
-    //}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getSfNum() {
         return sfNum;
@@ -81,12 +76,12 @@ public class User implements Serializable {
         this.isSign = isSign;
     }
 
-    public Date getTimeSign() {
-        return timeSign;
+    public Date getSignedTime() {
+        return signedTime;
     }
 
-    public void setTimeSign(Date timeSign) {
-        this.timeSign = timeSign;
+    public void setSignedTime(Date signedTime) {
+        this.signedTime = signedTime;
     }
 
     public String getWxOpenid() {
@@ -172,7 +167,7 @@ public class User implements Serializable {
         sb.append(", sfName=").append(sfName);
         sb.append(", awardCount=").append(awardCount);
         sb.append(", isSign=").append(isSign);
-        sb.append(", timeSign=").append(timeSign);
+        sb.append(", signedTime=").append(signedTime);
         sb.append(", wxOpenid=").append(wxOpenid);
         sb.append(", wxHeadimgurl=").append(wxHeadimgurl);
         sb.append(", wxNickname=").append(wxNickname);
