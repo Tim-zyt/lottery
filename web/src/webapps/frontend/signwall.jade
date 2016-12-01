@@ -1,0 +1,40 @@
+extends jade/common/layout
+block header
+    link(rel="shortcut icon",href="../favicon.ico")
+    link(rel="stylesheet",type="text/css",href="css/signwall/normalize.css")
+    link(rel="stylesheet",type="text/css",href="css/signwall/demo.css")
+    link(rel="stylesheet",type="text/css",href="css/signwall/component.css")
+    link(rel="stylesheet",type="text/css",href="css/signwall/init.css")
+block content
+    div.container.demo-1(style="width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+        div.content(style="padding: 0px;")
+            div.large-header#large-header
+                div.row
+                    div.col-md-12(style="text-align:center;")
+                        h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2016年会签到墙
+                canvas#demo-canvas
+                div.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;")
+                    div.col-md-12
+                        div.box(style="background-color:#fff;border-top-width: 0px;filter:alpha(opacity=50);opacity:0.5")
+                            div.box-body.no-padding(style="display: block;")
+                                ul.users-list.clearfix(style="height: 750px;overflow-y: auto;margin-left:20px;margin-right:20px;")
+                                    li(style="width: 10%;")
+                                        img(src="lib/AdminLTE/dist/img/user3-128x128.jpg" alt="User Image")
+                                        a.users-list-name(href="#") Alexander Pierce
+                                    li(style="width: 10%;")
+                                        img(src="lib/AdminLTE/dist/img/user3-128x128.jpg" alt="User Image")
+                                        a.users-list-name(href="#") Alexander Pierce
+                                    li(style="width: 10%;")
+                                        img(src="lib/AdminLTE/dist/img/user3-128x128.jpg" alt="User Image")
+                                        a.users-list-name(href="#") Alexander Pierce
+                                    li(style="width: 10%;")
+                                        img(src="lib/AdminLTE/dist/img/user3-128x128.jpg" alt="User Image")
+                                        a.users-list-name(href="#") Alexander Pierce
+
+block footer
+block extends
+    script(src="js/signwall/TweenLite.min.js")
+    script(src="js/signwall/EasePack.min.js")
+    script(src="js/signwall/rAF.min.js")
+    script(src="js/signwall/demo-1.min.js")
+
