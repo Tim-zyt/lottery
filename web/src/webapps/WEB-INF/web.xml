@@ -1,5 +1,13 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0" metadata-complete="true">
     <display-name>myspace</display-name>
+    <servlet>
+        <servlet-name>signUpChannel</servlet-name>
+        <servlet-class>com.sf.lottery.web.websocket.SignUpChannel</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signUpChannel</servlet-name>
+        <url-pattern>/signUpChannel</url-pattern>
+    </servlet-mapping>
     <!-- 加载spring容器配置 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -51,6 +59,8 @@
         <filter-name>ProjectEncoding</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+
 
     <!-- 配置Shiro过滤器,先让Shiro过滤系统接收到的请求 -->
     <!-- 这里filter-name必须对应applicationContext.xml中定义的<bean id="shiroFilter"/> -->
