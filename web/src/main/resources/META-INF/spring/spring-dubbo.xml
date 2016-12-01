@@ -6,5 +6,6 @@
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 <dubbo:consumer timeout="60000" >
 </dubbo:consumer>
-<!--<dubbo:reference id="blogCommentService" interface="com.cn.hash.myspace.blog.service.BlogCommentService" check="false" />-->
+<!--<dubbo:reference id="blogCommentService" interface="com.cn.hash.myspace.blog.com.sf.lottery.servicee.com.sf.lottery.com.sf.lottery.serviceimplimpl.BlogCommentService" check="false" />-->
+    <dubbo:reference id="userService" interface="com.sf.lottery.service.UserService" check="false" />
 </beans>
