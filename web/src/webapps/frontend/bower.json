@@ -1,0 +1,17 @@
+{
+  "name": "sfpp-frontend",
+  "version": "3.0.0",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "animate.css": "^3.5.2",
+    "scrollreveal": "^3.3.2",
+    "font-awesome": "^4.6.3",
+    "Buttons": "^2.0.0",
+    "responsive-nav": "^1.0.39",
+    "jquery": "1.11.3",
+    "jquery-ui": "^1.12.1",
+    "flat-ui": "^2.3.0",
+    "AdminLTE": "admin-lte#^2.3.8"
+  },
+  "devDependencies": {}
+}
