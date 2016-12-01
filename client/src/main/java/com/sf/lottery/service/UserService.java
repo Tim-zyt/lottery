@@ -1,6 +1,5 @@
-package com.sf.lottery.client.user.service;
+package com.sf.lottery.service;
 
-import com.sf.lottery.common.model.SignedUser;
 import com.sf.lottery.common.model.User;
 
 import java.util.List;
@@ -20,6 +19,6 @@ public interface UserService {
      * 获得已签到的用户，返回对象只包含用户的ID、微信号、微信头像、工号、姓名、性别、签到时间
      * @return
      */
-    List<SignedUser> getIsSignUser();
+    List<User> getSignedUser();
 
 }

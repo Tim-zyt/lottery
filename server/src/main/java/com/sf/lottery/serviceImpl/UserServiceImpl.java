@@ -1,7 +1,6 @@
-package com.sf.lottery.client.user.service.impl;
+package com.sf.lottery.serviceImpl;
 
-import com.sf.lottery.client.user.service.UserService;
-import com.sf.lottery.common.model.SignedUser;
+import com.sf.lottery.service.UserService;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.manager.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class UserServiceImpl implements UserService {
         return userManager.addUser(user);
     }
 
-    @Override public List<SignedUser> getIsSignUser() {
-        return null;
+    @Override public List<User> getSignedUser() {
+        return userManager.getSignedUser();
     }
 }

@@ -3,6 +3,11 @@ package com.sf.lottery.common.model;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author wujiang
+ * @version 1.0.0.
+ * @date 2016/11/30
+ */
 public class User implements Serializable {
     private Integer id;
 

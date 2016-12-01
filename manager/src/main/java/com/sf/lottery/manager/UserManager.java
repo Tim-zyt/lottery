@@ -28,4 +28,7 @@ public class UserManager {
         return b;
     }
 
+    public List<User> getSignedUser(){
+        return userMapper.selectSignedUser();
+    }
 }
