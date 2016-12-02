@@ -2,11 +2,19 @@
     <display-name>myspace</display-name>
     <servlet>
         <servlet-name>signUpChannel</servlet-name>
-        <servlet-class>com.sf.lottery.web.websocket.SignUpChannel</servlet-class>
+        <servlet-class>com.sf.lottery.web.websocket.WebsocketChannel</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>signUpChannel</servlet-name>
         <url-pattern>/signUpChannel</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>danmukuChannel</servlet-name>
+        <servlet-class>com.sf.lottery.web.websocket.WebsocketChannel</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>danmukuChannel</servlet-name>
+        <url-pattern>/danmukuChannel</url-pattern>
     </servlet-mapping>
     <!-- 加载spring容器配置 -->
     <listener>

@@ -18,9 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0.0
  * @date 2016/11/30.
  */
-public class SignUpChannel extends WebSocketServlet {
-
-    private static final long serialVersionUID = -4853540828121130946L;
+public class WebsocketChannel extends WebSocketServlet {
     private static ConcurrentHashSet<MyMessageInbound> mmiList = new ConcurrentHashSet<>();
 
     @Override
@@ -33,25 +31,17 @@ public class SignUpChannel extends WebSocketServlet {
 
         @Override
         public void onOpen(WsOutbound outbound) {
-            try {
-                System.out.println("Open Client.");
                 this.myoutbound = outbound;
                 mmiList.add(this);
-                outbound.writeTextMessage(CharBuffer.wrap("Hello!"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         @Override
         public void onClose(int status) {
-            System.out.println("Close Client.");
             mmiList.remove(this);
         }
 
         @Override
         public void onTextMessage(CharBuffer cb) throws IOException {
-            System.out.println("Accept Message : " + cb);
             for (MyMessageInbound mmib : mmiList) {
                 CharBuffer buffer = CharBuffer.wrap(cb);
                 try {
