@@ -35,26 +35,26 @@ jQuery(function ($) {
             //         currentPresent.remove();
             //     },2000)
             // },2000);
-            // currentPresent = $("<div style='position:absolute;top:25%;padding-left:"+(num%7+1)*10+"%;class='col-lg-12'><p><img src='image/present/rocket.png' style='height:500px' class='img-responsive'></p></div>");
-            // danmukuWall.after(currentPresent);
-            // currentPresent.addClass("animated bounceInUp");
-            // setTimeout(function () {
-            //     currentPresent.removeClass("animated bounceInUp");
-            //     currentPresent.addClass("animated bounceOutUp");
-            //     setTimeout(function () {
-            //         currentPresent.remove();
-            //     },2000)
-            // },2000);
-            var currentPresent = $("<div style='position:absolute;top:"+ (num%5+1)*100 +"px;padding-left:"+(num%7+1)*10+"%' class='col-lg-12'><p><img src='image/present/flower.gif' style='height: 120px' class='img-responsive'></p></div>");
+            var currentPresent = $("<div style='position:absolute;top:25%;padding-left:"+(num%7+1)*10+"%;class='col-lg-12'><p><img src='image/present/rocket.png' style='height:500px' class='img-responsive'></p></div>");
             danmukuWall.after(currentPresent);
-            currentPresent.addClass("animated bounceIn");
+            currentPresent.addClass("animated bounceInUp");
             setTimeout(function () {
-                currentPresent.removeClass("animated bounceIn");
-                currentPresent.addClass("animated bounceOut");
+                currentPresent.removeClass("animated bounceInUp");
+                currentPresent.addClass("animated bounceOutUp");
                 setTimeout(function () {
                     currentPresent.remove();
                 },2000)
             },2000);
+            // var currentPresent = $("<div style='position:absolute;top:"+ (num%5+1)*100 +"px;padding-left:"+(num%7+1)*10+"%' class='col-lg-12'><p><img src='image/present/flower.gif' style='height: 120px' class='img-responsive'></p><strong>862911送出一束花</strong></div>");
+            // danmukuWall.after(currentPresent);
+            // currentPresent.addClass("animated bounceIn");
+            // setTimeout(function () {
+            //     currentPresent.removeClass("animated bounceIn");
+            //     currentPresent.addClass("animated bounceOut");
+            //     setTimeout(function () {
+            //         currentPresent.remove();
+            //     },2000)
+            // },2000);
         };
         function postToServer(){
             ws.send(document.getElementById("msg").value);

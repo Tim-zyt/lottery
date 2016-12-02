@@ -31,4 +31,8 @@ public class UserManager {
     public List<User> getSignedUser(){
         return userMapper.selectSignedUser();
     }
+
+    public User getUserById(int userId){
+        return userMapper.selectByPrimaryKey(userId);
+    }
 }
