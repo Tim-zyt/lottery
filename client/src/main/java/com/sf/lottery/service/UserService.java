@@ -1,4 +1,6 @@
-package com.sf.lottery.client.user.service;
+package com.sf.lottery.service;
+
+import com.sf.lottery.common.model.User;
 
 import java.util.List;
 
@@ -11,12 +13,13 @@ public interface UserService {
      * 并且第一次保存时，设置该用户已签到，并由代码生成签到时间
      * @return
      */
-    boolean saveUser();
+    boolean saveUser(User user) throws Exception;
 
     /**
      * 获得已签到的用户，返回对象只包含用户的ID、微信号、微信头像、工号、姓名、性别、签到时间
      * @return
      */
-    List<Object> getIsSignUser();
+    List<User> getSignedUser() throws Exception;
 
+    User getUserById(int userId) throws Exception;
 }

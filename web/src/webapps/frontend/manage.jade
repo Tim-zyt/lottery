@@ -1,0 +1,58 @@
+//
+   Created by 01170626 on 2016/12/1.
+extends jade/common/layout
+
+block header
+    link(rel="shortcut icon",href="../favicon.ico")
+    link(rel="stylesheet", type="text/css",href="css/manage/component.css")
+    link(rel="stylesheet", type="text/css",href="css/manage/demo.css")
+    link(rel="stylesheet", type="text/css",href="css/manage/normalize.css")
+    link(rel="stylesheet",href="http://www.yyyweb.com/demo/common/init.css")
+
+block content
+    div.container.demo-4(style="width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+        div.content(style="padding: 0px;")
+            div#large-header.large-header
+                canvas#demo-canvas
+                div(style="position:absolute;top:20%;width:80%;left:10%;right:10%;text-align:center")
+                    h1(style="font-size:6em") 2016年会管理系统
+                    div
+                        div.row
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-aqua
+                                    div.inner(style="text-align:center;")
+                                        h3 签到墙
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-green
+                                    div.inner(style="text-align:center;")
+                                        h3 活动开始
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-yellow
+                                    div.inner(style="text-align:center;")
+                                        h3 节目管理
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-red
+                                    div.inner(style="text-align:center;")
+                                        h3 抽奖管理
+                        div.row
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-aqua
+                                    div.inner(style="text-align:center;")
+                                        h3 sfpp
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-green
+                                    div.inner(style="text-align:center;")
+                                        h3 sfpp
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-yellow
+                                    div.inner(style="text-align:center;")
+                                        h3 初始化
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-red
+                                    div.inner(style="text-align:center;")
+                                        h3 统计
+block footer
+    script(src="js/manage/demo-4.min.js")
+    script(src="js/manage/rAF.min.js")
+    script(src="js/manage/EasePack.min.js")
+    script(src="js/manage/TweenLite.min.js")

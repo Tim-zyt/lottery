@@ -2,6 +2,13 @@ package com.sf.lottery.dao;
 
 import com.sf.lottery.common.model.User;
 
+import java.util.List;
+
+/**
+ * @author wujiang
+ * @version 1.0.0.
+ * @date 2016/11/30
+ */
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +21,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> selectSignedUser();
 }

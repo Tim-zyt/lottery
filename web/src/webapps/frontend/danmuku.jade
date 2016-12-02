@@ -1,8 +1,24 @@
 extends jade/common/layout
+block header
+    link(rel="shortcut icon",href="../favicon.ico")
+    link(rel="stylesheet",type="text/css",href="css/danmuku/normalize.css")
+    link(rel="stylesheet",type="text/css",href="css/danmuku/demo.css")
+    link(rel="stylesheet",type="text/css",href="css/danmuku/component.css")
+    link(rel="stylesheet",type="text/css",href="css/danmuku/init.css")
 block content
-    div.box.box-info.direct-chat.direct-chat-info
-        div.box-header.with-border
-            h3.box-title 弹幕墙
-        div.box-body
+    div.container.demo-2(style="width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+        div.content(style="padding: 0px;")
+            div.large-header#large-header
+                div.row
+                    div.col-md-12(style="text-align:center;")
+                        h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2016年会弹幕墙
+                canvas#demo-canvas
+                div.box-body(style="background-color:#fff;border-top-width: 0px;filter:alpha(opacity=50);opacity:0.9;position:absolute;top:10%;width:80%;left:10%;right:10%;")
+                    div.direct-chat-messages(style="height:900px")
+
 block extends
     script(src="js/danmuku.min.js")
+    script(src="js/damuku/TweenLite.min.js")
+    script(src="js/damuku/EasePack.min.js")
+    script(src="js/damuku/rAF.min.js")
+    script(src="js/damuku/demo-2.min.js")

@@ -7,7 +7,7 @@
     <result column="sf_name" property="sfName" jdbcType="VARCHAR" />
     <result column="award_count" property="awardCount" jdbcType="INTEGER" />
     <result column="is_sign" property="isSign" jdbcType="BIT" />
-    <result column="time_sign" property="timeSign" jdbcType="TIMESTAMP" />
+    <result column="signed_time" property="signedTime" jdbcType="TIMESTAMP" />
     <result column="wx_openid" property="wxOpenid" jdbcType="VARCHAR" />
     <result column="wx_headimgurl" property="wxHeadimgurl" jdbcType="VARCHAR" />
     <result column="wx_nickname" property="wxNickname" jdbcType="VARCHAR" />
@@ -19,8 +19,8 @@
     <result column="wx_unionid" property="wxUnionid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, sf_num, sf_name, award_count, is_sign, time_sign, wx_openid, wx_headimgurl, wx_nickname, 
-    wx_sex, wx_province, wx_city, wx_country, wx_privilege, wx_unionid
+    id, sf_num, sf_name, award_count, is_sign, signed_time, wx_openid, wx_headimgurl, 
+    wx_nickname, wx_sex, wx_province, wx_city, wx_country, wx_privilege, wx_unionid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -34,13 +34,13 @@
   </delete>
   <insert id="insert" parameterType="com.sf.lottery.common.model.User" >
     insert into sf_user (id, sf_num, sf_name, 
-      award_count, is_sign, time_sign, 
+      award_count, is_sign, signed_time, 
       wx_openid, wx_headimgurl, wx_nickname, 
       wx_sex, wx_province, wx_city, 
       wx_country, wx_privilege, wx_unionid
       )
     values (#{id,jdbcType=INTEGER}, #{sfNum,jdbcType=INTEGER}, #{sfName,jdbcType=VARCHAR}, 
-      #{awardCount,jdbcType=INTEGER}, #{isSign,jdbcType=BIT}, #{timeSign,jdbcType=TIMESTAMP}, 
+      #{awardCount,jdbcType=INTEGER}, #{isSign,jdbcType=BIT}, #{signedTime,jdbcType=TIMESTAMP}, 
       #{wxOpenid,jdbcType=VARCHAR}, #{wxHeadimgurl,jdbcType=VARCHAR}, #{wxNickname,jdbcType=VARCHAR}, 
       #{wxSex,jdbcType=INTEGER}, #{wxProvince,jdbcType=VARCHAR}, #{wxCity,jdbcType=VARCHAR}, 
       #{wxCountry,jdbcType=VARCHAR}, #{wxPrivilege,jdbcType=VARCHAR}, #{wxUnionid,jdbcType=VARCHAR}
@@ -64,8 +64,8 @@
       <if test="isSign != null" >
         is_sign,
       </if>
-      <if test="timeSign != null" >
-        time_sign,
+      <if test="signedTime != null" >
+        signed_time,
       </if>
       <if test="wxOpenid != null" >
         wx_openid,
@@ -111,8 +111,8 @@
       <if test="isSign != null" >
         #{isSign,jdbcType=BIT},
       </if>
-      <if test="timeSign != null" >
-        #{timeSign,jdbcType=TIMESTAMP},
+      <if test="signedTime != null" >
+        #{signedTime,jdbcType=TIMESTAMP},
       </if>
       <if test="wxOpenid != null" >
         #{wxOpenid,jdbcType=VARCHAR},
@@ -158,8 +158,8 @@
       <if test="isSign != null" >
         is_sign = #{isSign,jdbcType=BIT},
       </if>
-      <if test="timeSign != null" >
-        time_sign = #{timeSign,jdbcType=TIMESTAMP},
+      <if test="signedTime != null" >
+        signed_time = #{signedTime,jdbcType=TIMESTAMP},
       </if>
       <if test="wxOpenid != null" >
         wx_openid = #{wxOpenid,jdbcType=VARCHAR},
@@ -197,7 +197,7 @@
       sf_name = #{sfName,jdbcType=VARCHAR},
       award_count = #{awardCount,jdbcType=INTEGER},
       is_sign = #{isSign,jdbcType=BIT},
-      time_sign = #{timeSign,jdbcType=TIMESTAMP},
+      signed_time = #{signedTime,jdbcType=TIMESTAMP},
       wx_openid = #{wxOpenid,jdbcType=VARCHAR},
       wx_headimgurl = #{wxHeadimgurl,jdbcType=VARCHAR},
       wx_nickname = #{wxNickname,jdbcType=VARCHAR},
