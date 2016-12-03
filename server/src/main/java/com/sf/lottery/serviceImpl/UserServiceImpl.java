@@ -23,9 +23,9 @@ public class UserServiceImpl implements UserService {
     UserManager userManager;
 
     @Override
-    public boolean saveUser(User user) throws Exception {
+    public int saveUser(User user) throws Exception {
         try {
-            return userManager.addUser(user);
+            return userManager.updateByNoAndName(user);
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
             throw new Exception(e);
@@ -51,4 +51,23 @@ public class UserServiceImpl implements UserService {
             throw new Exception(e);
         }
     }
+
+    @Override
+    public boolean isSignedByWxInfo(String openId){
+        int count = userManager.isSignedByWxInfo(openId);
+        if(count == 1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean verifyUser(int sfNum,String sfName){
+        int count = userManager.VerifyUser(sfNum,sfName);
+        if(count == 1){
+            return true;
+        }
+        return false;
+    }
+
 }

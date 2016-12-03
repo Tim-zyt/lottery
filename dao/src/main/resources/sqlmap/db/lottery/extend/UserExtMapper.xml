@@ -2,11 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sf.lottery.dao.UserMapper">
 
-  <select id="selectSignedUser" resultMap="BaseResultMap">
+    <select id="selectSignedUser" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sf_user
     where is_sign = 1
   </select>
+
+    <select id="isSignedByWxInfo" parameterType="java.lang.String" resultType="java.lang.Integer">
+            select
+            count(*)
+            from sf_user
+            where wx_openid = #{openId,jdbcType=VARCHAR} and is_sign=true
+    </select>
+
+    <select id="verifyUser" resultType="java.lang.Integer">
+        select
+        count(*)
+        from sf_user
+        where sf_num=#{0} and sf_name=#{1}
+    </select>
+
+    <update id="updateByNoAndName" parameterType="com.sf.lottery.common.model.User" >
+        update sf_user
+        set is_sign = #{isSign,jdbcType=BIT},
+        signed_time = #{signedTime,jdbcType=TIMESTAMP},
+        wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+        wx_headimgurl = #{wxHeadimgurl,jdbcType=VARCHAR},
+        wx_nickname = #{wxNickname,jdbcType=VARCHAR},
+        wx_sex = #{wxSex,jdbcType=INTEGER},
+        wx_province = #{wxProvince,jdbcType=VARCHAR},
+        wx_city = #{wxCity,jdbcType=VARCHAR},
+        wx_country = #{wxCountry,jdbcType=VARCHAR},
+        wx_privilege = #{wxPrivilege,jdbcType=VARCHAR},
+        wx_unionid = #{wxUnionid,jdbcType=VARCHAR}
+        where sf_num = #{sfNum,jdbcType=INTEGER} and sf_name = #{sfName,jdbcType=VARCHAR}
+    </update>
 
 </mapper>
