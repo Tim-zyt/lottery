@@ -1,8 +1,6 @@
 package com.sf.lottery.web.utils;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +13,7 @@ import java.util.Map;
  * @version 1.0.0
  * @date 2016/12/1.
  */
+@Component
 public class CookiesUtil {
     /**
      * 添加Cookies

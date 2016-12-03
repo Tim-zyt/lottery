@@ -46,7 +46,7 @@
       #{wxCountry,jdbcType=VARCHAR}, #{wxPrivilege,jdbcType=VARCHAR}, #{wxUnionid,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sf.lottery.common.model.User" >
+  <insert id="insertSelective" parameterType="com.sf.lottery.common.model.User">
     insert into sf_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -191,7 +191,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sf.lottery.common.model.User" >
+  <update id="updateByPrimaryKey" parameterType="com.sf.lottery.common.model.User" useGeneratedKeys="true" keyProperty="id">
     update sf_user
     set sf_num = #{sfNum,jdbcType=INTEGER},
       sf_name = #{sfName,jdbcType=VARCHAR},
