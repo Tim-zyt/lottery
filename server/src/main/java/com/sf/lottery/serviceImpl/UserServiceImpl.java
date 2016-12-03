@@ -70,4 +70,9 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public int getSignedAmount(){
+        return userManager.getSignedAmount();
+    }
+
 }

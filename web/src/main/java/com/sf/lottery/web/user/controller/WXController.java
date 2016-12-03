@@ -59,7 +59,7 @@ public class WXController {
             if(isSigned){            //已签到
                 return "redirect:/frontend/main.html";
             }else{                  //未签到
-                return "redirect:/frontend/login.html?s="+s;
+                return "redirect:/frontend/login.html";
             }
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));

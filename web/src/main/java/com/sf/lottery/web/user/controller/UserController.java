@@ -7,9 +7,7 @@ import com.sf.lottery.common.utils.ExceptionUtils;
 import com.sf.lottery.service.UserService;
 import com.sf.lottery.web.utils.CookiesUtil;
 import com.sf.lottery.web.utils.HttpRequest;
-import com.sf.lottery.web.websocket.WebsocketClientFactory;
 import com.sf.lottery.web.weixin.domain.UserInfoReturn;
-import org.java_websocket.client.WebSocketClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,16 +85,29 @@ public class UserController {
             try {
                 userId = userService.saveUser(user);
                 cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
-                WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("signUp", signUpAddress);
-                webSocketClient.connectBlocking();
-                webSocketClient.send(JSON.toJSONString(user));
-                webSocketClient.close();
+//                WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("signUp", signUpAddress);
+//                webSocketClient.connectBlocking();
+//                webSocketClient.send(JSON.toJSONString(user));
+//                webSocketClient.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return "redirect:/frontend/main.html";
         }else{
-            return "该用户不存在";
+            String message = "该用户不存在";
+            return "redirect:/frontend/login.html?message="+message;
         }
+    }
+    @ResponseBody
+    @RequestMapping(value = "/user/getSignedAmount", method = RequestMethod.POST)
+    public JsonResult<Integer> getSignedAmount() {
+        JsonResult<Integer> result = new JsonResult<>();
+        try {
+            Integer signedAmount = userService.getSignedAmount();
+            result.setData(signedAmount);
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
     }
 }

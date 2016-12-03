@@ -1,0 +1,32 @@
+//为每个 HTML 页面的第一行添加标准模式（standard mode）的声明，这样能够确保在每个浏览器中拥有一致的展现。
+doctype html
+//根据 HTML5 规范：强烈建议为 html 根元素指定 lang 属性，从而为文档设置正确的语言。这将有助于语音合成工具确定其所应该采用的发音，有助于翻译工具确定其翻译时所应遵守的规则等等。
+html(lang="zh-cn")
+    head
+        block title
+        //通过明确声明字符编码，能够确保浏览器快速并容易的判断页面内容的渲染方式。这样做的好处是，可以避免在 HTML 中使用字符实体标记（character entity），从而全部与文档编码一致（一般采用 UTF-8 编码）。
+        meta(charset="utf-8")
+        //IE 支持通过特定的 <meta> 标签来确定绘制当前页面所应该采用的 IE 版本。除非有强烈的特殊需求，否则最好是设置为 edge mode，从而通知 IE 采用其所支持的最新的模式。
+        meta(http-equiv="X-UA-Compatible",content="IE=Edge")
+        link(rel="shortcut icon",href="../favicon.ico")
+
+        link(rel="stylesheet", href="lib/AdminLTE/dist/css/AdminLTE.min.css")
+
+    body(style="repeat:no-repeat;background:url(image/phone/main.png);background-size: cover;background-attachment: fixed;")
+        div.container.demo-4(style="width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+            div.content(style="padding: 0px;")
+                div#large-header.large-header
+                    canvas#demo-canvas
+                    div(style="position:absolute;top:50%;buttom:10%;width:80%;left:10%;right:10%;text-align:center")
+                        div.col-lg-6.col-xs-6
+                            div.small-box.bg-aqua
+                                div.inner(style="text-align:center;")
+                                    h3 进入活动现场
+                        div.col-lg-6.col-xs-6
+                            div.small-box.bg-green
+                                div.inner(style="text-align:center;")
+                                    h3 CP签到
+                        div.col-lg-6.col-xs-6
+                            div.small-box.bg-yellow
+                                div.inner(style="text-align:center;")
+                                    h3 游戏活动
