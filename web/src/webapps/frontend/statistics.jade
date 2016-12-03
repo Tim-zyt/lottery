@@ -1,0 +1,28 @@
+//
+   Created by 01170626 on 2016/12/2.
+extends jade/common/layout
+block header
+    link(rel="shortcut icon",href="../favicon.ico")
+    link(rel="stylesheet", type="text/css",href="css/statistics/sidebar/normalize.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/sidebar/demo.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/sidebar/component.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
+
+    script(src="js/statistics/sidebar/modernizr.custom.js")
+    script(src="js/statistics/sidebar/GoogleTemp.js")
+
+block content
+    include jade/statistics/sidebar
+
+    include jade/statistics/PeopleCounting
+
+
+block footer
+block extends
+    script(src="js/statistics/sidebar/classie.js")
+    script(src="js/statistics/sidebar/gnmenu.js")
+    script(src="js/statistics/sidebar/GoogleTemp2.js")
+    script(src="js/statistics/chart.min.js")
+    script(src="js/statistics/statistics.min.js")
+
