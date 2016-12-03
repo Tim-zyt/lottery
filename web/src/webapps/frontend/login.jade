@@ -25,7 +25,7 @@ html(lang="zh-cn")
                 b 顺丰科技2017年会入口
             div.login-box-body
                 p.login-box-msg 顺丰科技 大步向前
-                form(action="/user/login?" method="post")
+                form(action="/user/login?" method="post" onsubmit="return checkinput(this)")
                     div.form-group.has-feedback
                         input(type="number",placeholder="请输入您的6或8位工号",name="sfnum").form-control
                         span.glyphicon.glyphicon-plus.form-control-feedback
@@ -34,6 +34,7 @@ html(lang="zh-cn")
                         span.glyphicon.glyphicon-user.form-control-feedback
                     div.row
                         div.col-xs-8
+                            p#messsage
                         div.col-xs-4
                             button(type="submit").btn.btn-primary.btn-block.btn-flat Let's Go
 

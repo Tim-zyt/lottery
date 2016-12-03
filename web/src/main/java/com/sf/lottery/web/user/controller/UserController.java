@@ -94,7 +94,20 @@ public class UserController {
             }
             return "redirect:/frontend/main.html";
         }else{
-            return "该用户不存在";
+            String message = "该用户不存在";
+            return "redirect:/frontend/login.html?message="+message;
         }
+    }
+    @ResponseBody
+    @RequestMapping(value = "/user/getSignedAmount", method = RequestMethod.POST)
+    public JsonResult<Integer> getSignedAmount() {
+        JsonResult<Integer> result = new JsonResult<>();
+        try {
+            Integer signedAmount = userService.getSignedAmount();
+            result.setData(signedAmount);
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
     }
 }

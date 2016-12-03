@@ -8,33 +8,25 @@ html(lang="zh-cn")
         meta(charset="utf-8")
         //IE 支持通过特定的 <meta> 标签来确定绘制当前页面所应该采用的 IE 版本。除非有强烈的特殊需求，否则最好是设置为 edge mode，从而通知 IE 采用其所支持的最新的模式。
         meta(http-equiv="X-UA-Compatible",content="IE=Edge")
-        link(rel="stylesheet", href="lib/Buttons/css/buttons.min.css")
-        link(rel="stylesheet", href="lib/font-awesome/css/font-awesome.min.css")
-        link(rel="stylesheet", href="lib/bootstrap/dist/css/bootstrap.min.css")
-    //  注意：HTML 属性应当按照以下给出的顺序依次排列，确保代码的易读性：class,id, name,data-*,src, for, type, href,title, alt,aria-*, role
-    //  通过 JavaScript 生成的标签让内容变得不易查找、编辑，并且降低性能。能避免时尽量避免。
-    body
-        div.container
-            div.row
-                div(style="position:absolute;top:50%;left:39%;text-align:center").col-xs-10
-                    button.btn.btn-block.btn-info.btn-lg 进入活动现场
-                div(style="position:absolute;top:60%;left:39%;text-align:center").col-xs-10
-                    button.btn.btn-block.btn-info.btn-lg CP签到
-                div(style="position:absolute;top:70%;left:39%;right:39%;text-align:center").col-md-3.col-xs-10.col-lt-3
-                    button.btn.btn-block.btn-info.btn-lg 游戏活动
+        link(rel="shortcut icon",href="../favicon.ico")
 
+        link(rel="stylesheet", href="lib/AdminLTE/dist/css/AdminLTE.min.css")
 
-
-    script(src="lib/jquery/dist/jquery.min.js")
-    script(src="lib/jquery-ui/jquery-ui.min.js")
-    script(src="lib/bootstrap/dist/js/bootstrap.min.js")
-    //  动画相关
-    script(src="lib/Buttons/js/buttons.js")
-
-
-
-
-
-
-
-
+    body(style="repeat:no-repeat;background:url(image/phone/main.png);background-size: cover;background-attachment: fixed;")
+        div.container.demo-4(style="width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+            div.content(style="padding: 0px;")
+                div#large-header.large-header
+                    canvas#demo-canvas
+                    div(style="position:absolute;top:50%;buttom:10%;width:80%;left:10%;right:10%;text-align:center")
+                        div.col-lg-6.col-xs-6
+                            div.small-box.bg-aqua
+                                div.inner(style="text-align:center;")
+                                    h3 进入活动现场
+                        div.col-lg-6.col-xs-6
+                            div.small-box.bg-green
+                                div.inner(style="text-align:center;")
+                                    h3 CP签到
+                        div.col-lg-6.col-xs-6
+                            div.small-box.bg-yellow
+                                div.inner(style="text-align:center;")
+                                    h3 游戏活动

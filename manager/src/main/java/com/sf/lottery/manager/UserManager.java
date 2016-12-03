@@ -38,4 +38,8 @@ public class UserManager {
     public User getUserById(int userId){
         return userMapper.selectByPrimaryKey(userId);
     }
+
+    public int getSignedAmount(){
+        return userMapper.getSignedAmount();
+    }
 }

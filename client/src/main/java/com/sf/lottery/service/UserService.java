@@ -32,5 +32,8 @@ public interface UserService {
      * @return
      */
     boolean verifyUser(int sfNum,String sfName);
+
     User getUserById(int userId) throws Exception;
+
+    int getSignedAmount();
 }

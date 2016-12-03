@@ -29,4 +29,6 @@ public interface UserMapper {
     int verifyUser(int sfNum,String sfName);
 
     int updateByNoAndName(User user);
+
+    int getSignedAmount();
 }
