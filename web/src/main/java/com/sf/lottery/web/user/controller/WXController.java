@@ -2,9 +2,10 @@ package com.sf.lottery.web.user.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sf.lottery.common.utils.ExceptionUtils;
+import com.sf.lottery.service.UserService;
+import com.sf.lottery.web.utils.CookiesUtil;
 import com.sf.lottery.web.utils.HttpRequest;
 import com.sf.lottery.web.weixin.domain.UserAuthorizationReturn;
-import com.sf.lottery.web.weixin.domain.UserInfoReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+
+import java.net.URLEncoder;
 
 /**
  * @author Hash Zhang
@@ -27,6 +30,10 @@ public class WXController {
     private final static Logger log = LoggerFactory.getLogger(WXController.class);
     @Autowired
     private HttpRequest httpRequest;
+    @Autowired
+    private CookiesUtil cookiesUtil;
+    @Autowired
+    private UserService userService;
     @Value("${weixin.appID}")
     private String appId;
     @Value("${weixin.appsecret}")
@@ -40,16 +47,20 @@ public class WXController {
     }
 
     @RequestMapping(value = "/weixin/login", method = RequestMethod.GET)
-    public String getWXUserInfo(@RequestParam("code") String code) {
+    public String getWXUserInfo(@RequestParam("code") String code,HttpServletResponse response) {
         try {
             String s = httpRequest.sendGet("https://api.weixin.qq.com/sns/oauth2/access_token",
                     "appid=" + appId + "&secret=" + appSecret + "&code=" + code + "&grant_type=authorization_code");
             UserAuthorizationReturn userAuthorizationReturn = JSON.parseObject(s, UserAuthorizationReturn.class);
             s = httpRequest.sendGet("https://api.weixin.qq.com/sns/userinfo",
                     "access_token="+userAuthorizationReturn.getAccess_token()+"&openid="+userAuthorizationReturn.getOpenid()+"&lang=zh_CN");
-            UserInfoReturn userInfoReturn = JSON.parseObject(s, UserInfoReturn.class);
-            System.out.println(userInfoReturn.toString());
-            return "redirect:/frontend/test.html";
+            boolean isSigned = userService.isSignedByWxInfo(userAuthorizationReturn.getOpenid());
+            cookiesUtil.addCookie(response,"userJson",URLEncoder.encode(s,"UTF-8"),7200);
+            if(isSigned){            //已签到
+                return "redirect:/frontend/main.html";
+            }else{                  //未签到
+                return "redirect:/frontend/login.html?s="+s;
+            }
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }

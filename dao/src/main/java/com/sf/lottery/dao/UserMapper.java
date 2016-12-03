@@ -23,4 +23,10 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> selectSignedUser();
+
+    int isSignedByWxInfo(String openId);
+
+    int verifyUser(int sfNum,String sfName);
+
+    int updateByNoAndName(User user);
 }

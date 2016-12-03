@@ -7,27 +7,32 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author wujiang
+ * @version 1.0.0.
+ * @date 2016/11/30
+ */
 @Component
 public class UserManager {
 
     @Autowired
     private UserMapper userMapper;
 
-    /**
-     * 如果签到成功，则设置签到成功
-     * @param user
-     * @return
-     */
-    public boolean addUser(User user){
-        boolean b = userMapper.insertSelective(user)>0;
-        if(b){
-            user.setIsSign(true);
-        }
-        return b;
+
+    public int updateByNoAndName(User user){
+        return userMapper.updateByNoAndName(user);
     }
 
     public List<User> getSignedUser(){
         return userMapper.selectSignedUser();
+    }
+
+    public int isSignedByWxInfo(String openId){
+        return userMapper.isSignedByWxInfo(openId);
+    }
+
+    public int VerifyUser(int sfNum,String sfName){
+        return userMapper.verifyUser(sfNum,sfName);
     }
 
     public User getUserById(int userId){
