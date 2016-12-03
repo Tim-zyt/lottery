@@ -3,15 +3,13 @@ package com.sf.lottery.manager;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * @author wujiang
- * @version 1.0.0.
- * @date 2016/11/30
- */
+@Component
 public class UserManager {
+
     @Autowired
     private UserMapper userMapper;
 
