@@ -7,10 +7,13 @@ import com.sf.lottery.common.utils.ExceptionUtils;
 import com.sf.lottery.service.UserService;
 import com.sf.lottery.web.utils.CookiesUtil;
 import com.sf.lottery.web.utils.HttpRequest;
+import com.sf.lottery.web.websocket.WebsocketClientFactory;
 import com.sf.lottery.web.weixin.domain.UserInfoReturn;
+import org.java_websocket.client.WebSocketClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +42,9 @@ public class UserController {
     private CookiesUtil cookiesUtil;
     @Autowired
     private UserService userService;
+
+    @Value("signUp.websocket.address")
+    private String signUpAddress;
 
     @ResponseBody
     @RequestMapping(value = "/user/getSignedUser", method = RequestMethod.POST)
@@ -80,11 +86,14 @@ public class UserController {
             int userId = 0;
             try {
                 userId = userService.saveUser(user);
+                cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
+                WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("signUp", signUpAddress);
+                webSocketClient.connectBlocking();
+                webSocketClient.send(JSON.toJSONString(user));
+                webSocketClient.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
-            //todo 签到墙更新事件
             return "redirect:/frontend/main.html";
         }else{
             return "该用户不存在";

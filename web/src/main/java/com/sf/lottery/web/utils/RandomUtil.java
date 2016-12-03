@@ -1,14 +1,17 @@
 package com.sf.lottery.web.utils;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by 01139954 on 2016/12/3.
  */
+@Component
 public class RandomUtil {
     /**
      * 随机指定范围内N个不重复的数
      * 最简单最基本的方法
-     * @param min 指定范围最小值
-     * @param max 指定范围最大值
+     * @param min 指定范围最小值（包含）
+     * @param max 指定范围最大值(不包含)
      * @param n 随机数个数
      */
     public static int[] randomCommon(int min, int max, int n){
@@ -16,9 +19,12 @@ public class RandomUtil {
             return null;
         }
         int[] result = new int[n];
+        for(int i = 0 ; i < n ; i++){
+            result[i] = -9999;
+        }
         int count = 0;
         while(count < n) {
-            int num = (int) (Math.random() * (max - min)) + min;
+            int num = (int) ((Math.random() * (max - min)) + min);
             boolean flag = true;
             for (int j = 0; j < n; j++) {
                 if(num == result[j]){
@@ -36,13 +42,11 @@ public class RandomUtil {
 
     public static void main(String args[]){
         for(int j = 0 ; j < 20 ; j++){
-            int[] ran = randomCommon(0,10,3);
+            int[] ran = randomCommon(0,10,5);
             for(int i = 0 ; i < ran.length ; i++){
                 System.out.print(ran[i] + "," );
             }
             System.out.println("");
         }
-
-
     }
 }
