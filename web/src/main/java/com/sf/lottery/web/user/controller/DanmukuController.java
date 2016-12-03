@@ -2,13 +2,16 @@ package com.sf.lottery.web.user.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sf.lottery.common.dto.JsonResult;
+import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.ExceptionUtils;
+import com.sf.lottery.service.UserService;
 import com.sf.lottery.web.damuku.domain.DanmukuMessage;
 import com.sf.lottery.web.utils.CookiesUtil;
 import com.sf.lottery.web.websocket.WebsocketClientFactory;
 import org.java_websocket.client.WebSocketClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +29,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class DanmukuController {
+    @Autowired
+    private UserService userService;
 
     @Value("danmuku.websocket.address")
     private String danmukuAddress;
@@ -37,7 +42,7 @@ public class DanmukuController {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
             int userId = Integer.parseInt(CookiesUtil.getCookieByName(request, "userId").getValue());
-
+            User user = userService.getUserById(userId);
             WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", danmukuAddress);
             webSocketClient.connectBlocking();
             webSocketClient.send(JSON.toJSONString(danmukuMessage));

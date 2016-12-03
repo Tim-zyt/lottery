@@ -15,21 +15,25 @@ html(lang="zh-cn")
         link(rel="stylesheet", href="lib/AdminLTE/dist/css/AdminLTE.min.css")
         link(rel="stylesheet", href="lib/flat-ui/dist/css/flat-ui.min.css")
         link(rel="stylesheet", href="lib/jquery-fireworks/stylesheets/stylesheet.css")
+        //利用block划分区域，便于被继承
+        block header
     //  注意：HTML 属性应当按照以下给出的顺序依次排列，确保代码的易读性：class,id, name,data-*,src, for, type, href,title, alt,aria-*, role
     //  通过 JavaScript 生成的标签让内容变得不易查找、编辑，并且降低性能。能避免时尽量避免。
     body
-        //利用block划分区域，便于被继承
-        block header
         block content
         block footer
     script(src="lib/jquery/dist/jquery.min.js")
     script(src="lib/jquery-ui/jquery-ui.min.js")
     script(src="lib/bootstrap/dist/js/bootstrap.min.js")
+    //微信
+    script(src="js/jweixin-1.1.0.min.js")
     //  动画相关
     script(src="lib/scrollreveal/dist/scrollreveal.min.js")
     script(src="lib/Buttons/js/buttons.js")
     script(src="lib/jquery-fireworks/jquery.fireworks.min.js")
     //  native
     script(src="js/util.min.js")
+    script(src="js/variables.min.js")
+    // weixin
     block extends
 

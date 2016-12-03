@@ -1,5 +1,17 @@
 jQuery(function ($) {
     $(document).ready(function () {
+        var ws = new WebSocket(signWallChannelAddress);
+        ws.onopen = function(){
+        };
+        ws.onmessage = function(message){
+        };
+        function postToServer(){
+            ws.send(document.getElementById("msg").value);
+            document.getElementById("msg").value = "";
+        }
+        function closeConnect(){
+            ws.close();
+        }
         getSignedUser();
     });
 

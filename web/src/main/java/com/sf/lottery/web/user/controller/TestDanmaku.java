@@ -29,7 +29,7 @@ public class TestDanmaku {
     public JsonResult<Boolean> getWXUserInfo(@RequestParam("content") String content, HttpServletRequest request) {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
-            WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", "ws://localhost/signUpChannel");
+            WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", "ws://localhost/danmukuChannel");
             webSocketClient.connectBlocking();
             webSocketClient.send(content);
             webSocketClient.close();

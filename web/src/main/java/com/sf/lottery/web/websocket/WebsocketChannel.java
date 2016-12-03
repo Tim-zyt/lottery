@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2016/11/30.
  */
 public class WebsocketChannel extends WebSocketServlet {
-    private static ConcurrentHashSet<MyMessageInbound> mmiList = new ConcurrentHashSet<>();
+    private ConcurrentHashSet<MyMessageInbound> mmiList = new ConcurrentHashSet<>();
 
     @Override
     protected StreamInbound createWebSocketInbound(String s, HttpServletRequest httpServletRequest) {
