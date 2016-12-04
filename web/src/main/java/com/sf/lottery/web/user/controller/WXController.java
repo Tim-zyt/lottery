@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
-
 import java.net.URLEncoder;
 
 /**
@@ -55,10 +54,10 @@ public class WXController {
             s = httpRequest.sendGet("https://api.weixin.qq.com/sns/userinfo",
                     "access_token="+userAuthorizationReturn.getAccess_token()+"&openid="+userAuthorizationReturn.getOpenid()+"&lang=zh_CN");
             boolean isSigned = userService.isSignedByWxInfo(userAuthorizationReturn.getOpenid());
-            cookiesUtil.addCookie(response,"userJson",URLEncoder.encode(s,"UTF-8"),7200);
             if(isSigned){            //已签到
                 return "redirect:/frontend/main.html";
             }else{                  //未签到
+                cookiesUtil.addCookie(response,"userJson", URLEncoder.encode(s,"UTF-8"),86400);
                 return "redirect:/frontend/login.html";
             }
         } catch (Exception e) {

@@ -61,12 +61,14 @@ public class UserController {
         Cookie cookie = cookiesUtil.getCookieByName(request,"userJson");
         UserInfoReturn userInfoReturn = null;
         try {
-            userInfoReturn = JSON.parseObject(URLDecoder.decode(cookie.getValue(),"UTF-8"),UserInfoReturn.class);
+            if(cookie!=null){
+                userInfoReturn = JSON.parseObject(URLDecoder.decode(cookie.getValue(),"UTF-8"),UserInfoReturn.class);
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         boolean exists = userService.verifyUser(sfnum,sfname);
-        if(exists){
+        if(exists && userInfoReturn != null){
             User user = new User();
             user.setSfNum(sfnum);
             user.setSfName(sfname);
@@ -85,10 +87,6 @@ public class UserController {
             try {
                 userId = userService.saveUser(user);
                 cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
-//                WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("signUp", signUpAddress);
-//                webSocketClient.connectBlocking();
-//                webSocketClient.send(JSON.toJSONString(user));
-//                webSocketClient.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
