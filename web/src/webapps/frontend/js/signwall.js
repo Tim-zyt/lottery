@@ -29,11 +29,15 @@ jQuery(function ($) {
             },
             success: function(data){
                 var signedusers = data.data;
-                var userHtml = "";
+                var userHtml = "<tr>";
                 var iLen = signedusers.length;
                 for(var i = iLen - 1 ; i >=0  ; i--){
-                    userHtml += "<li style='width: 10%;'><img src='"+ signedusers[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + signedusers[i].sfName + "</a></li>";
+                    userHtml += "<td style='width: 10%;'><div style='text-align: center;'><img style='border-radius: 50%;max-width: 90%;height: auto;' src='"+ signedusers[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + signedusers[i].sfName + "</a></div></td>";
+                    if((iLen - i)%10 == 0){
+                        userHtml += "</tr><tr>";
+                    }
                 }
+                userHtml += "</tr>";
                 $("#users").html(userHtml);
             }
         });
