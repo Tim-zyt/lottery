@@ -2,21 +2,21 @@ jQuery(function ($) {
     $(document).ready(function () {
         time();
 
-        var ws = new WebSocket(signWallChannelAddress);
-        ws.onopen = function(){
-        };
-        ws.onmessage = function(message){
-            // var user = message.data;
-            // var signUserHtml = "<li style='width: 10%;'><img src='"+ user.wxHeadimgurl +"'alt='User Image'><a href='#' style='font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + user.sfName + "</a></li>";
-            // $("#users").prepend(signUserHtml);
-        };
-        function postToServer(){
-            ws.send(document.getElementById("msg").value);
-            document.getElementById("msg").value = "";
-        }
-        function closeConnect(){
-            ws.close();
-        }
+        // var ws = new WebSocket(signWallChannelAddress);
+        // ws.onopen = function(){
+        // };
+        // ws.onmessage = function(message){
+        //     // var user = message.data;
+        //     // var signUserHtml = "<li style='width: 10%;'><img src='"+ user.wxHeadimgurl +"'alt='User Image'><a href='#' style='font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + user.sfName + "</a></li>";
+        //     // $("#users").prepend(signUserHtml);
+        // };
+        // function postToServer(){
+        //     ws.send(document.getElementById("msg").value);
+        //     document.getElementById("msg").value = "";
+        // }
+        // function closeConnect(){
+        //     ws.close();
+        // }
         getSignedUser();
     });
 
