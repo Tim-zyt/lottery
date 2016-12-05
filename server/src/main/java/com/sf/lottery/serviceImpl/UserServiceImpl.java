@@ -71,8 +71,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int getSignedAmount(){
-        return userManager.getSignedAmount();
+    public int getSignedAmount() throws Exception{
+        try {
+            return userManager.getSignedAmount();
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
     }
 
+    @Override
+    public int getTotalUserAmount() throws Exception {
+        try {
+            return userManager.getTotalUserAmount();
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
+    }
+
+    @Override
+    public List<User> getUnAwardUser() throws Exception {
+        try {
+            return userManager.getUnAwardUser();
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
+    }
 }

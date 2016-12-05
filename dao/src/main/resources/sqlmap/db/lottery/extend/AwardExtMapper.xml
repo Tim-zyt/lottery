@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sf.lottery.dao.AwardMapper">
+    <select id="selectAwardByKind" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from award
+        where aw_kind = #{awKind,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAllKind" resultType="java.lang.String">
+        select
+        aw_kind
+        from award
+        ORDER BY aw_kind ASC
+    </select>
+</mapper>

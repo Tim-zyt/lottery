@@ -35,5 +35,23 @@ public interface UserService {
 
     User getUserById(int userId) throws Exception;
 
-    int getSignedAmount();
+    /**
+     * 已签到用户人数
+     * @return
+     * @throws Exception
+     */
+    int getSignedAmount() throws Exception;
+
+    /**
+     * 总用户人数
+     * @return
+     * @throws Exception
+     */
+    int getTotalUserAmount() throws Exception;
+
+    /**
+     * 得到当前已经签到，并且还没有获奖的人，以备抽奖使用
+     * @return
+     */
+    List<User> getUnAwardUser() throws Exception;
 }

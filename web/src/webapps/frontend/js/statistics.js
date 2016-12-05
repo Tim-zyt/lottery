@@ -10,20 +10,25 @@ jQuery(function ($) {
     function getSignedAmount(){
         $.ajax({
             type: "post",
-            url : getContextPath() + "/user/getSignedAmount",
+            url : getContextPath() + "/user/getUserAmount",
             dataType:'json',
             data: {
             },
             success: function(data){
-                var signedNumber = data.data;
-                var unsignedNumber = 1000-signedNumber;
+                var amount = data.data;
+                var totalAmount = amount.sum;
+                var unsignedNumber = amount.sum-amount.signed;
+                $("#signed").html(amount.signed);
+                $("#unsigned").html(unsignedNumber);
+                $("#sum").html(totalAmount);
+
 
                 var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
 
                 var pieChart = new Chart(pieChartCanvas);
                 var PieData = [
                     {
-                        value: signedNumber,
+                        value: amount.signed,
                         color: "#00a65a",
                         highlight: "#00a65a",
                         label: "已签到"

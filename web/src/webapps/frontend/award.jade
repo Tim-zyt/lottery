@@ -1,0 +1,31 @@
+//
+   Created by 01170626 on 2016/12/5.
+extends jade/common/layout
+block header
+    link(rel="stylesheet", type="text/css",href="css/manage/manage.css")
+
+block content
+    div#top
+        h2 奖项管理
+            div#topTags
+                ul
+    div#main
+        div#leftMenu
+            ul
+                li 个人资料
+                li 相册管理
+                li 日志管理
+        div#content
+            div#welcome.content(style="display:block;")
+                div(align="center")
+                    p
+                        strong 欢迎使用奖项管理系统
+                    P
+            div#v0.content 个人资料
+            div#v1.content 相册管理
+            div#v2.content 日志管理
+
+
+block extends
+    script(src="js/award.min.js")
+    script(Src="js/manage/manageMenu.js")
