@@ -11,6 +11,7 @@ import com.sf.lottery.web.weixin.domain.UserInfoReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +41,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Value("signUp.websocket.address")
+    private String signUpAddress;
+
     @ResponseBody
     @RequestMapping(value = "/user/getSignedUser", method = RequestMethod.POST)
     public JsonResult<List<User>> getSignedUser() {
@@ -57,12 +61,14 @@ public class UserController {
         Cookie cookie = cookiesUtil.getCookieByName(request,"userJson");
         UserInfoReturn userInfoReturn = null;
         try {
-            userInfoReturn = JSON.parseObject(URLDecoder.decode(cookie.getValue(),"UTF-8"),UserInfoReturn.class);
+            if(cookie!=null){
+                userInfoReturn = JSON.parseObject(URLDecoder.decode(cookie.getValue(),"UTF-8"),UserInfoReturn.class);
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         boolean exists = userService.verifyUser(sfnum,sfname);
-        if(exists){
+        if(exists && userInfoReturn != null){
             User user = new User();
             user.setSfNum(sfnum);
             user.setSfName(sfname);
@@ -80,14 +86,26 @@ public class UserController {
             int userId = 0;
             try {
                 userId = userService.saveUser(user);
+                cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
-            //todo 签到墙更新事件
             return "redirect:/frontend/main.html";
         }else{
-            return "该用户不存在";
+            String message = "该用户不存在";
+            return "redirect:/frontend/login.html?message="+message;
         }
+    }
+    @ResponseBody
+    @RequestMapping(value = "/user/getSignedAmount", method = RequestMethod.POST)
+    public JsonResult<Integer> getSignedAmount() {
+        JsonResult<Integer> result = new JsonResult<>();
+        try {
+            Integer signedAmount = userService.getSignedAmount();
+            result.setData(signedAmount);
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
     }
 }
