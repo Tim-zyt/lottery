@@ -25,6 +25,7 @@
             <list>
                 <value>classpath:weixin.properties</value>
                 <value>classpath:http.properties</value>
+                <value>classpath:websocket.properties</value>
             </list>
         </property>
     </bean>

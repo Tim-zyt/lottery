@@ -7,7 +7,9 @@ import com.sf.lottery.common.utils.ExceptionUtils;
 import com.sf.lottery.service.UserService;
 import com.sf.lottery.web.utils.CookiesUtil;
 import com.sf.lottery.web.utils.HttpRequest;
+import com.sf.lottery.web.websocket.WebsocketClientFactory;
 import com.sf.lottery.web.weixin.domain.UserInfoReturn;
+import org.java_websocket.client.WebSocketClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Value("signUp.websocket.address")
+    @Value("${signUp.websocket.address}")
     private String signUpAddress;
 
     @ResponseBody
@@ -61,7 +63,7 @@ public class UserController {
         Cookie cookie = cookiesUtil.getCookieByName(request,"userJson");
         UserInfoReturn userInfoReturn = null;
         try {
-            if(cookie!=null){
+            if(cookie != null){
                 userInfoReturn = JSON.parseObject(URLDecoder.decode(cookie.getValue(),"UTF-8"),UserInfoReturn.class);
             }
         } catch (UnsupportedEncodingException e) {
@@ -87,6 +89,10 @@ public class UserController {
             try {
                 userId = userService.saveUser(user);
                 cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
+                WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("signUp", signUpAddress);
+                webSocketClient.connectBlocking();
+                webSocketClient.send(JSON.toJSONString(user));
+                webSocketClient.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

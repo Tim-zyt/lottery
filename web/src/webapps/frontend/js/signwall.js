@@ -1,14 +1,21 @@
 jQuery(function ($) {
     $(document).ready(function () {
-        time();
+        // time();
+
+        getSignedUser();
 
         var ws = new WebSocket(signWallChannelAddress);
         ws.onopen = function(){
         };
         ws.onmessage = function(message){
+            //alert(message.data);
             // var user = message.data;
-            // var signUserHtml = "<li style='width: 10%;'><img src='"+ user.wxHeadimgurl +"'alt='User Image'><a href='#' style='font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + user.sfName + "</a></li>";
-            // $("#users").prepend(signUserHtml);
+            var user = {
+                wxHeadimgurl:"http://wx.qlogo.cn/mmopen/78VYmCTbSZl6qfAsVe9SAkgJBeSlo1BHXdzicvNCKZcemKialG5f99SibPzj3lzHJA0ByDIxgW40Y4ZUR8Plbe9vJrwfWcugJZ2/0",
+                sfName:"haha"
+            };
+            var signUserHtml = "<li class='animated rollIn' style='width: 10%;height:16%'><div style='text-align: center;'><img src='"+ user.wxHeadimgurl +"' style='border-radius: 50%;max-width: 90%;height: auto;' alt='User Image'><a href='#' style='font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + user.sfName + "</a></div></li>";
+            $("#users").prepend(signUserHtml);
         };
         function postToServer(){
             ws.send(document.getElementById("msg").value);
@@ -17,7 +24,7 @@ jQuery(function ($) {
         function closeConnect(){
             ws.close();
         }
-        getSignedUser();
+
     });
 
     function getSignedUser(){
@@ -32,8 +39,12 @@ jQuery(function ($) {
                 var userHtml = "";
                 var iLen = signedusers.length;
                 for(var i = iLen - 1 ; i >=0  ; i--){
-                    userHtml += "<li style='width: 10%;'><img src='"+ signedusers[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + signedusers[i].sfName + "</a></li>";
+                    userHtml += "<li style='width: 10%;height:16%'><div style='text-align: center;'><img style='border-radius: 50%;max-width: 90%;height: auto;' src='"+ signedusers[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + signedusers[i].sfName + "</a></div></li>";
+                    // if((iLen - i)%10 == 0){
+                    //     userHtml += "</tr><tr>";
+                    // }
                 }
+                // userHtml += "</tr>";
                 $("#users").html(userHtml);
             }
         });
