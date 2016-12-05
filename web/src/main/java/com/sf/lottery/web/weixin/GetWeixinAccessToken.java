@@ -115,4 +115,6 @@ public class GetWeixinAccessToken {
     public String getWXJsApiTicket() {
         return jsApiTicket;
     }
+
+
 }
