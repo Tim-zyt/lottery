@@ -9,7 +9,7 @@ block content
             div.col-md-12
                 div.box(style="background-color:#fff;border-top-width: 0px;filter:alpha(opacity=50);opacity:0.5")
                     div.box-body.no-padding(style="display: block;")
-                        ul#luckmanList.users-list.clearfix(style="height: 750px;overflow-y: auto;margin-left:20px;margin-right:20px;")
+                        ul#luckmanList.users-list.clearfix(style="height: 785px;overflow-y: auto;margin-left:20px;margin-right:20px;")
                             li.luckman(style="width: 10%;")
                                 img(src="lib/AdminLTE/dist/img/user3-128x128.jpg" alt="User Image")
                                 a.users-list-name(href="#") Alexander Pierce
@@ -58,9 +58,25 @@ block content
                             li.luckman(style="width: 10%;")
                                 img(src="lib/AdminLTE/dist/img/user6-128x128.jpg" alt="User Image")
                                 a.users-list-name(href="#") Alexander Pierce
-                div.btn(onclick="start()") 开始抽奖
-                div.btn(onclick="end()") 停止抽奖
-
+        div.row
+            div.col-md-12
+                div.btn.btn-danger(onclick="start()") 开始抽奖
+                div.btn.btn-danger(onclick="end()") 停止抽奖
+                div.btn-group
+                    button.btn.btn-danger(type="button") Action
+                    button.btn.btn-danger.dropdown-toggle(type="button" data-toggle="dropdown")
+                        span.caret
+                        span.sr-only  Toggle Dropdown
+                    ul.dropdown-menu(role="menu")
+                        li
+                            a(href="#") Action
+                        li
+                            a(href="#") Another action
+                        li
+                            a(href="#") Something else here
+                        li.divider
+                        li
+                            a(href="#") Separated link
 block footer
 block extends
     script(src="lib/jquery/dist/jquery.min.js")

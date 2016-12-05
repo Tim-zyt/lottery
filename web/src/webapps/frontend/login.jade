@@ -27,14 +27,14 @@ html(lang="zh-cn")
                 p.login-box-msg 顺丰科技 大步向前
                 form(action="/user/login?" method="post" onsubmit="return checkinput(this)")
                     div.form-group.has-feedback
-                        input(type="number",placeholder="请输入您的6或8位工号",name="sfnum").form-control
+                        input(type="number",placeholder="请输入您的工号",name="sfnum").form-control
                         span.glyphicon.glyphicon-plus.form-control-feedback
                     div.form-group.has-feedback
                         input(type="text",placeholder="请输入您的真实姓名",name="sfname").form-control
                         span.glyphicon.glyphicon-user.form-control-feedback
                     div.row
                         div.col-xs-8
-                            p#messsage
+                            p(style="color:red;")#message
                         div.col-xs-4
                             button(type="submit").btn.btn-primary.btn-block.btn-flat Let's Go
 
