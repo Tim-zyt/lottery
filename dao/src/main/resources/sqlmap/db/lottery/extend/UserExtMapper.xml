@@ -46,4 +46,17 @@
         where is_sign=true
     </select>
 
+    <select id="getTotalUserAmount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from sf_user
+    </select>
+
+    <select id="getUnAwardUser" resultType="com.sf.lottery.common.model.User">
+        select
+        <include refid="Base_Column_List" />
+        from sf_user
+        where award_count=0 and is_sign=true
+    </select>
+
 </mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sf.lottery.dao.AwardMapper" >
+  <resultMap id="BaseResultMap" type="com.sf.lottery.common.model.Award" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="aw_name" property="awName" jdbcType="VARCHAR" />
+    <result column="aw_description" property="awDescription" jdbcType="VARCHAR" />
+    <result column="aw_img" property="awImg" jdbcType="VARCHAR" />
+    <result column="aw_user_count" property="awUserCount" jdbcType="INTEGER" />
+    <result column="aw_kind" property="awKind" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, aw_name, aw_description, aw_img, aw_user_count, aw_kind
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from award
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from award
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sf.lottery.common.model.Award" >
+    insert into award (id, aw_name, aw_description, 
+      aw_img, aw_user_count, aw_kind
+      )
+    values (#{id,jdbcType=INTEGER}, #{awName,jdbcType=VARCHAR}, #{awDescription,jdbcType=VARCHAR}, 
+      #{awImg,jdbcType=VARCHAR}, #{awUserCount,jdbcType=INTEGER}, #{awKind,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sf.lottery.common.model.Award" >
+    insert into award
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="awName != null" >
+        aw_name,
+      </if>
+      <if test="awDescription != null" >
+        aw_description,
+      </if>
+      <if test="awImg != null" >
+        aw_img,
+      </if>
+      <if test="awUserCount != null" >
+        aw_user_count,
+      </if>
+      <if test="awKind != null" >
+        aw_kind,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="awName != null" >
+        #{awName,jdbcType=VARCHAR},
+      </if>
+      <if test="awDescription != null" >
+        #{awDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="awImg != null" >
+        #{awImg,jdbcType=VARCHAR},
+      </if>
+      <if test="awUserCount != null" >
+        #{awUserCount,jdbcType=INTEGER},
+      </if>
+      <if test="awKind != null" >
+        #{awKind,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sf.lottery.common.model.Award" >
+    update award
+    <set >
+      <if test="awName != null" >
+        aw_name = #{awName,jdbcType=VARCHAR},
+      </if>
+      <if test="awDescription != null" >
+        aw_description = #{awDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="awImg != null" >
+        aw_img = #{awImg,jdbcType=VARCHAR},
+      </if>
+      <if test="awUserCount != null" >
+        aw_user_count = #{awUserCount,jdbcType=INTEGER},
+      </if>
+      <if test="awKind != null" >
+        aw_kind = #{awKind,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sf.lottery.common.model.Award" >
+    update award
+    set aw_name = #{awName,jdbcType=VARCHAR},
+      aw_description = #{awDescription,jdbcType=VARCHAR},
+      aw_img = #{awImg,jdbcType=VARCHAR},
+      aw_user_count = #{awUserCount,jdbcType=INTEGER},
+      aw_kind = #{awKind,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

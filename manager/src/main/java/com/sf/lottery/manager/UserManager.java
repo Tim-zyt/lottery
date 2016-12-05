@@ -18,7 +18,6 @@ public class UserManager {
     @Autowired
     private UserMapper userMapper;
 
-
     public int updateByNoAndName(User user){
         return userMapper.updateByNoAndName(user);
     }
@@ -41,5 +40,13 @@ public class UserManager {
 
     public int getSignedAmount(){
         return userMapper.getSignedAmount();
+    }
+
+    public int getTotalUserAmount(){
+        return userMapper.getTotalUserAmount();
+    }
+
+    public List<User> getUnAwardUser(){
+        return userMapper.getUnAwardUser();
     }
 }

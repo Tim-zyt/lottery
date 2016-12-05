@@ -21,5 +21,7 @@
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
 	<dubbo:service interface="com.sf.lottery.service.UserService" ref="userServiceImpl" protocol="dubbo" />
+	<dubbo:service interface="com.sf.lottery.service.AwardService" ref="awardServiceImpl" protocol="dubbo" />
+
 
 </beans>

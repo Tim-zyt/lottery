@@ -26,7 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zyt
@@ -103,12 +105,29 @@ public class UserController {
         }
     }
     @ResponseBody
-    @RequestMapping(value = "/user/getSignedAmount", method = RequestMethod.POST)
-    public JsonResult<Integer> getSignedAmount() {
-        JsonResult<Integer> result = new JsonResult<>();
+    @RequestMapping(value = "/user/getUserAmount", method = RequestMethod.POST)
+    public JsonResult<Map<String,Integer>> getUserAmount() {
+        JsonResult<Map<String,Integer>> result = new JsonResult<>();
         try {
             Integer signedAmount = userService.getSignedAmount();
-            result.setData(signedAmount);
+            Integer totalUserAmount = userService.getTotalUserAmount();
+            Map<String,Integer> amountMap = new HashMap<>();
+            amountMap.put("signed",signedAmount);
+            amountMap.put("sum",totalUserAmount);
+            result.setData(amountMap);
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/getUnAwardUser", method = RequestMethod.POST)
+    public JsonResult<List<User>> getUnAwardUser() {
+        JsonResult<List<User>> result = new JsonResult<>();
+        try {
+            List<User> unAwardUsers = userService.getUnAwardUser();
+            result.setData(unAwardUsers);
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }

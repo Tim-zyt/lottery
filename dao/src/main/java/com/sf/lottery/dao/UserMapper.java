@@ -31,4 +31,8 @@ public interface UserMapper {
     int updateByNoAndName(User user);
 
     int getSignedAmount();
+
+    int getTotalUserAmount();
+
+    List<User> getUnAwardUser();
 }
