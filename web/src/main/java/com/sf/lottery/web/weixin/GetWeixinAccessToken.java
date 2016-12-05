@@ -46,18 +46,18 @@ public class GetWeixinAccessToken {
     private volatile int getJsApiTicketFailedCount;
 
     public GetWeixinAccessToken() throws Exception {
-        String s = httpRequest.sendGet("https://api.weixin.qq.com/cgi-bin/token", StrUtils.makeString("grant_type=client_credential&appid=", appId, "&secret=", appSecret));
-        AccessTokenReturn accessTokenReturn = JSON.parseObject(s, AccessTokenReturn.class);
-        if (!accessTokenReturn.isSuccessful()) {
-            throw new Exception("获取微信access token失败!" + accessTokenReturn.getErrmsg());
-        }
-        refreshAccessToken(accessTokenReturn);
-        s = httpRequest.sendGet("https://api.weixin.qq.com/cgi-bin/ticket/getticket", StrUtils.makeString("access_token=", accessToken, "&type=jsapi"));
-        JSApiTicketReturn jsApiTicketReturn = JSON.parseObject(s, JSApiTicketReturn.class);
-        if (!jsApiTicketReturn.isSuccessful()) {
-            throw new Exception("获取微信js api ticket失败!" + jsApiTicketReturn.getErrmsg());
-        }
-        refreshJSApiTicket(jsApiTicketReturn);
+//        String s = httpRequest.sendGet("https://api.weixin.qq.com/cgi-bin/token", StrUtils.makeString("grant_type=client_credential&appid=", appId, "&secret=", appSecret));
+//        AccessTokenReturn accessTokenReturn = JSON.parseObject(s, AccessTokenReturn.class);
+//        if (!accessTokenReturn.isSuccessful()) {
+//            throw new Exception("获取微信access token失败!" + accessTokenReturn.getErrmsg());
+//        }
+//        refreshAccessToken(accessTokenReturn);
+//        s = httpRequest.sendGet("https://api.weixin.qq.com/cgi-bin/ticket/getticket", StrUtils.makeString("access_token=", accessToken, "&type=jsapi"));
+//        JSApiTicketReturn jsApiTicketReturn = JSON.parseObject(s, JSApiTicketReturn.class);
+//        if (!jsApiTicketReturn.isSuccessful()) {
+//            throw new Exception("获取微信js api ticket失败!" + jsApiTicketReturn.getErrmsg());
+//        }
+//        refreshJSApiTicket(jsApiTicketReturn);
     }
 
     private void refreshAccessToken(final AccessTokenReturn accessTokenReturn) {
@@ -115,6 +115,5 @@ public class GetWeixinAccessToken {
     public String getWXJsApiTicket() {
         return jsApiTicket;
     }
-
 
 }
