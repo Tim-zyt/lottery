@@ -1,0 +1,21 @@
+extends jade/common/layout
+block content
+    div.btn.btn-primary(style="color:#000",onclick="startGift()") 开始抽奖
+    div.btn.btn-primary(style="color:#000",onclick="endGift()") 结束抽奖
+
+block extends
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="lib/bootstrap/dist/js/bootstrap.min.js")
+    //微信
+    script(src="js/jweixin-1.1.0.min.js")
+    //  动画相关
+    script(src="lib/scrollreveal/dist/scrollreveal.min.js")
+    script(src="lib/Buttons/js/buttons.js")
+    script(src="lib/jquery-fireworks/jquery.fireworks.min.js")
+    //  native
+    script(src="js/util.min.js")
+    script(src="js/variables.min.js")
+    script(src="js/testGift.min.js")
+
+

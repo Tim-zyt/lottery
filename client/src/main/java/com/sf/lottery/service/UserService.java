@@ -54,4 +54,11 @@ public interface UserService {
      * @return
      */
     List<User> getUnAwardUser() throws Exception;
+
+    /**
+     * 得到已获奖的人
+     * @return
+     * @throws Exception
+     */
+    List<User> getAwardUser() throws Exception;
 }

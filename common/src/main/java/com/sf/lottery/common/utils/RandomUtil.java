@@ -1,4 +1,4 @@
-package com.sf.lottery.web.utils;
+package com.sf.lottery.common.utils;
 
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class RandomUtil {
      * @param max 指定范围最大值(不包含)
      * @param n 随机数个数
      */
-    public static int[] randomCommon(int min, int max, int n){
+    public static int[] getNRandom(int min, int max, int n){
         if (n > (max - min + 1) || max < min) {
             return null;
         }
@@ -42,7 +42,7 @@ public class RandomUtil {
 
     public static void main(String args[]){
         for(int j = 0 ; j < 20 ; j++){
-            int[] ran = randomCommon(0,10,5);
+            int[] ran = getNRandom(0,10,5);
             for(int i = 0 ; i < ran.length ; i++){
                 System.out.print(ran[i] + "," );
             }

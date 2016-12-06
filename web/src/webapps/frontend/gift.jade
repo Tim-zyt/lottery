@@ -1,85 +1,44 @@
 extends jade/common/layout
 block header
     link(rel="stylesheet",type="text/css",href="css/signwall/normalize.css")
+    link(rel="stylesheet",type="text/css",href="css/gift/style.css")
 block content
-    div
-        div#background(style="background: #ff5c5c;position: absolute;left: 0px;top: 0px;width: 100%;height: 100%;")
-            img(src="img/gift/background-grid.png")
-        div.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;")
-            div.col-md-12
-                div.box(style="background-color:#fff;border-top-width: 0px;filter:alpha(opacity=50);opacity:0.5")
-                    div.box-body.no-padding(style="display: block;")
-                        ul#luckmanList.users-list.clearfix(style="height: 785px;overflow-y: auto;margin-left:20px;margin-right:20px;")
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user3-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user4-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user7-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user8-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user4-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user5-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user6-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user4-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user1-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user4-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user7-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user8-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user4-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user5-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-                            li.luckman(style="width: 10%;")
-                                img(src="lib/AdminLTE/dist/img/user6-128x128.jpg" alt="User Image")
-                                a.users-list-name(href="#") Alexander Pierce
-        div.row
-            div.col-md-12
-                div.btn.btn-danger(onclick="start()") 开始抽奖
-                div.btn.btn-danger(onclick="end()") 停止抽奖
-                div.btn-group
-                    button.btn.btn-danger(type="button") Action
-                    button.btn.btn-danger.dropdown-toggle(type="button" data-toggle="dropdown")
-                        span.caret
-                        span.sr-only  Toggle Dropdown
-                    ul.dropdown-menu(role="menu")
-                        li
-                            a(href="#") Action
-                        li
-                            a(href="#") Another action
-                        li
-                            a(href="#") Something else here
-                        li.divider
-                        li
-                            a(href="#") Separated link
+    div.container(style="background-color: #fed261;max-width:100%;width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+        div.content(style="padding: 0px;")
+                div.row
+                    //div(style="position: absolute;top: 30px;left: 40px;z-index: 9;")
+                    //    div.btn.btn-danger(onclick="start()") 开始抽奖
+                    //    div.btn.btn-danger(onclick="end()") 停止抽奖
+                    //    div.btn-group
+                    //        button.btn.btn-danger(type="button") Action
+                    //        button.btn.btn-danger.dropdown-toggle(type="button" data-toggle="dropdown")
+                    //            span.caret
+                    //            span.sr-only  Toggle Dropdown
+                    //        ul#giftmenu.dropdown-menu(role="menu")
+                    //            li
+                    //                a(href="#") Action
+                    //            li
+                    //                a(href="#") Another action
+                    //            li
+                    //                a(href="#") Something else here
+                    //            li.divider
+                    //            li
+                    //                a(href="#") Separated link
+                    div.col-md-12(style="text-align:center;")
+                        h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2017年会大抽奖
+                canvas#canvas(style="position: relative; background-color: #fed261;")
+                div.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;")
+                    div.col-md-12
+                        div
+                            div.box-body.no-padding(style="display: block;")
+                                ul#luckmanList.users-list.clearfix(style="height: 785px;overflow-y: auto;margin-left:20px;margin-right:20px;")
+
 block footer
 block extends
     script(src="lib/jquery/dist/jquery.min.js")
     script(src="lib/jquery-ui/jquery-ui.min.js")
     script(src="js/gift.min.js")
+    script(src="js/gift/mathlib.min.js")
+    script(src="js/gift/k3d.min.js")
+    script(src="js/gift/radiation.min.js")
 

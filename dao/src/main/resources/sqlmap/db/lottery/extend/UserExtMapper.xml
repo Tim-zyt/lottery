@@ -52,7 +52,7 @@
         from sf_user
     </select>
 
-    <select id="getUnAwardUser" resultType="com.sf.lottery.common.model.User">
+    <select id="getUnAwardUser" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from sf_user

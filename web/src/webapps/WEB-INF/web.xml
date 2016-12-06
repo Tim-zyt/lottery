@@ -16,6 +16,14 @@
         <servlet-name>danmukuChannel</servlet-name>
         <url-pattern>/danmukuChannel</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>giftChannel</servlet-name>
+        <servlet-class>com.sf.lottery.web.websocket.WebsocketChannel</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>giftChannel</servlet-name>
+        <url-pattern>/giftChannel</url-pattern>
+    </servlet-mapping>
     <!-- 加载spring容器配置 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

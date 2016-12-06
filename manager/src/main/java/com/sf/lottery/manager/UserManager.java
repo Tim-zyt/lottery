@@ -1,10 +1,12 @@
 package com.sf.lottery.manager;
 
 import com.sf.lottery.common.model.User;
+import com.sf.lottery.common.utils.RandomUtil;
 import com.sf.lottery.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,6 +19,9 @@ public class UserManager {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RandomUtil randomUtil;
 
     public int updateByNoAndName(User user){
         return userMapper.updateByNoAndName(user);
@@ -48,5 +53,17 @@ public class UserManager {
 
     public List<User> getUnAwardUser(){
         return userMapper.getUnAwardUser();
+    }
+
+    public List<User> getAwardUser(){
+        List<User> unAwardUser =  userMapper.getUnAwardUser();
+        List<User> awardUser = new LinkedList<>();
+        int[] luckIndex = RandomUtil.getNRandom(0 , unAwardUser.size() , 5);
+        int iLen = luckIndex.length;
+        for(int i = 0 ; i < iLen ; i++){
+            awardUser.add(unAwardUser.get(luckIndex[i]));
+        }
+        //todo 将awardUser持久化到数据库
+        return awardUser;
     }
 }
