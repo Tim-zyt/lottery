@@ -8,12 +8,11 @@ jQuery(function ($) {
         ws.onopen = function(){
         };
         ws.onmessage = function(message){
-            //alert(message.data);
-            // var user = message.data;
-            var user = {
-                wxHeadimgurl:"http://wx.qlogo.cn/mmopen/78VYmCTbSZl6qfAsVe9SAkgJBeSlo1BHXdzicvNCKZcemKialG5f99SibPzj3lzHJA0ByDIxgW40Y4ZUR8Plbe9vJrwfWcugJZ2/0",
-                sfName:"haha"
-            };
+            var user = JSON.parse(message.data);
+            // var user = {
+            //     wxHeadimgurl:"http://wx.qlogo.cn/mmopen/78VYmCTbSZl6qfAsVe9SAkgJBeSlo1BHXdzicvNCKZcemKialG5f99SibPzj3lzHJA0ByDIxgW40Y4ZUR8Plbe9vJrwfWcugJZ2/0",
+            //     sfName:"haha"
+            // };
             var signUserHtml = "<li class='animated rollIn' style='width: 10%;height:16%'><div style='text-align: center;'><img src='"+ user.wxHeadimgurl +"' style='border-radius: 50%;max-width: 90%;height: auto;' alt='User Image'><a href='#' style='font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + user.sfName + "</a></div></li>";
             $("#users").prepend(signUserHtml);
         };

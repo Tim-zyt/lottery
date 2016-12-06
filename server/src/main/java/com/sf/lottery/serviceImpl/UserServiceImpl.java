@@ -99,4 +99,14 @@ public class UserServiceImpl implements UserService {
             throw new Exception(e);
         }
     }
+
+    @Override
+    public List<User> getAwardUser() throws Exception{
+        try {
+            return userManager.getAwardUser();
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
+    }
 }
