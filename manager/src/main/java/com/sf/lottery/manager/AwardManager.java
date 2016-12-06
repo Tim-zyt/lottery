@@ -44,4 +44,8 @@ public class AwardManager {
     public Set<String> getAllAwKinds(){
         return awardMapper.selectAllKind();
     }
+
+    public List<Award> getAllAwards(){
+        return awardMapper.selectAllAwards();
+    }
 }

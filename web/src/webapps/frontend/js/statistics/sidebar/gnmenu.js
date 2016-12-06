@@ -31,7 +31,7 @@
         _init : function() {
             this.trigger = this.el.querySelector( 'a.gn-icon-menu' );
             this.menu = this.el.querySelector( 'nav.gn-menu-wrapper' );
-            this.isMenuOpen = false;
+            this.isMenuOpen = true;
             this.eventtype = mobilecheck() ? 'touchstart' : 'click';
             this._initEvents();
 
@@ -46,7 +46,7 @@
 
             if( !mobilecheck() ) {
                 this.trigger.addEventListener( 'mouseover', function(ev) { self._openIconMenu(); } );
-                this.trigger.addEventListener( 'mouseout', function(ev) { self._closeIconMenu(); } );
+                // this.trigger.addEventListener( 'mouseout', function(ev) { self._closeIconMenu(); } );
 
                 this.menu.addEventListener( 'mouseover', function(ev) {
                     self._openMenu();
@@ -81,11 +81,11 @@
             this._closeIconMenu();
         },
         _closeMenu : function() {
-            if( !this.isMenuOpen ) return;
+            // if( !this.isMenuOpen ) return;
             classie.remove( this.trigger, 'gn-selected' );
-            this.isMenuOpen = false;
-            classie.remove( this.menu, 'gn-open-all' );
-            this._closeIconMenu();
+            // this.isMenuOpen = false;
+            // classie.remove( this.menu, 'gn-open-all' );
+            // this._closeIconMenu();
         }
     }
 

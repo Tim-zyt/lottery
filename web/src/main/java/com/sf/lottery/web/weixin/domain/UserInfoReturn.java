@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @version 1.0.0
  * @date 2016/11/30.
  */
-public class UserInfoReturn implements Serializable {
+public class UserInfoReturn extends BaseReturn {
     private String openid;//用户的唯一标识
     private String nickname;//用户昵称
     private int sex;//用户的性别，值为1时是男性，值为2时是女性，值为0时是未知
@@ -90,18 +90,4 @@ public class UserInfoReturn implements Serializable {
         this.unionid = unionid;
     }
 
-    @Override
-    public String toString() {
-        return "UserInfoReturn{" +
-                "openid='" + openid + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", sex=" + sex +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", headimgurl='" + headimgurl + '\'' +
-                ", privilege='" + privilege + '\'' +
-                ", unionid='" + unionid + '\'' +
-                '}';
-    }
 }

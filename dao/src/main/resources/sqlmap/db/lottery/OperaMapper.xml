@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sf.lottery.dao.OperaMapper" >
+  <resultMap id="BaseResultMap" type="com.sf.lottery.common.model.Opera" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="op_name" property="opName" jdbcType="VARCHAR" />
+    <result column="op_actor" property="opActor" jdbcType="VARCHAR" />
+    <result column="op_department" property="opDepartment" jdbcType="VARCHAR" />
+    <result column="op_sort" property="opSort" jdbcType="INTEGER" />
+    <result column="op_img" property="opImg" jdbcType="VARCHAR" />
+    <result column="op_support" property="opSupport" jdbcType="INTEGER" />
+    <result column="op_danmuku_count" property="opDanmukuCount" jdbcType="INTEGER" />
+    <result column="op_flower" property="opFlower" jdbcType="INTEGER" />
+    <result column="op_car" property="opCar" jdbcType="INTEGER" />
+    <result column="op_rocket" property="opRocket" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, op_name, op_actor, op_department, op_sort, op_img, op_support, op_danmuku_count, 
+    op_flower, op_car, op_rocket
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from opera
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from opera
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sf.lottery.common.model.Opera" >
+    insert into opera (id, op_name, op_actor, 
+      op_department, op_sort, op_img, 
+      op_support, op_danmuku_count, op_flower, 
+      op_car, op_rocket)
+    values (#{id,jdbcType=INTEGER}, #{opName,jdbcType=VARCHAR}, #{opActor,jdbcType=VARCHAR}, 
+      #{opDepartment,jdbcType=VARCHAR}, #{opSort,jdbcType=INTEGER}, #{opImg,jdbcType=VARCHAR}, 
+      #{opSupport,jdbcType=INTEGER}, #{opDanmukuCount,jdbcType=INTEGER}, #{opFlower,jdbcType=INTEGER}, 
+      #{opCar,jdbcType=INTEGER}, #{opRocket,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sf.lottery.common.model.Opera" >
+    insert into opera
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="opName != null" >
+        op_name,
+      </if>
+      <if test="opActor != null" >
+        op_actor,
+      </if>
+      <if test="opDepartment != null" >
+        op_department,
+      </if>
+      <if test="opSort != null" >
+        op_sort,
+      </if>
+      <if test="opImg != null" >
+        op_img,
+      </if>
+      <if test="opSupport != null" >
+        op_support,
+      </if>
+      <if test="opDanmukuCount != null" >
+        op_danmuku_count,
+      </if>
+      <if test="opFlower != null" >
+        op_flower,
+      </if>
+      <if test="opCar != null" >
+        op_car,
+      </if>
+      <if test="opRocket != null" >
+        op_rocket,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="opName != null" >
+        #{opName,jdbcType=VARCHAR},
+      </if>
+      <if test="opActor != null" >
+        #{opActor,jdbcType=VARCHAR},
+      </if>
+      <if test="opDepartment != null" >
+        #{opDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="opSort != null" >
+        #{opSort,jdbcType=INTEGER},
+      </if>
+      <if test="opImg != null" >
+        #{opImg,jdbcType=VARCHAR},
+      </if>
+      <if test="opSupport != null" >
+        #{opSupport,jdbcType=INTEGER},
+      </if>
+      <if test="opDanmukuCount != null" >
+        #{opDanmukuCount,jdbcType=INTEGER},
+      </if>
+      <if test="opFlower != null" >
+        #{opFlower,jdbcType=INTEGER},
+      </if>
+      <if test="opCar != null" >
+        #{opCar,jdbcType=INTEGER},
+      </if>
+      <if test="opRocket != null" >
+        #{opRocket,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sf.lottery.common.model.Opera" >
+    update opera
+    <set >
+      <if test="opName != null" >
+        op_name = #{opName,jdbcType=VARCHAR},
+      </if>
+      <if test="opActor != null" >
+        op_actor = #{opActor,jdbcType=VARCHAR},
+      </if>
+      <if test="opDepartment != null" >
+        op_department = #{opDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="opSort != null" >
+        op_sort = #{opSort,jdbcType=INTEGER},
+      </if>
+      <if test="opImg != null" >
+        op_img = #{opImg,jdbcType=VARCHAR},
+      </if>
+      <if test="opSupport != null" >
+        op_support = #{opSupport,jdbcType=INTEGER},
+      </if>
+      <if test="opDanmukuCount != null" >
+        op_danmuku_count = #{opDanmukuCount,jdbcType=INTEGER},
+      </if>
+      <if test="opFlower != null" >
+        op_flower = #{opFlower,jdbcType=INTEGER},
+      </if>
+      <if test="opCar != null" >
+        op_car = #{opCar,jdbcType=INTEGER},
+      </if>
+      <if test="opRocket != null" >
+        op_rocket = #{opRocket,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sf.lottery.common.model.Opera" >
+    update opera
+    set op_name = #{opName,jdbcType=VARCHAR},
+      op_actor = #{opActor,jdbcType=VARCHAR},
+      op_department = #{opDepartment,jdbcType=VARCHAR},
+      op_sort = #{opSort,jdbcType=INTEGER},
+      op_img = #{opImg,jdbcType=VARCHAR},
+      op_support = #{opSupport,jdbcType=INTEGER},
+      op_danmuku_count = #{opDanmukuCount,jdbcType=INTEGER},
+      op_flower = #{opFlower,jdbcType=INTEGER},
+      op_car = #{opCar,jdbcType=INTEGER},
+      op_rocket = #{opRocket,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

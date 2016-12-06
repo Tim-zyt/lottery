@@ -53,4 +53,11 @@ public interface AwardService {
      * @throws Exception
      */
     Set<String> getAllAwKinds() throws Exception;
+
+    /**
+     * 根据分类得到所有奖项
+     * @return
+     * @throws Exception
+     */
+    List<Award> getAllAwards() throws Exception;
 }

@@ -32,7 +32,7 @@ public class DanmukuController {
     @Autowired
     private UserService userService;
 
-    @Value("danmuku.websocket.address")
+    @Value("${danmuku.websocket.address}")
     private String danmukuAddress;
     private final static Logger log = LoggerFactory.getLogger(DanmukuController.class);
 
