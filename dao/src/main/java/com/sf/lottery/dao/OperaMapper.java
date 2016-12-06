@@ -19,4 +19,5 @@ public interface OperaMapper {
     int updateByPrimaryKeySelective(Opera record);
 
     int updateByPrimaryKey(Opera record);
+
 }
