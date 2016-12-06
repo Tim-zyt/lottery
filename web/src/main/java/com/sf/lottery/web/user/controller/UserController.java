@@ -100,8 +100,7 @@ public class UserController {
             }
             return "redirect:/frontend/main.html";
         }else{
-            String message = "该用户不存在";
-            return "redirect:/frontend/login.html?message="+message;
+            return "redirect:/frontend/loginError.html";
         }
     }
     @ResponseBody
