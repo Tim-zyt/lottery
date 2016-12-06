@@ -1,12 +1,12 @@
 package com.sf.lottery.manager;
 
 import com.sf.lottery.common.model.Award;
-import com.sf.lottery.common.model.AwardUser;
+import com.sf.lottery.common.model.AwardUserModel.AwardUser;
 import com.sf.lottery.common.model.Config;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.RandomUtil;
 import com.sf.lottery.dao.AwardMapper;
-import com.sf.lottery.dao.AwardUserMapper;
+import com.sf.lottery.dao.AwardUser.AwardUserMapper;
 import com.sf.lottery.dao.ConfigMapper;
 import com.sf.lottery.dao.UserMapper;
 import org.slf4j.Logger;

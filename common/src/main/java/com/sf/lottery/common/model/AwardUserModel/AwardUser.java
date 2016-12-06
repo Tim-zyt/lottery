@@ -1,4 +1,4 @@
-package com.sf.lottery.common.model;
+package com.sf.lottery.common.model.AwardUserModel;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @version 1.0.0.
  * @date 2016/12/6
  */
-public class awardUser implements Serializable {
+public class AwardUser implements Serializable {
     private Integer id;
 
     private Integer userId;
