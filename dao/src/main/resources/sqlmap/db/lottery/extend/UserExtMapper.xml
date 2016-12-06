@@ -66,4 +66,14 @@
         where award_count=0 and is_sign=true
     </select>
 
+    <update id="updateAwardCountBatch"  parameterType="java.util.List">
+        <foreach collection="list" item="User" index="index" open="" close="" separator=";">
+            update sf_user
+            <set>
+                award_count = 1
+            </set>
+            where id = ${User.id}
+        </foreach>
+    </update>
+
 </mapper>

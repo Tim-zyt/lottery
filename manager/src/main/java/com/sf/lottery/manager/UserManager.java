@@ -1,10 +1,12 @@
 package com.sf.lottery.manager;
 
 import com.sf.lottery.common.model.Award;
+import com.sf.lottery.common.model.AwardUserModel.AwardUser;
 import com.sf.lottery.common.model.Config;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.RandomUtil;
 import com.sf.lottery.dao.AwardMapper;
+import com.sf.lottery.dao.AwardUser.AwardUserMapper;
 import com.sf.lottery.dao.ConfigMapper;
 import com.sf.lottery.dao.UserMapper;
 import org.slf4j.Logger;
@@ -33,6 +35,9 @@ public class UserManager {
 
     @Autowired
     private AwardMapper awardMapper;
+
+    @Autowired
+    private AwardUserMapper awardUserMapper;
 
     @Autowired
     private RandomUtil randomUtil;
@@ -90,6 +95,7 @@ public class UserManager {
         }
         if(award.getAwUserCount() >= unAwardUser.size()){
             //如果奖品人数比未获奖人数还多，那就所有人中奖。
+            saveAwardUserRecord(unAwardUser , award);
             return unAwardUser;
         }
         int[] luckIndex = RandomUtil.getNRandom(0 , unAwardUser.size() , award.getAwUserCount());
@@ -97,8 +103,25 @@ public class UserManager {
         for(int i = 0 ; i < iLen ; i++){
             awardUser.add(unAwardUser.get(luckIndex[i]));
         }
-        //todo 将awardUser持久化到数据库的关联表
+        saveAwardUserRecord(awardUser , award);
         return awardUser;
+    }
+
+    //将获奖人持久化到数据库
+    private void saveAwardUserRecord( List<User> awardUser , Award award){
+        //将awardUser持久化到数据库的关联表
+        List<AwardUser> awardUsersRele = new LinkedList<>();
+        int jLen = awardUser.size();
+        for(int j = 0 ; j < jLen ; j++){
+            AwardUser awardUserTe = new AwardUser();
+            awardUserTe.setUserId(awardUser.get(j).getId());
+            awardUserTe.setAwardId(award.getId());
+            awardUsersRele.add(awardUserTe);
+        }
+        awardUserMapper.insertBatch(awardUsersRele);
+
+        //将用户表的award_count设为1
+        userMapper.updateAwardCountBatch(awardUser);
     }
 
     public User getUserBySfNumAndName(int sfNum, String sfName) {
