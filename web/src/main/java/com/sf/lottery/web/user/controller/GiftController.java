@@ -3,7 +3,7 @@ package com.sf.lottery.web.user.controller;
 import com.alibaba.fastjson.JSON;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.service.UserService;
-import com.sf.lottery.web.gift.domain.GiftMessage;
+import com.sf.lottery.web.gift.GiftMessage;
 import com.sf.lottery.web.websocket.WebsocketClientFactory;
 import org.java_websocket.client.WebSocketClient;
 import org.slf4j.Logger;
