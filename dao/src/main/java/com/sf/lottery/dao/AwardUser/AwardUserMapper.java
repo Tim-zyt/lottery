@@ -1,6 +1,6 @@
 package com.sf.lottery.dao.AwardUser;
 
-import com.sf.lottery.common.model.AwardUser;
+import com.sf.lottery.common.model.AwardUserModel.AwardUser;
 
 import java.util.List;
 

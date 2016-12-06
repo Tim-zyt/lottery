@@ -37,4 +37,6 @@ public interface UserMapper {
     int getTotalUserAmount();
 
     List<User> getUnAwardUser();
+
+    int updateAwardCountBatch(List<User> users);
 }
