@@ -117,4 +117,16 @@ public class AwardController {
         }
         return result;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/award/getAllAwards", method = RequestMethod.POST)
+    public JsonResult<List<Award>> getAllAwards(HttpServletRequest request) {
+        JsonResult<List<Award>> result = new JsonResult<>();
+        try {
+            result.setData(awardService.getAllAwards());
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
+    }
 }

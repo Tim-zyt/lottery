@@ -2,30 +2,32 @@
    Created by 01170626 on 2016/12/5.
 extends jade/common/layout
 block header
-    link(rel="stylesheet", type="text/css",href="css/manage/manage.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
+
 
 block content
-    div#top
-        h2 奖项管理
-            div#topTags
-                ul
-    div#main
-        div#leftMenu
-            ul
-                li 个人资料
-                li 相册管理
-                li 日志管理
-        div#content
-            div#welcome.content(style="display:block;")
-                div(align="center")
-                    p
-                        strong 欢迎使用奖项管理系统
-                    P
-            div#v0.content 个人资料
-            div#v1.content 相册管理
-            div#v2.content 日志管理
+    div.box.box-info
+        div.box-header.with-border
+            h3.box-title 奖品管理界面
+        div.box-body
+            div.table-responsive
+                table.table.no-margin
+                    thead
+                    tr
+                        th 选中奖品
+                        th 奖品名称
+                        th 奖品描述
+                        th 可获奖人数
+                        th 奖品类别
+                        th 修改奖品
+                        th 删除奖品
+                    tbody#awardTable
 
-
-block extends
-    script(src="js/award.min.js")
-    script(Src="js/manage/manageMenu.js")
+block footer
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/award.js")
+    script(src="js/statistics/sidebar/classie.js")
+    script(src="js/statistics/sidebar/gnmenu.js")
+    script(src="js/statistics/sidebar/GoogleTemp2.js")

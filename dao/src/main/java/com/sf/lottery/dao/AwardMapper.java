@@ -25,5 +25,7 @@ public interface AwardMapper {
 
     List<Award> selectAwardByKind(String awKind);
 
+    List<Award> selectAllAwards();
+
     Set<String> selectAllKind();
 }

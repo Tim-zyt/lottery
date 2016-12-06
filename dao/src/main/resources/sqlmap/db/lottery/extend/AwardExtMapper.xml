@@ -7,6 +7,12 @@
         from award
         where aw_kind = #{awKind,jdbcType=VARCHAR}
     </select>
+    <select id="selectAllAwards" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from award
+        ORDER BY aw_kind ASC
+    </select>
     <select id="selectAllKind" resultType="java.lang.String">
         select
         aw_kind
