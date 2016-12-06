@@ -5,6 +5,7 @@ import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.ExceptionUtils;
 import com.sf.lottery.service.UserService;
+import com.sf.lottery.web.damuku.domain.DanmukuMessage;
 import com.sf.lottery.web.utils.CookiesUtil;
 import com.sf.lottery.web.utils.HttpRequest;
 import com.sf.lottery.web.websocket.WebsocketClientFactory;
@@ -44,6 +45,8 @@ public class UserController {
     private CookiesUtil cookiesUtil;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DanmukuMessage danmukuMessage;
 
     @Value("${signUp.websocket.address}")
     private String signUpAddress;
@@ -91,6 +94,9 @@ public class UserController {
             try {
                 userId = userService.saveUser(user);
                 cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
+                cookiesUtil.addCookie(response,"flower","30",86400);
+                cookiesUtil.addCookie(response,"car","5",86400);
+                cookiesUtil.addCookie(response,"rocket","1",86400);
                 WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("signUp", signUpAddress);
                 webSocketClient.connectBlocking();
                 webSocketClient.send(JSON.toJSONString(user));
