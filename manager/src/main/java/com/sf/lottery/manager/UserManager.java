@@ -1,8 +1,14 @@
 package com.sf.lottery.manager;
 
+import com.sf.lottery.common.model.Award;
+import com.sf.lottery.common.model.Config;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.RandomUtil;
+import com.sf.lottery.dao.AwardMapper;
+import com.sf.lottery.dao.ConfigMapper;
 import com.sf.lottery.dao.UserMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +23,16 @@ import java.util.List;
 @Component
 public class UserManager {
 
+    private final static Logger log = LoggerFactory.getLogger(UserManager.class);
+
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private ConfigMapper configMapper;
+
+    @Autowired
+    private AwardMapper awardMapper;
 
     @Autowired
     private RandomUtil randomUtil;
@@ -56,14 +70,34 @@ public class UserManager {
     }
 
     public List<User> getAwardUser(){
-        List<User> unAwardUser =  userMapper.getUnAwardUser();
         List<User> awardUser = new LinkedList<>();
-        int[] luckIndex = RandomUtil.getNRandom(0 , unAwardUser.size() , 5);
+        //获取当前奖品
+        int id = 0;
+        Config config = configMapper.selectByIsOpen();
+        if(config != null){
+            id = config.getCurGiftId();
+        }
+        Award award = awardMapper.selectByPrimaryKey(id);
+        if(award == null){
+            log.info("当前奖品未设置");
+            return awardUser;
+        }
+
+        List<User> unAwardUser =  userMapper.getUnAwardUser();
+        if(unAwardUser == null || unAwardUser.size() == 0){
+            log.info("获取未获奖人数出错");
+            return awardUser;
+        }
+        if(award.getAwUserCount() >= unAwardUser.size()){
+            //如果奖品人数比未获奖人数还多，那就所有人中奖。
+            return unAwardUser;
+        }
+        int[] luckIndex = RandomUtil.getNRandom(0 , unAwardUser.size() , award.getAwUserCount());
         int iLen = luckIndex.length;
         for(int i = 0 ; i < iLen ; i++){
             awardUser.add(unAwardUser.get(luckIndex[i]));
         }
-        //todo 将awardUser持久化到数据库
+        //todo 将awardUser持久化到数据库的关联表
         return awardUser;
     }
 }
