@@ -24,7 +24,9 @@ public interface UserMapper {
 
     List<User> selectSignedUser();
 
-    int isSignedByWxInfo(String openId);
+    Integer isSignedByWxInfo(String openId);
+
+    User selectUserByUniqueKey(int sfNum,String sfName);
 
     int verifyUser(int sfNum,String sfName);
 

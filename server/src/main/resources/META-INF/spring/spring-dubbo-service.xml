@@ -22,6 +22,7 @@
 	
 	<dubbo:service interface="com.sf.lottery.service.UserService" ref="userServiceImpl" protocol="dubbo" />
 	<dubbo:service interface="com.sf.lottery.service.AwardService" ref="awardServiceImpl" protocol="dubbo" />
+	<dubbo:service interface="com.sf.lottery.service.OperaService" ref="operaServiceImpl" protocol="dubbo" />
 
 
 </beans>

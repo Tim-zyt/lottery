@@ -8,33 +8,49 @@ import java.io.Serializable;
  * @date 2016/12/1.
  */
 public class DanmukuMessage implements Serializable {
-    private String sfNo;
-    private String sfName;
-    private String avatar;
-    private int type; //0为弹幕，1为鲜花，2为汽车，3为游艇，4为火箭
+    private String sfUserNum;
+    private String sfUserName;
+    private String wxAvatar;
+    private int type; //0为弹幕，1为鲜花，2为汽车，3为火箭
     private String content;
 
-    public String getSfNo() {
-        return sfNo;
+    public String getSfUserNum() {
+        return sfUserNum;
     }
 
-    public void setSfNo(String sfNo) {
-        this.sfNo = sfNo;
+    public void setSfUserNum(String sfUserNum) {
+        this.sfUserNum = sfUserNum;
     }
 
-    public String getSfName() {
-        return sfName;
+    public String getSfUserName() {
+        return sfUserName;
     }
 
-    public void setSfName(String sfName) {
-        this.sfName = sfName;
+    public void setSfUserName(String sfUserName) {
+        this.sfUserName = sfUserName;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getWxAvatar() {
+        return wxAvatar;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setWxAvatar(String wxAvatar) {
+        this.wxAvatar = wxAvatar;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

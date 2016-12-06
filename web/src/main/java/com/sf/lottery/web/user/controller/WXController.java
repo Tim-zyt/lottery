@@ -30,8 +30,6 @@ public class WXController {
     @Autowired
     private HttpRequest httpRequest;
     @Autowired
-    private CookiesUtil cookiesUtil;
-    @Autowired
     private UserService userService;
     @Value("${weixin.appID}")
     private String appId;
@@ -53,11 +51,12 @@ public class WXController {
             UserAuthorizationReturn userAuthorizationReturn = JSON.parseObject(s, UserAuthorizationReturn.class);
             s = httpRequest.sendGet("https://api.weixin.qq.com/sns/userinfo",
                     "access_token="+userAuthorizationReturn.getAccess_token()+"&openid="+userAuthorizationReturn.getOpenid()+"&lang=zh_CN");
-            boolean isSigned = userService.isSignedByWxInfo(userAuthorizationReturn.getOpenid());
-            if(isSigned){            //已签到
+            Integer userId = userService.isSignedByWxInfo(userAuthorizationReturn.getOpenid());
+            if(userId!=null){            //已签到
+                CookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
                 return "redirect:/frontend/main.html";
             }else{                  //未签到
-                cookiesUtil.addCookie(response,"userJson", URLEncoder.encode(s,"UTF-8"),86400);
+                CookiesUtil.addCookie(response,"userJson", URLEncoder.encode(s,"UTF-8"),86400);
                 return "redirect:/frontend/login.html";
             }
         } catch (Exception e) {

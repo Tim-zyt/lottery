@@ -1,0 +1,4 @@
+.login-page, .register-page {
+    background: url("../../img/phone/loginBackground.jpg");
+    background-size:cover;
+}

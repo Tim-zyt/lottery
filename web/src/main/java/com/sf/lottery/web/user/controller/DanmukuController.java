@@ -8,6 +8,7 @@ import com.sf.lottery.service.UserService;
 import com.sf.lottery.web.damuku.domain.DanmukuMessage;
 import com.sf.lottery.web.utils.CookiesUtil;
 import com.sf.lottery.web.websocket.WebsocketClientFactory;
+import com.sun.javafx.binding.StringFormatter;
 import org.java_websocket.client.WebSocketClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +31,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class DanmukuController {
     @Autowired
+    private OperaController operaController;
+    @Autowired
     private UserService userService;
-
     @Value("${danmuku.websocket.address}")
     private String danmukuAddress;
     private final static Logger log = LoggerFactory.getLogger(DanmukuController.class);
@@ -43,11 +45,40 @@ public class DanmukuController {
         try {
             int userId = Integer.parseInt(CookiesUtil.getCookieByName(request, "userId").getValue());
             User user = userService.getUserById(userId);
+            if (user == null) {
+                throw new IllegalAccessException();
+            }
             WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", danmukuAddress);
             webSocketClient.connectBlocking();
+            danmukuMessage.setSfUserName(user.getSfName());
+            danmukuMessage.setSfUserNum(String.format("%08d",user.getSfNum()));
+            danmukuMessage.setWxAvatar(user.getWxHeadimgurl());
+            switch (danmukuMessage.getType()){
+                case 0:
+                    //普通弹幕
+                    break;
+                case 1:
+                    //鲜花
+                    operaController.updateFlower();
+                    break;
+                case 2:
+                    //跑车
+                    operaController.updateCar();
+                    break;
+                case 3:
+                    //火箭
+                    operaController.updateRocket();
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
             webSocketClient.send(JSON.toJSONString(danmukuMessage));
             webSocketClient.close();
             result.setData(true);
+        } catch (IllegalAccessException | NullPointerException i) {
+            result.setData(false);
+            result.setMessage("用户信息错误，请重新登陆");
+            result.setErrCode(JsonResult.NEED_RE_LOGIN);
         } catch (Exception e) {
             result.setData(false);
             log.warn(ExceptionUtils.getStackTrace(e));

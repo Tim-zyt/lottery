@@ -40,13 +40,7 @@ import java.util.Map;
 public class UserController {
     private final static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
-    private HttpRequest httpRequest;
-    @Autowired
-    private CookiesUtil cookiesUtil;
-    @Autowired
     private UserService userService;
-    @Autowired
-    private DanmukuMessage danmukuMessage;
 
     @Value("${signUp.websocket.address}")
     private String signUpAddress;
@@ -65,7 +59,7 @@ public class UserController {
     }
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public String getWXUserInfo(@RequestParam("sfnum") int sfnum, @RequestParam("sfname") String sfname, HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = cookiesUtil.getCookieByName(request,"userJson");
+        Cookie cookie = CookiesUtil.getCookieByName(request,"userJson");
         UserInfoReturn userInfoReturn = null;
         try {
             if(cookie != null){
@@ -92,11 +86,12 @@ public class UserController {
             user.setSignedTime(new Date());
             int userId = 0;
             try {
-                userId = userService.saveUser(user);
-                cookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
-                cookiesUtil.addCookie(response,"flower","30",86400);
-                cookiesUtil.addCookie(response,"car","5",86400);
-                cookiesUtil.addCookie(response,"rocket","1",86400);
+                userService.saveUser(user);
+                User user1 = userService.getUserBySfNumAndName(sfnum, sfname);
+                CookiesUtil.addCookie(response,"userId",String.valueOf(user1.getId()),86400);
+                CookiesUtil.addCookie(response,"flower","30",86400);
+                CookiesUtil.addCookie(response,"car","5",86400);
+                CookiesUtil.addCookie(response,"rocket","1",86400);
                 WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("signUp", signUpAddress);
                 webSocketClient.connectBlocking();
                 webSocketClient.send(JSON.toJSONString(user));

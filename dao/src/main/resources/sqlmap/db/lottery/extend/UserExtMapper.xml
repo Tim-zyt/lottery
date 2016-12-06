@@ -11,9 +11,16 @@
 
     <select id="isSignedByWxInfo" parameterType="java.lang.String" resultType="java.lang.Integer">
             select
-            count(*)
+            id
             from sf_user
             where wx_openid = #{openId,jdbcType=VARCHAR} and is_sign=true
+    </select>
+
+    <select id="selectUserByUniqueKey" resultMap="BaseResultMap">
+        select
+        *
+        from sf_user
+        where sf_num=#{0} and sf_name=#{1}
     </select>
 
     <select id="verifyUser" resultType="java.lang.Integer">

@@ -31,7 +31,7 @@ public class UserManager {
         return userMapper.selectSignedUser();
     }
 
-    public int isSignedByWxInfo(String openId){
+    public Integer isSignedByWxInfo(String openId){
         return userMapper.isSignedByWxInfo(openId);
     }
 
@@ -65,5 +65,9 @@ public class UserManager {
         }
         //todo 将awardUser持久化到数据库
         return awardUser;
+    }
+
+    public User getUserBySfNumAndName(int sfNum, String sfName) {
+        return userMapper.selectUserByUniqueKey(sfNum,sfName);
     }
 }

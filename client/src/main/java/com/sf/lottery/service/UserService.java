@@ -25,7 +25,7 @@ public interface UserService {
      * 根据微信登录信息获取用户是否已签到
      * @return
      */
-    boolean isSignedByWxInfo(String openId);
+    Integer isSignedByWxInfo(String openId);
 
     /**
      * 判断该用户是否存在
@@ -34,6 +34,8 @@ public interface UserService {
     boolean verifyUser(int sfNum,String sfName);
 
     User getUserById(int userId) throws Exception;
+
+    User getUserBySfNumAndName(int sfNum,String sfName) throws Exception;
 
     /**
      * 已签到用户人数

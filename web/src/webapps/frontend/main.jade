@@ -8,27 +8,37 @@ html(lang="zh-cn")
         meta(charset="utf-8")
         //IE 支持通过特定的 <meta> 标签来确定绘制当前页面所应该采用的 IE 版本。除非有强烈的特殊需求，否则最好是设置为 edge mode，从而通知 IE 采用其所支持的最新的模式。
         meta(http-equiv="X-UA-Compatible",content="IE=Edge")
+        meta(content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport")
         link(rel="shortcut icon",href="../favicon.ico")
         link(rel="stylesheet", href="lib/bootstrap/dist/css/bootstrap.min.css")
         link(rel="stylesheet", href="lib/AdminLTE/dist/css/AdminLTE.min.css")
-
-    body(style="repeat:no-repeat;")
-        div.container
-            div.row(style="background:url(image/phone/main.png)")
-            div.row
-                div.col-lg-12.col-xs-12.col-md-12
-                    div.small-box.bg-aqua
-                        div.inner(style="text-align:center;cursor: pointer;")
-                            h3(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 进入活动现场
-                div.col-lg-12.col-xs-12.col-md-12
-                    div.small-box.bg-green
-                        div.inner(style="text-align:center;cursor: pointer;font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;")
-                            h3(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") CP签到
-                div.col-lg-12.col-xs-12.col-md-12
-                    div.small-box.bg-yellow
-                        div.inner(style="text-align:center;cursor: pointer;font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;")
-                            h3(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 游戏活动
+        link(rel="stylesheet" href="css/phone/background.css")
+        script(src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js")
+        script(src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js")
+    body(style="padding-top:20%").hold-transition.login-page
+        div.login-box
+            div(style="filter:alpha(opacity=50);opacity:0.8;").login-box-body
+                h2(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 30px;").login-box-msg 顺丰科技2017年会
+                p.login-box-msg --顺丰科技 大步向前--
+                form(action="/user/login?" method="post" onsubmit="return checkinput(this)")
+                    div.form-group.has-feedback
+                        div.small-box.bg-aqua
+                            div.inner(style="text-align:center;cursor: pointer;")
+                                a(href="sendDanmuku.html",style="color:white")
+                                    h3(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 进入活动现场发弹幕
+                    div.form-group.has-feedback
+                        div.small-box.bg-green
+                            div.inner(style="text-align:center;cursor: pointer;font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;")
+                                h3(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;").cpSignup CP签到
+                    div.form-group.has-feedback
+                        div.small-box.bg-yellow
+                            div.inner(style="text-align:center;cursor: pointer;font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;")
+                                h3(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 游戏活动
 
     script(src="lib/jquery/dist/jquery.min.js")
     script(src="lib/jquery-ui/jquery-ui.min.js")
     script(src="lib/bootstrap/dist/js/bootstrap.min.js")
+    script(src="js/util.min.js")
+    script(src="js/variables.min.js")
+    script(src="js/jweixin-1.1.0.min.js")
+    script(src="js/UseWXApi.min.js")

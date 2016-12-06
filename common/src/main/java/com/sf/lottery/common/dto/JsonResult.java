@@ -13,6 +13,11 @@ import java.util.Date;
  * @date 2016/11/4.
  */
 public class JsonResult<T> {
+	public static int NEED_RE_LOGIN = 1;
+	public static int NEED_RETRY = 2;
+
+	private int errCode;
+
 	private String message;
 	
 	private String timestamp = ConcurrentDateUtil.format(new Date());
@@ -37,5 +42,13 @@ public class JsonResult<T> {
 
 	public void setData(T data) {
 		this.data = data;
+	}
+
+	public int getErrCode() {
+		return errCode;
+	}
+
+	public void setErrCode(int errCode) {
+		this.errCode = errCode;
 	}
 }

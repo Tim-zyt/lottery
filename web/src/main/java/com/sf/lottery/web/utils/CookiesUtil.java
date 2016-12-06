@@ -13,7 +13,6 @@ import java.util.Map;
  * @version 1.0.0
  * @date 2016/12/1.
  */
-@Component
 public class CookiesUtil {
     /**
      * 添加Cookies
@@ -38,7 +37,7 @@ public class CookiesUtil {
      * @param maxAge 单位：秒
      * 注意一、修改、删除Cookie时，新建的Cookie除value、maxAge之外的所有属性，例如name、path、domain等，都要与原Cookie完全一样。否则，浏览器将视为两个不同的Cookie不予覆盖，导致修改、删除失败。
      */
-    public void editCookie(HttpServletRequest request,HttpServletResponse response,String name,String value, int maxAge){
+    public static void editCookie(HttpServletRequest request,HttpServletResponse response,String name,String value, int maxAge){
         Cookie[] cookies = request.getCookies();
         if (null==cookies) {
         } else {
@@ -61,7 +60,7 @@ public class CookiesUtil {
      * @param response
      * @param name
      */
-    public void delCookie(HttpServletRequest request,HttpServletResponse response,String name){
+    public static void delCookie(HttpServletRequest request,HttpServletResponse response,String name){
         Cookie[] cookies = request.getCookies();
         if (null==cookies) {
         } else {

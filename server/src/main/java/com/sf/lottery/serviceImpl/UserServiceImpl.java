@@ -53,12 +53,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isSignedByWxInfo(String openId){
-        int count = userManager.isSignedByWxInfo(openId);
-        if(count == 1){
-            return true;
+    public User getUserBySfNumAndName(int sfNum, String sfName) throws Exception {
+        try {
+            return userManager.getUserBySfNumAndName(sfNum,sfName);
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
         }
-        return false;
+    }
+
+    @Override
+    public Integer isSignedByWxInfo(String openId){
+        return userManager.isSignedByWxInfo(openId);
     }
 
     @Override
