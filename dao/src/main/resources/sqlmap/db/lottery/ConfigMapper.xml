@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sf.lottery.dao.ConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.sf.lottery.common.model.Config" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cur_gift_id" property="curGiftId" jdbcType="INTEGER" />
+    <result column="cur_program_id" property="curProgramId" jdbcType="INTEGER" />
+    <result column="is_gift" property="isGift" jdbcType="BIT" />
+    <result column="is_open" property="isOpen" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cur_gift_id, cur_program_id, is_gift, is_open
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectByIsOpen" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from config
+        where  is_open = TRUE
+    </select>
+
+  <insert id="insert" parameterType="com.sf.lottery.common.model.Config" >
+    insert into config (id, cur_gift_id, cur_program_id, is_gift, is_open)
+    values (#{id,jdbcType=INTEGER}, #{curGiftId,jdbcType=INTEGER}, #{curProgramId,jdbcType=INTEGER},
+      #{isGift,jdbcType=BIT}, #{isOpen,jdbcType=BIT})
+  </insert>
+
+  <update id="updateByIsOpen" parameterType="com.sf.lottery.common.model.Config">
+    update config
+    set cur_gift_id = #{curGiftId,jdbcType=INTEGER},
+      cur_program_id = #{curProgramId,jdbcType=INTEGER},
+      is_gift = #{isGift,jdbcType=BIT}
+    where is_open = TRUE
+  </update>
+</mapper>

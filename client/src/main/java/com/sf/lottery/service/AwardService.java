@@ -60,4 +60,11 @@ public interface AwardService {
      * @throws Exception
      */
     List<Award> getAllAwards() throws Exception;
+
+    /**
+     * 获取当前的奖品
+     * @return
+     * @throws Exception
+     */
+    Award getCurAward() throws Exception ;
 }

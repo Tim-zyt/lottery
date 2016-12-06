@@ -1,7 +1,9 @@
 package com.sf.lottery.web.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sf.lottery.common.model.Award;
 import com.sf.lottery.common.model.User;
+import com.sf.lottery.service.AwardService;
 import com.sf.lottery.service.UserService;
 import com.sf.lottery.web.gift.GiftMessage;
 import com.sf.lottery.web.websocket.WebsocketClientFactory;
@@ -28,17 +30,24 @@ public class GiftController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AwardService awardService;
+
 
     @Value("${gift.websocket.address}")
     private String giftAddress;
 
     @ResponseBody
     @RequestMapping(value = "/gift/start", method = RequestMethod.POST)
-    public String startGift(@RequestParam("manCount") int manCount){
+    public String startGift(){
         try {
+            Award curAward = awardService.getCurAward();
+            if(curAward == null){
+                return "false";
+            }
             GiftMessage giftMessage = new GiftMessage();
             giftMessage.setFlag(0);
-            giftMessage.setLuckmanCount(manCount);
+            giftMessage.setLuckmanCount(curAward.getAwUserCount());
             WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("gift", giftAddress);
             webSocketClient.connectBlocking();
             webSocketClient.send(JSON.toJSONString(giftMessage));

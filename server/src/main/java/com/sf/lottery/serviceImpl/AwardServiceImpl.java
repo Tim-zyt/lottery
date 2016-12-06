@@ -92,4 +92,14 @@ public class AwardServiceImpl implements AwardService{
             throw new Exception(e);
         }
     }
+
+    @Override
+    public Award getCurAward() throws Exception {
+        try{
+            return awardManager.getCurAward();
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
+    }
 }
