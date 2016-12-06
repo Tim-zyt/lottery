@@ -1,7 +1,9 @@
 package com.sf.lottery.manager;
 
 import com.sf.lottery.common.model.Award;
+import com.sf.lottery.common.model.Config;
 import com.sf.lottery.dao.AwardMapper;
+import com.sf.lottery.dao.ConfigMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,9 @@ import java.util.Set;
 public class AwardManager {
     @Autowired
     private AwardMapper awardMapper;
+
+    @Autowired
+    private ConfigMapper configMapper;
 
     public boolean deleteAwardByAwardId(Integer awardId){
         boolean b = awardMapper.deleteByPrimaryKey(awardId)>0;
@@ -47,5 +52,14 @@ public class AwardManager {
 
     public List<Award> getAllAwards(){
         return awardMapper.selectAllAwards();
+    }
+
+    public Award getCurAward(){
+        int id = 0;
+        Config config = configMapper.selectByIsOpen();
+        if(config != null){
+            id = config.getCurGiftId();
+        }
+        return awardMapper.selectByPrimaryKey(id);
     }
 }
