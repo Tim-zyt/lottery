@@ -60,6 +60,7 @@ public class UserController {
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public String getWXUserInfo(@RequestParam("sfnum") int sfnum, @RequestParam("sfname") String sfname, HttpServletRequest request, HttpServletResponse response) {
         Cookie cookie = CookiesUtil.getCookieByName(request,"userJson");
+        log.info("Cookies: "+cookie.getValue());
         UserInfoReturn userInfoReturn = null;
         try {
             if(cookie != null){
@@ -88,6 +89,7 @@ public class UserController {
             try {
                 userService.saveUser(user);
                 User user1 = userService.getUserBySfNumAndName(sfnum, sfname);
+                log.info("userInfo:"+user1.toString());
                 CookiesUtil.addCookie(response,"userId",String.valueOf(user1.getId()),86400);
                 CookiesUtil.addCookie(response,"flower","30",86400);
                 CookiesUtil.addCookie(response,"car","5",86400);

@@ -21,22 +21,17 @@ html(lang="zh-cn")
             div(style="filter:alpha(opacity=50);opacity:0.8;").login-box-body
                 h2(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 30px;").login-box-msg 顺丰科技2017年会
                 p.login-box-msg --顺丰科技 大步向前--
-                div.login-box-msg(style="padding:0 1px 20px 2px;text-align:left")
-                    p 点击图片给当前节目打赏：
+                div.login-box-msg(style="padding:0 1px 0px 2px;text-align:left")
+                    strong 点击图片给当前节目打赏：
+                    p.text-center
                         img(src="image/present/flower.gif",height="20px",style="margin-left:5px;margin-right:5px").flower
                         strong(style="color:#337ab7;font-size:15px;line-height:20px").flower * 30
                         img(src="image/present/car.gif",height="20px",style="margin-left:15px;margin-right:5px").car
                         strong(style="color:#00a65a;font-size:15px;line-height:20px").car * 5
                         img(src="image/present/rocket.png",height="20px",style="margin-left:15px;margin-right:5px").rocket
                         strong(style="color:#dd4b39;font-size:15px;line-height:20px").rocket * 1
-                    p
-                        | 说明：1
-                        img(src="image/present/rocket.png",height="20px",style="margin-left:5px;margin-right:5px")
-                        | = 5
-                        img(src="image/present/car.gif",height="20px",style="margin-left:5px;margin-right:5px")
-                        | = 25
-                        img(src="image/present/flower.gif",height="20px",style="margin-left:5px;margin-right:5px")
-                div.form-group.has-feedback(style="margin-top:10px;text-align:left")
+                    p 说明：1火箭=5跑车=25鲜花
+                div.form-group.has-feedback(style="text-align:left")
                     strong 发送弹幕：
                     textarea(name="content")#Smohan_text.form-control
                 div.login-box-msg(style="padding:0 1px 20px 2px")#Smohan_FaceBox

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.UUID;
@@ -42,9 +43,9 @@ public class GetWeixinAccessToken {
 
     private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
 
-    private String accessToken;
+    private volatile String accessToken;
     private final Object accessTokenSync = new Object();
-    private String jsApiTicket;
+    private volatile String jsApiTicket;
     private final Object jsApiTicketSync = new Object();
 
     //  单线程修改，只用volatile就可以
@@ -69,7 +70,6 @@ public class GetWeixinAccessToken {
                     accessTokenReturn1.setAccess_token(accessToken);
                     accessTokenReturn1.setExpires_in(31); //每隔一秒重试一次
                     log.warn(ExceptionUtils.getStackTrace(e));
-                    log.warn("");
                 }
             }
         }, accessTokenReturn.getExpires_in() - 30, TimeUnit.SECONDS);//提前30s刷新，目前access_token的有效期通过返回的expire_in来传达，目前是7200秒之内的值。中控服务器需要根据这个有效时间提前去刷新新access_token。在刷新过程中，中控服务器对外输出的依然是老access_token，此时公众平台后台会保证在刷新短时间内，新老access_token都可用，这保证了第三方业务的平滑过渡
@@ -92,6 +92,7 @@ public class GetWeixinAccessToken {
                     JSApiTicketReturn jsApiTicketReturn = new JSApiTicketReturn();
                     jsApiTicketReturn.setTicket(jsApiTicket);
                     jsApiTicketReturn.setExpires_in(31); //每隔一秒重试一次
+                    log.warn(ExceptionUtils.getStackTrace(e));
                 }
             }
         }, jsApiTicketReturn.getExpires_in() - 30, TimeUnit.SECONDS);
@@ -144,9 +145,15 @@ public class GetWeixinAccessToken {
 
     @ResponseBody
     @RequestMapping(value = "/weixin/jsSignature", method = RequestMethod.GET)
-    public String getWXJsSignature(@RequestParam("noncestr") String noncestr, @RequestParam("timestamp") String timestamp) throws Exception {
+    public String getWXJsSignature(@RequestParam("noncestr") String noncestr, @RequestParam("timestamp") String timestamp, @RequestParam("htmlPath") String htmlPath, HttpServletRequest request) throws Exception {
         initializeAccessToken();
         initializeJsApiTicket();
-        return StrUtils.sha1(StrUtils.makeString("jsapi_ticket=",jsApiTicket,"&noncestr=",noncestr,"&timestamp=",timestamp,"url=http://mp.weixin.qq.com?params=value"));
+        String url = "";
+        url = request.getScheme() +"://" + request.getServerName() + htmlPath;
+        log.warn("jsApiTicket:"+jsApiTicket);
+        log.warn("noncestr:"+noncestr);
+        log.warn("timestamp"+timestamp);
+        log.warn("url"+url);
+        return StrUtils.sha1(StrUtils.makeString("jsapi_ticket=",jsApiTicket,"&noncestr=",noncestr,"&timestamp=",timestamp,"&url=",url));
     }
 }

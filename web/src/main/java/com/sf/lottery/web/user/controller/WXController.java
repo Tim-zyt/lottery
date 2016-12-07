@@ -44,19 +44,20 @@ public class WXController {
     }
 
     @RequestMapping(value = "/weixin/login", method = RequestMethod.GET)
-    public String getWXUserInfo(@RequestParam("code") String code,HttpServletResponse response) {
+    public String getWXUserInfo(@RequestParam("code") String code, HttpServletResponse response) {
         try {
             String s = httpRequest.sendGet("https://api.weixin.qq.com/sns/oauth2/access_token",
                     "appid=" + appId + "&secret=" + appSecret + "&code=" + code + "&grant_type=authorization_code");
             UserAuthorizationReturn userAuthorizationReturn = JSON.parseObject(s, UserAuthorizationReturn.class);
             s = httpRequest.sendGet("https://api.weixin.qq.com/sns/userinfo",
-                    "access_token="+userAuthorizationReturn.getAccess_token()+"&openid="+userAuthorizationReturn.getOpenid()+"&lang=zh_CN");
+                    "access_token=" + userAuthorizationReturn.getAccess_token() + "&openid=" + userAuthorizationReturn.getOpenid() + "&lang=zh_CN");
             Integer userId = userService.isSignedByWxInfo(userAuthorizationReturn.getOpenid());
-            if(userId!=null){            //已签到
-                CookiesUtil.addCookie(response,"userId",String.valueOf(userId),86400);
+            log.info("微信返回：" + s);
+            if (userId != null) {            //已签到
+                CookiesUtil.addCookie(response, "userId", String.valueOf(userId), 86400);
                 return "redirect:/frontend/main.html";
-            }else{                  //未签到
-                CookiesUtil.addCookie(response,"userJson", URLEncoder.encode(s,"UTF-8"),86400);
+            } else {                  //未签到
+                CookiesUtil.addCookie(response, "userJson", URLEncoder.encode(s, "UTF-8"), 86400);
                 return "redirect:/frontend/login.html";
             }
         } catch (Exception e) {
