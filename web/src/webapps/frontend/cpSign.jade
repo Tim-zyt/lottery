@@ -9,7 +9,7 @@ html(lang="zh-cn")
         //IE 支持通过特定的 <meta> 标签来确定绘制当前页面所应该采用的 IE 版本。除非有强烈的特殊需求，否则最好是设置为 edge mode，从而通知 IE 采用其所支持的最新的模式。
         meta(http-equiv="X-UA-Compatible",content="IE=Edge")
         meta(content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport")
-        title 2017年会登录入口
+        title CP签到
         link(rel="stylesheet", href="lib/AdminLTE/bootstrap/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css")
@@ -20,25 +20,32 @@ html(lang="zh-cn")
         script(src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js")
     //  注意：HTML 属性应当按照以下给出的顺序依次排列，确保代码的易读性：class,id, name,data-*,src, for, type, href,title, alt,aria-*, role
     //  通过 JavaScript 生成的标签让内容变得不易查找、编辑，并且降低性能。能避免时尽量避免。
-    body.hold-transition.login-page(style="padding-top:20%")
+    body.hold-transition.login-page(style="padding-top:10%")
         div.login-box
             div(style="filter:alpha(opacity=50);opacity:0.8;").login-box-body
-                p.login-box-msg 顺丰科技2017年会入口
-                form(action="/user/login?" method="post" onsubmit="return checkinput(this)")
+                p.login-box-msg CP签到
+                div#cpDiv(align="center" style="display:none;")
+                    img#cpImg(src="image/phone/main.png" width="50%" alt="cp头像")
+                div(style="margin-top:3%;margin-bottom:3%")
+                    button(type="button").cpSignup 上传图片
+                form(action="/cp/sign" method="post" onsubmit="return checkinput(this)")
                     div.form-group.has-feedback
-                        input(type="number",placeholder="请输入您的工号",name="sfnum").form-control
-                        span.glyphicon.glyphicon-plus.form-control-feedback
-                    div.form-group.has-feedback
-                        input(type="text",placeholder="请输入您的真实姓名",name="sfname").form-control
+                        input(type="number",placeholder="请输入CP1的工号",name="sfnum").form-control
                         span.glyphicon.glyphicon-user.form-control-feedback
+                    div.form-group.has-feedback
+                        input(type="number",placeholder="请输入CP2的工号",name="sfname").form-control
+                        span.glyphicon.glyphicon-user.form-control-feedback
+                    p.help-block(style="font-size:10px;") 注：CP组合仅需一人完成图片上传签到即可
                     div.row
                         div.col-xs-8
                             p(style="color:red;")#message
                         div.col-xs-4
-                            button(type="submit").btn.btn-primary.btn-block.btn-flat Let's Go
+                            button(type="submit").btn.btn-primary.btn-block.btn-flat 确认
     script(src="lib/jquery/dist/jquery.min.js")
     script(src="lib/jquery-ui/jquery-ui.min.js")
     script(src="js/util.min.js")
     script(src="js/login.min.js")
+    script(src="js/cpsign.min.js")
+    script(src="js/jweixin-1.1.0.min.js")
 
 
