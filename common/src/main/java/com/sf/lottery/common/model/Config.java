@@ -16,6 +16,9 @@ public class Config implements Serializable {
 
     private Boolean isOpen;
 
+    //是否开始摇一摇
+    private Boolean isStartShake;
+
     public Integer getId() {
         return id;
     }
@@ -54,5 +57,13 @@ public class Config implements Serializable {
 
     public void setIsOpen(Boolean isOpen) {
         this.isOpen = isOpen;
+    }
+
+    public Boolean getIsStartShake() {
+        return isStartShake;
+    }
+
+    public void setIsStartShake(Boolean isStartShake) {
+        this.isStartShake = isStartShake;
     }
 }
