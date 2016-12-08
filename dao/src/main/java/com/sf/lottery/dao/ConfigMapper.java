@@ -13,4 +13,5 @@ public interface ConfigMapper {
     Config selectByIsOpen();
 
     Config selectByPrimaryKey(int id);
+
 }

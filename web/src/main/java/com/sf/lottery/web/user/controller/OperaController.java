@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author zyt
  * @version 1.0.0
@@ -17,35 +19,37 @@ public class OperaController {
     private final static Logger log = LoggerFactory.getLogger(OperaController.class);
     @Autowired
     private OperaService operaService;
-    private int flowerCount;
-    private volatile int carCount;
-    private volatile int rocketCount;
+    private AtomicInteger flowerCount = new AtomicInteger(0);
+    private AtomicInteger carCount = new AtomicInteger(0);
+    private AtomicInteger rocketCount = new AtomicInteger(0);
 
     public void updateFlower() {
-        flowerCount = flowerCount + 1;
+        flowerCount.incrementAndGet();
     }
 
     public void updateCar() {
-        carCount = carCount + 1;
+        carCount.incrementAndGet();
     }
 
     public void updateRocket() {
-        rocketCount = rocketCount + 1;
+        rocketCount.incrementAndGet();
     }
 
     public void resetCount(int operaId) {
         Opera opera = new Opera();
         opera.setId(operaId);
-        opera.setOpFlower(flowerCount);
-        opera.setOpCar(carCount);
-        opera.setOpRocket(rocketCount);
+        opera.setOpFlower(flowerCount.get());
+        opera.setOpCar(carCount.get());
+        opera.setOpRocket(rocketCount.get());
         try {
             operaService.updateByPrimaryKey(opera);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        flowerCount = 0;
-        carCount = 0;
-        rocketCount = 0;
+        flowerCount.set(0);
+        carCount.set(0);
+        rocketCount.set(0);
     }
+
+
 }

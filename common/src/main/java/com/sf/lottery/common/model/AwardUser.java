@@ -1,4 +1,4 @@
-package com.sf.lottery.common.model.AwardUserModel;
+package com.sf.lottery.common.model;
 
 import java.io.Serializable;
 

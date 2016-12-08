@@ -10,15 +10,13 @@ jQuery(function ($) {
 
 $(document).ready(function () {
     var message = getUrlParam("message");
-    alert("message" + message);
     $("#message").html(message);
 });
 
-window.onload = function(){
-    var message = getUrlParam("message");
-    alert("message" + message);
-    $("#message").html(message);
-}
+// window.onload = function(){
+//     var message = getUrlParam("message");
+//     $("#message").html(message);
+// }
 
 function checkinput(f){
     var sfnum = f.sfnum.value;

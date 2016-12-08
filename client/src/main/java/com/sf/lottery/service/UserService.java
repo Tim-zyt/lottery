@@ -63,4 +63,11 @@ public interface UserService {
      * @throws Exception
      */
     List<User> getAwardUser() throws Exception;
+
+    /**
+     * 删除已获奖但未到场用户
+     * @return
+     * @throws Exception
+     */
+    boolean deleteWinner(int userId) throws Exception;
 }
