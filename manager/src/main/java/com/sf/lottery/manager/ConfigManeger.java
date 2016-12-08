@@ -14,7 +14,7 @@ public class ConfigManeger {
     private ConfigMapper configMapper;
 
     //是否开始摇一摇
-    Boolean isStartShark(){
+    public Boolean isStartShark(){
         Config config = configMapper.selectByIsOpen();
         if(config == null || config.getIsStartShake() == null){
             return false;
@@ -23,12 +23,29 @@ public class ConfigManeger {
     }
 
     //开启摇一摇
-    int openStartShark(){
+    public int openStartShark(){
         Config config = configMapper.selectByIsOpen();
         if(config == null){
             config = new Config();
+            config.setIsStartShake(true);
+            config.setIsOpen(true);
+            return configMapper.insert(config);
         }
         config.setIsStartShake(true);
+        config.setIsOpen(true);
+        return configMapper.updateByIsOpen(config);
+    }
+
+    //关闭摇一摇
+    public int closeShark(){
+        Config config = configMapper.selectByIsOpen();
+        if(config == null){
+            config = new Config();
+            config.setIsStartShake(false);
+            config.setIsOpen(true);
+            return configMapper.insert(config);
+        }
+        config.setIsStartShake(false);
         config.setIsOpen(true);
         return configMapper.updateByIsOpen(config);
     }
