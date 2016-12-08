@@ -56,7 +56,7 @@ jQuery(function ($) {
                 var usersHtml = "";
                 var iLen = users.length;
                 for(var i = iLen - 1 ; i >=0  ; i--){
-                    usersHtml += "<li style='width: 10%;height:16%;display:none' class='luckman'><div style='text-align: center;'><img style='border-radius: 50%;max-width: 90%;height: auto;' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + users[i].sfName + "</a></div></li>";
+                    usersHtml += "<li style='width: 10%;height:16%;display:none' class='luckman'><div style='text-align: center;'><img style='border-radius: 50%;max-width: 90%;height: 100px;width: 100px;' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + users[i].sfName + "</a></div></li>";
                 }
                 $("#luckmanList").html(usersHtml);
             }
@@ -69,7 +69,7 @@ jQuery(function ($) {
         var usersHtml = "";
         var iLen = users.length;
         for(var i = iLen - 1 ; i >=0  ; i--){
-            usersHtml += "<li style='width: 10%;height:16%;' class='luckman'><div style='text-align: center;'><img style='border-radius: 50%;max-width: 90%;height: auto;' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + users[i].sfName + "</a></div></li>";
+            usersHtml += "<li style='width: 10%;height:16%;' class='luckman'><div style='text-align: center;'><img style='border-radius: 50%;max-width: 90%;height: 100px;width: 100px;' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 20px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + users[i].sfName + "</a></div></li>";
         }
         $("#luckmanList").html(usersHtml);
     }
