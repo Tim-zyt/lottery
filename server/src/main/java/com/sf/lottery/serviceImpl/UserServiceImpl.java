@@ -115,4 +115,14 @@ public class UserServiceImpl implements UserService {
             throw new Exception(e);
         }
     }
+
+    @Override
+    public boolean deleteWinner(int userId) throws Exception{
+        try{
+        return userManager.deleteWinner(userId);
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
+    }
 }

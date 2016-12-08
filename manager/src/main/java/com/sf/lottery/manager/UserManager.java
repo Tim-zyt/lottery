@@ -1,12 +1,12 @@
 package com.sf.lottery.manager;
 
 import com.sf.lottery.common.model.Award;
-import com.sf.lottery.common.model.AwardUserModel.AwardUser;
+import com.sf.lottery.common.model.AwardUser;
 import com.sf.lottery.common.model.Config;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.RandomUtil;
 import com.sf.lottery.dao.AwardMapper;
-import com.sf.lottery.dao.AwardUser.AwardUserMapper;
+import com.sf.lottery.dao.AwardUserMapper;
 import com.sf.lottery.dao.ConfigMapper;
 import com.sf.lottery.dao.UserMapper;
 import org.slf4j.Logger;
@@ -126,5 +126,13 @@ public class UserManager {
 
     public User getUserBySfNumAndName(int sfNum, String sfName) {
         return userMapper.selectUserByUniqueKey(sfNum,sfName);
+    }
+
+    //删除获奖-用户临时表（未到现场）
+    public boolean deleteWinner(int userId){
+        if(awardUserMapper.deleteByUserId(userId)>0){
+            return true;
+        }else
+            return false;
     }
 }

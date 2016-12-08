@@ -1,6 +1,6 @@
-package com.sf.lottery.dao.AwardUser;
+package com.sf.lottery.dao;
 
-import com.sf.lottery.common.model.AwardUserModel.AwardUser;
+import com.sf.lottery.common.model.AwardUser;
 
 import java.util.List;
 
@@ -12,11 +12,15 @@ import java.util.List;
 public interface AwardUserMapper {
     int deleteByPrimaryKey(Integer id);
 
+    int deleteByUserId(Integer userId);
+
     int insert(AwardUser record);
 
     int insertSelective(AwardUser record);
 
     AwardUser selectByPrimaryKey(Integer id);
+
+    AwardUser selectByUserId(Integer userId);
 
     int updateByPrimaryKeySelective(AwardUser record);
 

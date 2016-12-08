@@ -5,9 +5,7 @@ import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.ExceptionUtils;
 import com.sf.lottery.service.UserService;
-import com.sf.lottery.web.damuku.domain.DanmukuMessage;
 import com.sf.lottery.web.utils.CookiesUtil;
-import com.sf.lottery.web.utils.HttpRequest;
 import com.sf.lottery.web.websocket.WebsocketClientFactory;
 import com.sf.lottery.web.weixin.domain.UserInfoReturn;
 import org.java_websocket.client.WebSocketClient;
@@ -134,5 +132,11 @@ public class UserController {
             log.warn(ExceptionUtils.getStackTrace(e));
         }
         return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/deleteWinner", method = RequestMethod.POST)
+    public boolean deleteWinner(int userId) throws Exception {
+         return userService.deleteWinner(userId);
     }
 }

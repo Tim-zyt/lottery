@@ -9,4 +9,8 @@ public interface ConfigService {
     int openStartShark();
 
     Boolean isStartShark();
+
+    boolean setCurrentAward(int awardId);
+
+    boolean setCurrentOpera(int operaId);
 }

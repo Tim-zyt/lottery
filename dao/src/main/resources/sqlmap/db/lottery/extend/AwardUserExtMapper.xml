@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sf.lottery.dao.AwardUser.AwardUserMapper" >
-    <resultMap id="BaseResultMap" type="com.sf.lottery.common.model.AwardUserModel.AwardUser" >
+<mapper namespace="com.sf.lottery.dao.AwardUserMapper" >
+    <resultMap id="BaseResultMap" type="com.sf.lottery.common.model.AwardUser" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="award_id" property="awardId" jdbcType="INTEGER" />
@@ -15,17 +15,27 @@
         from award_user
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from award_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
         delete from award_user
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.sf.lottery.common.model.AwardUserModel.AwardUser" >
+    <delete id="deleteByUserId" parameterType="java.lang.Integer" >
+        delete from award_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.sf.lottery.common.model.AwardUser" >
         insert into award_user (id, user_id, award_id
         )
         values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{awardId,jdbcType=INTEGER}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.sf.lottery.common.model.AwardUserModel.AwardUser" >
+    <insert id="insertSelective" parameterType="com.sf.lottery.common.model.AwardUser" >
         insert into award_user
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -50,7 +60,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.sf.lottery.common.model.AwardUserModel.AwardUser" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.sf.lottery.common.model.AwardUser" >
         update award_user
         <set >
             <if test="userId != null" >
@@ -62,7 +72,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.sf.lottery.common.model.AwardUserModel.AwardUser" >
+    <update id="updateByPrimaryKey" parameterType="com.sf.lottery.common.model.AwardUser" >
         update award_user
         set user_id = #{userId,jdbcType=INTEGER},
         award_id = #{awardId,jdbcType=INTEGER}
