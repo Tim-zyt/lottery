@@ -1,5 +1,6 @@
 package com.sf.lottery.web.user.controller;
 
+import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.service.ConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +24,27 @@ public class ConfigController {
 
     @ResponseBody
     @RequestMapping(value = "/config/setCurrentGift", method = RequestMethod.POST)
-    public boolean setCurrentAward(@RequestParam("awardId") int awardId){
-        return configService.setCurrentAward(awardId);
+    public JsonResult<Boolean> setCurrentAward(@RequestParam("awardId") int awardId){
+        JsonResult<Boolean> result = new JsonResult<>();
+        try {
+            result.setData(configService.setCurrentAward(awardId));
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @ResponseBody
     @RequestMapping(value = "/config/setCurrentOpera", method = RequestMethod.POST)
-    public boolean setCurrentOpera(@RequestParam("operaId") int operaId){
-        return configService.setCurrentOpera(operaId);
+    public JsonResult<Boolean> setCurrentOpera(@RequestParam("operaId") int operaId){
+        JsonResult<Boolean> result = new JsonResult<>();
+        try {
+            result.setData(configService.setCurrentOpera(operaId));
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

@@ -65,6 +65,13 @@ public interface UserService {
     List<User> getAwardUser() throws Exception;
 
     /**
+     * 重置用户表
+     * @return
+     * @throws Exception
+     */
+    boolean resetUsers() throws Exception;
+
+    /**
      * 删除已获奖但未到场用户
      * @return
      * @throws Exception

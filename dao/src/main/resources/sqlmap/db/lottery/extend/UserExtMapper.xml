@@ -76,4 +76,20 @@
         </foreach>
     </update>
 
+    <update id="resetUsers">
+        update sf_user
+        set is_sign=0,
+        award_count = 0,
+        signed_time = NULL,
+        wx_openid = NULL,
+        wx_headimgurl = null,
+        wx_nickname = null,
+        wx_sex = null,
+        wx_province = null,
+        wx_city = null,
+        wx_country = null,
+        wx_privilege = null,
+        wx_unionid = null
+    </update>
+
 </mapper>

@@ -117,6 +117,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean resetUsers() throws Exception {
+        try {
+            return userManager.resetUsers();
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
+    }
+
+    @Override
     public boolean deleteWinner(int userId) throws Exception{
         try{
         return userManager.deleteWinner(userId);

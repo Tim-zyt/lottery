@@ -1,0 +1,15 @@
+//
+   Created by 01170626 on 2016/12/7.
+extends jade/common/layout
+block header
+    link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
+    link(rel="stylesheet", type="text/css",href="css/layer/layer.css")
+    link(rel="stylesheet", type="text/css",href="css/layer/layer_skin.css")
+
+block content
+    div.box.box-info
+        div.box-header.with-border
+            h3.box-title 节目管理界面
+            button.btn.btn-success(style="margin-left:5%;" onclick="confirmAddAward()") 添加节目
+

@@ -1,6 +1,7 @@
 package com.sf.lottery.web.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.model.Award;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.service.AwardService;
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -32,8 +32,7 @@ public class GiftController {
 
     @Autowired
     private AwardService awardService;
-
-
+    
     @Value("${gift.websocket.address}")
     private String giftAddress;
 
@@ -59,8 +58,10 @@ public class GiftController {
         return "true";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/gift/end", method = RequestMethod.POST)
-    public String endGift(){
+    public JsonResult<List<User>> endGift(){
+        JsonResult<List<User>> result = new JsonResult<>();
         try {
             List<User> users = userService.getAwardUser();
             GiftMessage giftMessage = new GiftMessage();
@@ -71,11 +72,12 @@ public class GiftController {
             webSocketClient.connectBlocking();
             webSocketClient.send(JSON.toJSONString(giftMessage));
             webSocketClient.close();
+            result.setData(users);
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
-            return "false";
         }
-        return "true";
+        return result;
     }
 
 }

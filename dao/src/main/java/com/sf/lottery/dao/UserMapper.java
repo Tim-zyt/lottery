@@ -39,4 +39,6 @@ public interface UserMapper {
     List<User> getUnAwardUser();
 
     int updateAwardCountBatch(List<User> users);
+
+    int resetUsers();
 }

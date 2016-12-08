@@ -1,0 +1,36 @@
+//
+   Created by 01170626 on 2016/12/7.
+extends jade/common/layout
+block header
+    link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
+    link(rel="stylesheet", type="text/css",href="css/layer/layer.css")
+    link(rel="stylesheet", type="text/css",href="css/layer/layer_skin.css")
+
+block content
+    div.box.box-info
+        div.box-header.with-border
+            h3.box-title 节目管理界面
+            button.btn.btn-success(style="margin-left:5%;" onclick="confirmAddOpera()") 添加节目
+
+        div.box-body
+            div.table-responsive
+                table.table.no-margin
+                    thead
+                    tr
+                        th 选中节目
+                        th 节目名称
+                        th 节目演员
+                        th 所属部门
+                        th 修改节目
+                        th 删除节目
+                    tbody#operas
+
+
+block footer
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/opera.js")
+    script(src="js/layer/layer.js")
+    script(src="js/layer/layer_main.js")
+

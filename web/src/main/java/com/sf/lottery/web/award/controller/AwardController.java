@@ -60,7 +60,11 @@ public class AwardController {
         JsonResult<Boolean> result = new JsonResult<>();
         String awardName = request.getParameter("awardName");
         String awardDescription = request.getParameter("awardDescription");
-        Integer awardUserCount = Integer.valueOf(request.getParameter("awardUserCount"));
+        String s = request.getParameter("awardUserCount");
+        Integer awardUserCount = 0;
+        if(s!=null && s!=""){
+            awardUserCount = Integer.valueOf(s);
+        }
         String awardKind = request.getParameter("awardKind");
         Award award = null;
         try {
@@ -95,18 +99,18 @@ public class AwardController {
         JsonResult<Boolean> result = new JsonResult<>();
         String awardName = request.getParameter("awardName");
         String awardDescription = request.getParameter("awardDescription");
-        Integer awardUserCount = Integer.valueOf(request.getParameter("awardUserCount"));
+        String awardUserCount = request.getParameter("awardUserCount");
         String awardKind = request.getParameter("awardKind");
         try {
             Award award = awardService.getAward(awardId);
             if(awardName!=null && awardName!=""){
                 award.setAwName(awardName);
             }
+            if(awardUserCount!=null&& awardUserCount!=""){
+                award.setAwUserCount(Integer.valueOf(awardUserCount));
+            }
             if(awardDescription!=null && awardDescription!=""){
                 award.setAwDescription(awardDescription);
-            }
-            if(awardUserCount!=null){
-                award.setAwUserCount(awardUserCount);
             }
             if(awardKind!=null && awardKind!=""){
                 award.setAwKind(awardKind);

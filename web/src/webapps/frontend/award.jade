@@ -4,12 +4,18 @@ extends jade/common/layout
 block header
     link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
     link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
-
+    link(rel="stylesheet", type="text/css",href="css/layer/layer.css")
+    link(rel="stylesheet", type="text/css",href="css/layer/layer_skin.css")
 
 block content
     div.box.box-info
         div.box-header.with-border
             h3.box-title 奖品管理界面
+            button.btn.btn-success(style="margin-left:5%;" onclick="confirmAddAward()") 添加奖品
+            button.btn.btn-info#startGift(onclick="startGift()",style="display:block;") 开始抽奖
+            button.btn.btn-danger#endGift(onclick="endGift()",style="display:none;") 结束抽奖
+
+
         div.box-body
             div.table-responsive
                 table.table.no-margin
@@ -24,10 +30,25 @@ block content
                         th 删除奖品
                     tbody#awardTable
 
+    div.box.box-info
+        div.box-header.with-border
+            h3.box-title 获奖者界面
+
+        div.box-body(style="margin:0 auto;")
+            div.table-responsive
+                table.table.no-margin
+                    thead
+                    tr
+                        th 获奖者姓名
+                        th 获奖者工号
+                        th 删除该获奖者
+                    tbody#winnerTable
+
+
+
 block footer
     script(src="lib/jquery/dist/jquery.min.js")
     script(src="lib/jquery-ui/jquery-ui.min.js")
     script(src="js/award.js")
-    script(src="js/statistics/sidebar/classie.js")
-    script(src="js/statistics/sidebar/gnmenu.js")
-    script(src="js/statistics/sidebar/GoogleTemp2.js")
+    script(src="js/layer/layer.js")
+    script(src="js/layer/layer_main.js")
