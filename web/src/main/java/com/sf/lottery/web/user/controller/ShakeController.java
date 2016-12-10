@@ -91,18 +91,18 @@ public class ShakeController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shake/isStartShake", method = RequestMethod.POST)
+    @RequestMapping(value = "/shake/isCanShark", method = RequestMethod.POST)
     public JsonResult<Boolean> isStartShake(){
         JsonResult<Boolean> result = new JsonResult<>();
-        result.setData(configService.isStartShark());
+        result.setData(configService.isCanShark());
         return result;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shake/startShark", method = RequestMethod.POST)
+    @RequestMapping(value = "/shake/openShark", method = RequestMethod.POST)
     public JsonResult<Boolean> startShark(){
         JsonResult<Boolean> result = new JsonResult<>();
-        result.setData(configService.openStartShark() > 0);
+        result.setData(configService.openShark() > 0);
         return result;
     }
 
