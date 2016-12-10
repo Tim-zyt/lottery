@@ -20,9 +20,9 @@ function cpSubmit() {
     var sfnum1 = $("#sfnum1").val();
     var sfnum2 = $("#sfnum2").val();
     var imgSrc = $("#imgSrc").val();
-    // if(imgSrc==null||imgSrc==undefined||imgSrc==""){
-    //     alert("请上传图片再签到");
-    // }else{
+    if(imgSrc==null||imgSrc==undefined||imgSrc==""){
+        alert("请上传图片再签到");
+    }else{
         $.ajax({
             type: "post",
             url : getContextPath() + "/cp/cpsign",
@@ -43,7 +43,7 @@ function cpSubmit() {
                 }
             }
         });
-    // }
+     }
 }
 
 jQuery(function ($) {
