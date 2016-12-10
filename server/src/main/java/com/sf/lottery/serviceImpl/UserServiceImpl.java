@@ -3,6 +3,7 @@ package com.sf.lottery.serviceImpl;
 
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.ExceptionUtils;
+import com.sf.lottery.manager.ConfigManager;
 import com.sf.lottery.manager.UserManager;
 import com.sf.lottery.service.UserService;
 import org.slf4j.Logger;
@@ -21,6 +22,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserManager userManager;
+    @Autowired
+    ConfigManager configManager;
 
     @Override
     public int saveUser(User user) throws Exception {
@@ -134,5 +137,25 @@ public class UserServiceImpl implements UserService {
             log.warn(ExceptionUtils.getStackTrace(e));
             throw new Exception(e);
         }
+    }
+
+    @Override
+    public boolean isSignedByUserNnm(int sfNum){
+        try{
+            return userManager.isSignedByUserNnm(sfNum);
+        } catch (Exception e) {
+            log.info("cp签到工号错误");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean cpSign(int sfNum1,int sfNum2,String imgSrc) throws Exception{
+        return userManager.cpSign(sfNum1,sfNum2,imgSrc);
+    }
+
+    @Override
+    public boolean isCanCpsign() throws Exception{
+        return configManager.IsCanCpsign();
     }
 }

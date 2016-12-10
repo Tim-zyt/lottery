@@ -40,5 +40,7 @@ public interface UserMapper {
 
     int updateAwardCountBatch(List<User> users);
 
+    Boolean isSignedByUserNum(int sfNum);
+
     int resetUsers();
 }

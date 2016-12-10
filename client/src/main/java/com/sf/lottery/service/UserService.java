@@ -77,4 +77,19 @@ public interface UserService {
      * @throws Exception
      */
     boolean deleteWinner(int userId) throws Exception;
+
+    /**
+     * 根据工号判断用户是否签到
+     */
+    boolean isSignedByUserNnm(int sfNum) throws Exception;
+
+    /**
+     * Cp签到
+     */
+    boolean cpSign(int sfNum1,int sfNum2,String imgSrc) throws Exception;
+
+    /**
+     * 是否可以CP签到
+     */
+    boolean isCanCpsign() throws Exception;
 }

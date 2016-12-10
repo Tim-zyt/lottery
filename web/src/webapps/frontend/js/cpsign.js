@@ -16,6 +16,36 @@ $.ajax({
     }
 });
 
+function cpSubmit() {
+    var sfnum1 = $("#sfnum1").val();
+    var sfnum2 = $("#sfnum2").val();
+    var imgSrc = $("#imgSrc").val();
+    // if(imgSrc==null||imgSrc==undefined||imgSrc==""){
+    //     alert("请上传图片再签到");
+    // }else{
+        $.ajax({
+            type: "post",
+            url : getContextPath() + "/cp/cpsign",
+            dataType:'json',
+            data: {
+                "sfnum1":sfnum1,
+                "sfnum2":sfnum2,
+                "imgSrc":imgSrc
+            },
+            success: function(data){
+                var code = data.data;
+                if(code == "true"){
+                    var p = "<p style='color:green;' >" + data.message + "</p>" ;
+                    $("#msg").append(p);
+                }else {
+                    var p = "<p style='color:red;' >" + data.message + "</p>" ;
+                    $("#msg").append(p);
+                }
+            }
+        });
+    // }
+}
+
 jQuery(function ($) {
     $(document).ready(function () {
         $(".cpSignup").click(function () {
@@ -48,7 +78,9 @@ jQuery(function ($) {
                         var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + serverId;
                         $("#cpDiv").css("display", "block");
                         $("#cpImg").attr("src", imgSrc);
+                        $("#imgSrc").val(imgSrc);
                 }
             });
     }
+
 });

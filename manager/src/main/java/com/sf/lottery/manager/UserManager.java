@@ -1,14 +1,8 @@
 package com.sf.lottery.manager;
 
-import com.sf.lottery.common.model.Award;
-import com.sf.lottery.common.model.AwardUser;
-import com.sf.lottery.common.model.Config;
-import com.sf.lottery.common.model.User;
+import com.sf.lottery.common.model.*;
 import com.sf.lottery.common.utils.RandomUtil;
-import com.sf.lottery.dao.AwardMapper;
-import com.sf.lottery.dao.AwardUserMapper;
-import com.sf.lottery.dao.ConfigMapper;
-import com.sf.lottery.dao.UserMapper;
+import com.sf.lottery.dao.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +32,9 @@ public class UserManager {
 
     @Autowired
     private AwardUserMapper awardUserMapper;
+
+    @Autowired
+    private CoupleMapper coupleMapper;
 
     @Autowired
     private RandomUtil randomUtil;
@@ -139,5 +136,30 @@ public class UserManager {
             return true;
         }else
             return false;
+    }
+
+    //根据工号判断用户是否签到
+    public boolean isSignedByUserNnm(int sfNum) throws Exception{
+        if(userMapper.isSignedByUserNum(sfNum) == true){
+            return true;
+        }else
+            return false;
+    }
+
+    //cp签到
+    public boolean cpSign(int sfNum1,int sfNum2,String imgSrc){
+        if((coupleMapper.isCpSignedByUserNum(sfNum1)==0)&&(coupleMapper.isCpSignedByUserNum(sfNum2)==0)){
+            Couple couple = new Couple();
+            couple.setUser1SfNum(sfNum1);
+            couple.setUser2SfNum(sfNum2);
+            couple.setCpImg(imgSrc);
+            int isSuccess = coupleMapper.insert(couple);
+            if(isSuccess==1){
+                return true;
+            }else
+                return false;
+        }else{
+            return false;
+        }
     }
 }
