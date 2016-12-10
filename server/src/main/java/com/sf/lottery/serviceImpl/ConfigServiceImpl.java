@@ -15,27 +15,57 @@ public class ConfigServiceImpl implements ConfigService {
     private ConfigManager configManager;
 
     @Override
+    public boolean setCurrentAward(int awardId) {
+        return configManager.setCurrentAward(awardId);
+    }
+
+    @Override
+    public boolean setCurrentOpera(int operaId) {
+        return configManager.setCurrentOpera(operaId);
+    }
+
+    @Override
+    public Boolean isCanShark() {
+        return configManager.isCanShark();
+    }
+
+    @Override
     public int closeShark() {
         return configManager.closeShark();
     }
 
     @Override
-    public int openStartShark() {
-        return configManager.openStartShark();
+    public int openShark() {
+        return configManager.openShark();
     }
 
     @Override
-    public Boolean isStartShark() {
-        return configManager.isStartShark();
+    public Boolean isCanReward() {
+        return configManager.isCanReward();
     }
 
     @Override
-    public boolean setCurrentAward(int awardId){
-        return configManager.setCurrentAward(awardId);
+    public int closeReward() {
+        return configManager.closeReward();
     }
 
     @Override
-    public boolean setCurrentOpera(int operaId){
-        return configManager.setCurrentOpera(operaId);
+    public int openReward() {
+        return configManager.openReward();
+    }
+
+    @Override
+    public Boolean IsCanCpsign() {
+        return configManager.IsCanCpsign();
+    }
+
+    @Override
+    public int closeCpsign() {
+        return configManager.closeCpsign();
+    }
+
+    @Override
+    public int openCpsign() {
+        return configManager.openCpsign();
     }
 }

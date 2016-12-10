@@ -12,12 +12,16 @@ public class Config implements Serializable {
 
     private Integer curProgramId;
 
-    private Boolean isGift;
-
-    private Boolean isOpen;
+    //是否开启抽奖
+    private Boolean isCanReward;
 
     //是否开始摇一摇
-    private Boolean isStartShake;
+    private Boolean isCanShake;
+
+    //是否可以CP签到
+    private Boolean isCanCpsign;
+
+    private Boolean isOpen;
 
     public Integer getId() {
         return id;
@@ -43,12 +47,28 @@ public class Config implements Serializable {
         this.curProgramId = curProgramId;
     }
 
-    public Boolean getIsGift() {
-        return isGift;
+    public Boolean getIsCanReward() {
+        return isCanReward;
     }
 
-    public void setIsGift(Boolean isGift) {
-        this.isGift = isGift;
+    public void setIsCanReward(Boolean isCanReward) {
+        this.isCanReward = isCanReward;
+    }
+
+    public Boolean getIsCanShake() {
+        return isCanShake;
+    }
+
+    public void setIsCanShake(Boolean isCanShake) {
+        this.isCanShake = isCanShake;
+    }
+
+    public Boolean getIsCanCpsign() {
+        return isCanCpsign;
+    }
+
+    public void setIsCanCpsign(Boolean isCanCpsign) {
+        this.isCanCpsign = isCanCpsign;
     }
 
     public Boolean getIsOpen() {
@@ -57,13 +77,5 @@ public class Config implements Serializable {
 
     public void setIsOpen(Boolean isOpen) {
         this.isOpen = isOpen;
-    }
-
-    public Boolean getIsStartShake() {
-        return isStartShake;
-    }
-
-    public void setIsStartShake(Boolean isStartShake) {
-        this.isStartShake = isStartShake;
     }
 }
