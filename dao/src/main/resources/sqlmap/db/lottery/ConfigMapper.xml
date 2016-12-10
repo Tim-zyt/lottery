@@ -5,12 +5,13 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="cur_gift_id" property="curGiftId" jdbcType="INTEGER" />
     <result column="cur_program_id" property="curProgramId" jdbcType="INTEGER" />
-    <result column="is_gift" property="isGift" jdbcType="BIT" />
+    <result column="is_can_reward" property="isCanReward" jdbcType="BIT" />
+    <result column="is_can_shake" property="isCanShake" jdbcType="BIT" />
+    <result column="is_can_cpsign" property="isCanCpsign" jdbcType="BIT" />
     <result column="is_open" property="isOpen" jdbcType="BIT" />
-    <result column="start_shake" property="isStartShake" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, cur_gift_id, cur_program_id, is_gift, is_open ,start_shake
+    id, cur_gift_id, cur_program_id, is_can_reward, is_can_shake ,is_can_cpsign , is_open
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,17 +28,19 @@
     </select>
 
   <insert id="insert" parameterType="com.sf.lottery.common.model.Config" >
-    insert into config (id, cur_gift_id, cur_program_id, is_gift, is_open, start_shake)
+    insert into config (id, cur_gift_id, cur_program_id, is_can_reward, is_can_shake, is_can_cpsign, is_open)
     values (#{id,jdbcType=INTEGER}, #{curGiftId,jdbcType=INTEGER}, #{curProgramId,jdbcType=INTEGER},
-      #{isGift,jdbcType=BIT}, #{isOpen,jdbcType=BIT},  #{isStartShake,jdbcType=BIT})
+      #{isCanReward,jdbcType=BIT}, #{isCanShake,jdbcType=BIT},  #{isCanCpsign,jdbcType=BIT} ,  #{isOpen,jdbcType=BIT})
   </insert>
 
   <update id="updateByIsOpen" parameterType="com.sf.lottery.common.model.Config">
     update config
     set cur_gift_id = #{curGiftId,jdbcType=INTEGER},
       cur_program_id = #{curProgramId,jdbcType=INTEGER},
-      is_gift = #{isGift,jdbcType=BIT},
-      start_shake = #{isStartShake,jdbcType=BIT}
+      is_can_reward = #{isCanReward,jdbcType=BIT},
+      is_can_shake = #{isCanShake,jdbcType=BIT},
+      is_can_cpsign = #{isCanCpsign,jdbcType=BIT},
+      is_open = #{isOpen,jdbcType=BIT}
     where is_open = TRUE
   </update>
 </mapper>
