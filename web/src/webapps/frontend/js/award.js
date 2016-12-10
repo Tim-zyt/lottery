@@ -4,6 +4,7 @@ $(document).ready(function () {
 });
 
 var awards = "";
+var awardWinners = "";
 
 function refreshPage(){
     $.ajax({
@@ -230,26 +231,26 @@ function endGift() {
         data: {
         },
         success: function(data){
-            var awardWinners = data.data;
+            awardWinners = data.data;
             var winnerHtml = "";
             var iLen = awardWinners.length;
             for(var i = iLen - 1 ; i >=0  ; i--){
-                winnerHtml+="<tr><td>"+awardWinners[i].sfNum+"</td><td>"+awardWinners[i].sfName+"</td><td>"+
-                    "<span class='label label-danger' style='cursor:pointer;' onclick='comfirmDeleteWinner("+awardWinners[i].id+")'>"+"删除"+"</span></td></tr>";
+                winnerHtml+="<tr id='tr"+i+"'><td>"+awardWinners[i].sfNum+"</td><td>"+awardWinners[i].sfName+"</td><td>"+
+                    "<span class='label label-danger' style='cursor:pointer;' onclick='confirmDeleteWinner("+i+")'>"+"删除"+"</span></td></tr>";
             }
             $("#winnerTable").html(winnerHtml);
-            refreshPage();
+            // refreshPage();
             $("#startGift").css("display","block");
             $("#endGift").css("display","none");
         }
     });
 }
 
-function comfirmDeleteWinner(winnerId){
-    layer.confirm('确定要删除该获奖用户吗？', {
+function confirmDeleteWinner(i){
+    layer.confirm("确定要删除 "+awardWinners[i].sfName+" 吗？", {
         btn: ['删除','取消'] //按钮
     }, function(){
-        deleteWinner(winnerId);
+        deleteWinner(i);
     }, function(){
         layer.msg('取消删除', {
             time: 500, //20s后自动关闭
@@ -257,12 +258,13 @@ function comfirmDeleteWinner(winnerId){
     });
 }
 
-function deleteWinner(winnerId) {
+function deleteWinner(i) {
     $.ajax({
         type: "post",
-        url : getContextPath() + "/user/deleteWinner?winnerId="+winnerId,
+        url : getContextPath() + "/user/deleteWinner",
         dataType:'json',
         data: {
+            "userId":awardWinners[i].id
         },
         success: function(data){
             var deleteSuccess = data.data;
@@ -271,7 +273,8 @@ function deleteWinner(winnerId) {
                     time: 500, //20s后自动关闭
                     // btn: ['明白了', '知道了']
                 });
-                refreshPage();
+                var trId = "tr"+i;
+                $("#"+trId).remove();
             }else{
                 layer.msg('删除失败', {
                     time: 500, //20s后自动关闭
