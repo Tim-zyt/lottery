@@ -1,0 +1,59 @@
+//
+   Created by 01170626 on 2016/12/8.
+extends jade/common/layout
+
+block header
+    link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
+    link(rel="stylesheet", href="lib/AdminLTE/dist/css/AdminLTE.min.css")
+
+
+block content
+    div.col-md-6
+        p.text-center
+            strong 摇一摇
+
+        div.progress-group
+            span.progress-text bilibili
+            span.progress-number 200/
+                b 300
+
+            div.progress.sm
+                div.progress-bar.progress-bar-aqua(style="width:66%")
+
+        div.progress-group
+            span.progress-text acfun
+            span.progress-number 180/
+                b 540
+
+            div.progress.sm
+                div.progress-bar.progress-bar-red(style="width:33%")
+
+    div.col-md-8
+        div.info-box.bg-yellow
+            span.info-box-icon
+                i.ion.ion-ios-pricetag-outline
+
+            div.info-box-content
+                span.info-box-text bilibili
+                span.info-box-number 5100
+
+                div.progress
+                    div.progress-bar(style="width:50%;")
+
+                span.progress-description
+                    balabalabala
+
+        div.info-box.bg-green
+            span.info-box-icon
+                i.ion.ion-ios-pricetag-outline
+
+            div.info-box-content
+                span.info-box-text Acfun
+                span.info-box-number 10200
+
+                div.progress
+                    div.progress-bar(style="width:100%;")
+
+                span.progress-description
+                    balabalabala

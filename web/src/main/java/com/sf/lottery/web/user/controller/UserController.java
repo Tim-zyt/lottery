@@ -136,7 +136,26 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user/deleteWinner", method = RequestMethod.POST)
-    public boolean deleteWinner(int userId) throws Exception {
-         return userService.deleteWinner(userId);
+    public JsonResult<Boolean> deleteWinner(HttpServletRequest request, HttpServletResponse response) {
+        JsonResult<Boolean> result = new JsonResult<>();
+        try {
+            String userId = request.getParameter("userId");
+            result.setData(userService.deleteWinner(userId););
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/resetUsers", method = RequestMethod.POST)
+    public JsonResult<Boolean> resetUsers() {
+        JsonResult<Boolean> result = new JsonResult<>();
+        try {
+            result.setData(userService.resetUsers());
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
     }
 }

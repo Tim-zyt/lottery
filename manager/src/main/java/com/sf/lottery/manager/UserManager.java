@@ -128,6 +128,11 @@ public class UserManager {
         return userMapper.selectUserByUniqueKey(sfNum,sfName);
     }
 
+    public boolean resetUsers(){
+        boolean b = userMapper.resetUsers()>0;
+        return b;
+    }
+
     //删除获奖-用户临时表（未到现场）
     public boolean deleteWinner(int userId){
         if(awardUserMapper.deleteByUserId(userId)>0){
