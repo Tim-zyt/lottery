@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sf.lottery.dao.CoupleMapper" >
+  <resultMap id="BaseResultMap" type="com.sf.lottery.common.model.Couple" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user1_sf_num" property="user1SfNum" jdbcType="INTEGER" />
+    <result column="user2_sf_num" property="user2SfNum" jdbcType="INTEGER" />
+    <result column="cp_img" property="cpImg" jdbcType="VARCHAR" />
+    <result column="aw_count" property="awCount" jdbcType="INTEGER" />
+    <result column="aw_id" property="awId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user1_sf_num, user2_sf_num, cp_img, aw_count, aw_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from couple
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from couple
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sf.lottery.common.model.Couple" >
+    insert into couple (id, user1_sf_num, user2_sf_num, 
+      cp_img, aw_count, aw_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{user1SfNum,jdbcType=INTEGER}, #{user2SfNum,jdbcType=INTEGER}, 
+      #{cpImg,jdbcType=VARCHAR}, #{awCount,jdbcType=INTEGER}, #{awId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sf.lottery.common.model.Couple" >
+    insert into couple
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="user1SfNum != null" >
+        user1_sf_num,
+      </if>
+      <if test="user2SfNum != null" >
+        user2_sf_num,
+      </if>
+      <if test="cpImg != null" >
+        cp_img,
+      </if>
+      <if test="awCount != null" >
+        aw_count,
+      </if>
+      <if test="awId != null" >
+        aw_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user1SfNum != null" >
+        #{user1SfNum,jdbcType=INTEGER},
+      </if>
+      <if test="user2SfNum != null" >
+        #{user2SfNum,jdbcType=INTEGER},
+      </if>
+      <if test="cpImg != null" >
+        #{cpImg,jdbcType=VARCHAR},
+      </if>
+      <if test="awCount != null" >
+        #{awCount,jdbcType=INTEGER},
+      </if>
+      <if test="awId != null" >
+        #{awId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sf.lottery.common.model.Couple" >
+    update couple
+    <set >
+      <if test="user1SfNum != null" >
+        user1_sf_num = #{user1SfNum,jdbcType=INTEGER},
+      </if>
+      <if test="user2SfNum != null" >
+        user2_sf_num = #{user2SfNum,jdbcType=INTEGER},
+      </if>
+      <if test="cpImg != null" >
+        cp_img = #{cpImg,jdbcType=VARCHAR},
+      </if>
+      <if test="awCount != null" >
+        aw_count = #{awCount,jdbcType=INTEGER},
+      </if>
+      <if test="awId != null" >
+        aw_id = #{awId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sf.lottery.common.model.Couple" >
+    update couple
+    set user1_sf_num = #{user1SfNum,jdbcType=INTEGER},
+      user2_sf_num = #{user2SfNum,jdbcType=INTEGER},
+      cp_img = #{cpImg,jdbcType=VARCHAR},
+      aw_count = #{awCount,jdbcType=INTEGER},
+      aw_id = #{awId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="isCpSignedByUserNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(*)
+    from couple
+    where user1_sf_num = #{sfNum,jdbcType=INTEGER} or user2_sf_num = #{sfNum,jdbcType=INTEGER}
+  </select>
+
+
+
+</mapper>

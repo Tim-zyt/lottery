@@ -56,7 +56,7 @@ public class UserController {
         return result;
     }
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    public String getWXUserInfo(@RequestParam("sfnum") int sfnum, @RequestParam("sfname") String sfname, HttpServletRequest request, HttpServletResponse response) {
+    public String login(@RequestParam("sfnum") int sfnum, @RequestParam("sfname") String sfname, HttpServletRequest request, HttpServletResponse response) {
         Cookie cookie = CookiesUtil.getCookieByName(request,"userJson");
         log.info("Cookies: "+cookie.getValue());
         UserInfoReturn userInfoReturn = null;
@@ -140,7 +140,7 @@ public class UserController {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
             String userId = request.getParameter("userId");
-            result.setData(userService.deleteWinner(userId););
+            result.setData(userService.deleteWinner(Integer.valueOf(userId)));
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }
@@ -155,6 +155,34 @@ public class UserController {
             result.setData(userService.resetUsers());
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/cp/cpsign", method = RequestMethod.POST)
+    public JsonResult<String> cpsign(@RequestParam("sfnum1") int sfnum1, @RequestParam("sfnum2") int sfnum2, @RequestParam("imgSrc") String imgSrc,HttpServletRequest request, HttpServletResponse response) throws Exception{
+        JsonResult<String> result = new JsonResult<>();
+        boolean isCanCpsign = userService.isCanCpsign();
+        if(!isCanCpsign){
+            result.setData("false");
+            result.setMessage("CP签到已结束，期待明年再会~");
+        }else{
+            boolean isSigned1 = userService.isSignedByUserNnm(sfnum1);
+            boolean isSigned2 = userService.isSignedByUserNnm(sfnum2);
+            if(isSigned1 && isSigned2){
+                boolean isCpSigned = userService.cpSign(sfnum1, sfnum2, imgSrc);
+                if(isCpSigned){
+                    result.setData("true");
+                    result.setMessage("CP签到成功，有情人终成眷属!");
+                }else{
+                    result.setData("false");
+                    result.setMessage("你这么到处组，你cp知道么!");
+                }
+            }else{
+                result.setData("false");
+                result.setMessage("工号错误或用户未签到");
+            }
         }
         return result;
     }

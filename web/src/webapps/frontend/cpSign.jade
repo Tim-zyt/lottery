@@ -25,27 +25,29 @@ html(lang="zh-cn")
             div(style="filter:alpha(opacity=50);opacity:0.8;").login-box-body
                 p.login-box-msg CP签到
                 div#cpDiv(align="center" style="display:none;")
-                    img#cpImg(src="image/phone/main.png" width="50%" alt="cp头像")
+                    img#cpImg(src="" width="50%" alt="cp头像")
                 div(style="margin-top:3%;margin-bottom:3%")
                     button(type="button").cpSignup 上传图片
-                form(action="/cp/sign" method="post" onsubmit="return checkinput(this)")
+                div
                     div.form-group.has-feedback
-                        input(type="number",placeholder="请输入CP1的工号",name="sfnum").form-control
+                        input#sfnum1(type="number",placeholder="请输入CP1的工号",name="sfnum1").form-control
                         span.glyphicon.glyphicon-user.form-control-feedback
                     div.form-group.has-feedback
-                        input(type="number",placeholder="请输入CP2的工号",name="sfname").form-control
+                        input#sfnum2(type="number",placeholder="请输入CP2的工号",name="sfnum2").form-control
                         span.glyphicon.glyphicon-user.form-control-feedback
+                    div.form-group.has-feedback
+                        input#imgSrc(type="hidden",name="imgSrc").form-control
                     p.help-block(style="font-size:10px;") 注：CP组合仅需一人完成图片上传签到即可
                     div.row
-                        div.col-xs-8
-                            p(style="color:red;")#message
+                        div#msg.col-xs-8
                         div.col-xs-4
-                            button(type="submit").btn.btn-primary.btn-block.btn-flat 确认
+                            button(onclick="cpSubmit()").btn.btn-primary.btn-block.btn-flat 确认
     script(src="lib/jquery/dist/jquery.min.js")
     script(src="lib/jquery-ui/jquery-ui.min.js")
     script(src="js/util.min.js")
     script(src="js/variables.min.js")
     script(src="js/cpsign.min.js")
     script(src="js/jweixin-1.1.0.min.js")
+
 
 

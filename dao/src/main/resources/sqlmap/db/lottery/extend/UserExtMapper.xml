@@ -16,6 +16,14 @@
             where wx_openid = #{openId,jdbcType=VARCHAR} and is_sign=true
     </select>
 
+    <select id="isSignedByUserNum" parameterType="java.lang.Integer" resultType="java.lang.Boolean">
+    select
+    is_sign
+    from sf_user
+    where sf_num = #{sfNum,jdbcType=INTEGER}
+</select>
+
+
     <select id="selectUserByUniqueKey" resultMap="BaseResultMap">
         select
         *
@@ -58,6 +66,7 @@
         count(*)
         from sf_user
     </select>
+
 
     <select id="getUnAwardUser" resultMap="BaseResultMap">
         select
