@@ -136,11 +136,10 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user/deleteWinner", method = RequestMethod.POST)
-    public JsonResult<Boolean> deleteWinner(HttpServletRequest request, HttpServletResponse response) {
+    public JsonResult<Boolean> deleteWinner(@RequestParam("userId") Integer userId,HttpServletRequest request, HttpServletResponse response) {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
-            String userId = request.getParameter("userId");
-            result.setData(userService.deleteWinner(Integer.valueOf(userId)));
+            result.setData(userService.deleteWinner(userId.intValue()));
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }

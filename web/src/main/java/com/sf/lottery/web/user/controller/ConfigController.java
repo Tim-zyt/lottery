@@ -23,8 +23,8 @@ public class ConfigController {
     private ConfigService configService;
 
     @ResponseBody
-    @RequestMapping(value = "/config/setCurrentGift", method = RequestMethod.POST)
-    public JsonResult<Boolean> setCurrentAward(@RequestParam("awardId") int awardId){
+    @RequestMapping(value = "/config/setCurrentAward", method = RequestMethod.POST)
+    public JsonResult<Boolean> setCurrentAward(@RequestParam("awardId") Integer awardId){
         JsonResult<Boolean> result = new JsonResult<>();
         try {
             result.setData(configService.setCurrentAward(awardId));
@@ -37,7 +37,7 @@ public class ConfigController {
 
     @ResponseBody
     @RequestMapping(value = "/config/setCurrentOpera", method = RequestMethod.POST)
-    public JsonResult<Boolean> setCurrentOpera(@RequestParam("operaId") int operaId){
+    public JsonResult<Boolean> setCurrentOpera(@RequestParam("operaId") Integer operaId){
         JsonResult<Boolean> result = new JsonResult<>();
         try {
             result.setData(configService.setCurrentOpera(operaId));

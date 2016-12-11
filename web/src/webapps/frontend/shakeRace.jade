@@ -6,54 +6,32 @@ block header
     link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
     link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
     link(rel="stylesheet", href="lib/AdminLTE/dist/css/AdminLTE.min.css")
-
+    link(rel="stylesheet",type="text/css",href="css/signwall/normalize.css")
 
 block content
-    div.col-md-6
-        p.text-center
-            strong 摇一摇
+    div.container(style="background-color: #fed261;max-width:100%;width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+        div.content(style="padding: 0px;")
+            div.row
+                div.col-md-12(style="text-align:center;")
+                    h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2017年会摇一摇
+            canvas#canvas(style="position: relative; background-color: #fed261;")
+            div(style="position: absolute;top: 15%;left:16%;right:16%;width:68%;padding-bottom:0px;")
+                ul.products-list.product-list-in-boxs#shake
+                    //li.item(style="background-color:rgba(255,255,255,0);")
+                    //    div.product-img
+                    //        img.animated.shake(src="img/danmuku/demo-2-bg.jpg" style="border-radius: 50%;max-width: 100%;height: 100px;width: 100px;")
+                    //    div.product-info(style="margin-left:12%")
+                    //        a.product-title(style="font-size:22px;") bilibili
+                    //            span.label.label-warning.pull-right 15/24
+                    //        span.product-description(style="margin-top:2%")
+                    //            div.progress.sm
+                    //                div.progress-bar.progress-bar-aqua(style="width:66%")
 
-        div.progress-group
-            span.progress-text bilibili
-            span.progress-number 200/
-                b 300
-
-            div.progress.sm
-                div.progress-bar.progress-bar-aqua(style="width:66%")
-
-        div.progress-group
-            span.progress-text acfun
-            span.progress-number 180/
-                b 540
-
-            div.progress.sm
-                div.progress-bar.progress-bar-red(style="width:33%")
-
-    div.col-md-8
-        div.info-box.bg-yellow
-            span.info-box-icon
-                i.ion.ion-ios-pricetag-outline
-
-            div.info-box-content
-                span.info-box-text bilibili
-                span.info-box-number 5100
-
-                div.progress
-                    div.progress-bar(style="width:50%;")
-
-                span.progress-description
-                    balabalabala
-
-        div.info-box.bg-green
-            span.info-box-icon
-                i.ion.ion-ios-pricetag-outline
-
-            div.info-box-content
-                span.info-box-text Acfun
-                span.info-box-number 10200
-
-                div.progress
-                    div.progress-bar(style="width:100%;")
-
-                span.progress-description
-                    balabalabala
+block footer
+block extends
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/shake.min.js")
+    script(src="js/gift/mathlib.min.js")
+    script(src="js/gift/k3d.min.js")
+    script(src="js/gift/radiation.min.js")
