@@ -20,9 +20,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	
-	<dubbo:service interface="com.sf.lottery.service.UserService" ref="userServiceImpl" protocol="dubbo" />
+	<dubbo:service interface="com.sf.lottery.service.UserService" ref="userServiceImpl" protocol="dubbo"/>
 	<dubbo:service interface="com.sf.lottery.service.AwardService" ref="awardServiceImpl" protocol="dubbo" />
 	<dubbo:service interface="com.sf.lottery.service.OperaService" ref="operaServiceImpl" protocol="dubbo" />
     <dubbo:service interface="com.sf.lottery.service.ConfigService" ref="configServiceImpl" protocol="dubbo" />
+    <dubbo:service interface="com.sf.lottery.service.CoupleService" ref="coupleServiceImpl" protocol="dubbo" />
 
 </beans>

@@ -12,5 +12,6 @@
     <dubbo:reference id="awardService" interface="com.sf.lottery.service.AwardService" check="false" />
     <dubbo:reference id="operaService" interface="com.sf.lottery.service.OperaService" check="false" />
     <dubbo:reference id="configService" interface="com.sf.lottery.service.ConfigService" check="false" />
+    <dubbo:reference id="coupleServiceImpl" interface="com.sf.lottery.service.CoupleService" check="false" />
 
 </beans>

@@ -1,0 +1,47 @@
+extends jade/common/layout
+block header
+    link(rel="stylesheet",type="text/css",href="css/signwall/normalize.css")
+    link(rel="stylesheet",type="text/css",href="css/gift/style.css")
+block content
+    div.container(style="background-color: #fed261;max-width:100%;width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+        div.content(style="padding: 0px;")
+                div.row
+                    //div(style="position: absolute;top: 30px;left: 40px;z-index: 9;")
+                    //    div.btn.btn-danger(onclick="start()") 开始抽奖
+                    //    div.btn.btn-danger(onclick="end()") 停止抽奖
+                    //    div.btn-group
+                    //        button.btn.btn-danger(type="button") Action
+                    //        button.btn.btn-danger.dropdown-toggle(type="button" data-toggle="dropdown")
+                    //            span.caret
+                    //            span.sr-only  Toggle Dropdown
+                    //        ul#giftmenu.dropdown-menu(role="menu")
+                    //            li
+                    //                a(href="#") Action
+                    //            li
+                    //                a(href="#") Another action
+                    //            li
+                    //                a(href="#") Something else here
+                    //            li.divider
+                    //            li
+                    //                a(href="#") Separated link
+                    div.col-md-12(style="text-align:center;")
+                        h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2017年会CP抽奖
+                canvas#canvas(style="position: relative; background-color: #fed261;")
+                div.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;")
+                    div.col-md-12
+                        div
+                            div#luckDiv.box-body.no-padding(style="display: block;")
+                                div
+                                    img(src="http://wx.qlogo.cn/mmopen/PiajxSqBRaEKmcUfYbQkqebFgX3TKWjwWvW9yhg2mocmJ7GDapW0Hbd4MSIibTVY6keQnq8cEZLX49j0ZFWeicwpw/0", alt="CP合影" )
+                                    a(href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name') 顺小丰 011399954
+                                    a(href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name') 顺大丰 011399954
+
+block footer
+block extends
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/cpgift.min.js")
+    script(src="js/gift/mathlib.min.js")
+    script(src="js/gift/k3d.min.js")
+    script(src="js/gift/radiation.min.js")
+
