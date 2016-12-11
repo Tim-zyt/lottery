@@ -9,6 +9,16 @@
     <result column="aw_count" property="awCount" jdbcType="INTEGER" />
     <result column="aw_id" property="awId" jdbcType="INTEGER" />
   </resultMap>
+    <resultMap id="CpGiftResultMap" type="com.sf.lottery.common.vo.CpGiftVo" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user1_sf_num" property="user1SfNum" jdbcType="INTEGER" />
+        <result column="user2_sf_num" property="user2SfNum" jdbcType="INTEGER" />
+        <result column="cp_img" property="cpImg" jdbcType="VARCHAR" />
+        <result column="aw_count" property="awCount" jdbcType="INTEGER" />
+        <result column="aw_id" property="awId" jdbcType="INTEGER" />
+        <result column="user1_sf_name" property="user1SfName" jdbcType="VARCHAR" />
+        <result column="user2_sf_name" property="user2SfName" jdbcType="VARCHAR" />
+    </resultMap>
   <sql id="Base_Column_List" >
     id, user1_sf_num, user2_sf_num, cp_img, aw_count, aw_id
   </sql>
@@ -111,6 +121,25 @@
     where user1_sf_num = #{sfNum,jdbcType=INTEGER} or user2_sf_num = #{sfNum,jdbcType=INTEGER}
   </select>
 
+    <select id="selectAllCouple" resultMap="CpGiftResultMap">
+        select a.id, user1_sf_num, user2_sf_num, cp_img, aw_count, aw_id ,b.sf_name as user1_sf_name,c.sf_name as user2_sf_name
+        FROM couple a, sf_user b,  sf_user c
+        where a.user1_sf_num = b.sf_num
+        AND a.user2_sf_num = c.sf_num
+    </select>
 
+    <select id="selectUnAwardCouple" resultMap="CpGiftResultMap">
+        select a.id, user1_sf_num, user2_sf_num, cp_img, aw_count, aw_id ,b.sf_name as user1_sf_name,c.sf_name as user2_sf_name
+        FROM couple a, sf_user b,  sf_user c
+        where a.user1_sf_num = b.sf_num
+        AND a.user2_sf_num = c.sf_num
+        AND a.aw_count = 0
+    </select>
+
+    <update id="updateAwardStatusById" parameterType="java.lang.Integer" >
+        update couple
+        set aw_count = 1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
 </mapper>

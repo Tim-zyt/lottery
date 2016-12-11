@@ -29,3 +29,31 @@
             }
         });
     }
+
+
+function startCpGift() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/cpGift/start",
+        dataType:'json',
+        data: {
+            manCount:10
+        },
+        success: function(data){
+            //alert(data);
+        }
+    });
+}
+
+function endCpGift() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/cpGift/end",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            //alert(data);
+        }
+    });
+}

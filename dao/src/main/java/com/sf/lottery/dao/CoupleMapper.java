@@ -1,6 +1,9 @@
 package com.sf.lottery.dao;
 
 import com.sf.lottery.common.model.Couple;
+import com.sf.lottery.common.vo.CpGiftVo;
+
+import java.util.List;
 
 public interface CoupleMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,4 +20,9 @@ public interface CoupleMapper {
 
     Integer isCpSignedByUserNum(int sfNum);
 
+    List<CpGiftVo> selectAllCouple();
+
+    List<CpGiftVo> selectUnAwardCouple();
+
+    int updateAwardStatusById(Integer id);
 }
