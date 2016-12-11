@@ -284,3 +284,41 @@ function deleteWinner(i) {
         }
     });
 }
+
+function startCpGift() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/cpGift/start",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            layer.msg('正在抽奖', {
+                time: 500, //20s后自动关闭
+            });
+            $("#startCpGift").css("display","none");
+            $("#endCpGift").css("display","block");
+        }
+    });
+}
+
+function endCpGift() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/cpGift/end",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            var cpWinners = data.data;
+            var cpHtml = "";
+            cpHtml+="<tr><td>"+cpWinners.user1SfName+"</td><td>"+cpWinners.user1SfNum+"</td><td>"+
+                "<span class='label label-danger' style='cursor:pointer;'>"+"删除"+"</span></td></tr>"+
+                "<tr><td>"+cpWinners.user2SfName+"</td><td>"+cpWinners.user2SfNum+"</td><td>"+
+                "<span class='label label-danger' style='cursor:pointer;' >"+"删除"+"</span></td></tr>";
+            $("#startCpGift").css("display","block");
+            $("#endCpGift").css("display","none");
+            $("#winnerTable").html(cpHtml);
+        }
+    });
+}
