@@ -57,13 +57,16 @@ public class ShakeController {
                 shakeCountMap.put(userId, curUserShakeVo);//存的是引用，不用写这一句，只是为了阅读方便
             }else {
                 User user = userService.getUserById(userId);
-                UserShakeVo userShakeVo = new UserShakeVo();
-                userShakeVo.setUserId(user.getId());
-                userShakeVo.setUserName(user.getSfName());
-                userShakeVo.setHeadImgUrl(user.getWxHeadimgurl());
-                userShakeVo.setUserNo(user.getSfNum());//工号
-                userShakeVo.setShakeCount(shakeCount);//摇的次数
-                shakeCountMap.put(userId,userShakeVo);//重新放一个相同的key,会自动覆盖value
+                //只有未获奖的人才可以进行摇一摇抽奖
+                if(user.getAwardCount() == 0){
+                    UserShakeVo userShakeVo = new UserShakeVo();
+                    userShakeVo.setUserId(user.getId());
+                    userShakeVo.setUserName(user.getSfName());
+                    userShakeVo.setHeadImgUrl(user.getWxHeadimgurl());
+                    userShakeVo.setUserNo(user.getSfNum());//工号
+                    userShakeVo.setShakeCount(shakeCount);//摇的次数
+                    shakeCountMap.put(userId,userShakeVo);//重新放一个相同的key,会自动覆盖value
+                }
                 result.setData("true");
             }
         } catch (Exception e) {
@@ -91,26 +94,41 @@ public class ShakeController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shake/isCanShark", method = RequestMethod.POST)
+    @RequestMapping(value = "/shake/isCanShake", method = RequestMethod.POST)
     public JsonResult<Boolean> isStartShake(){
         JsonResult<Boolean> result = new JsonResult<>();
-        result.setData(configService.isCanShark());
+        result.setData(configService.isCanShake());
         return result;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shake/openShark", method = RequestMethod.POST)
-    public JsonResult<Boolean> startShark(){
+    @RequestMapping(value = "/shake/openShake", method = RequestMethod.POST)
+    public JsonResult<Boolean> startShake(){
         JsonResult<Boolean> result = new JsonResult<>();
-        result.setData(configService.openShark() > 0);
+        shakeCountMap = new ConcurrentHashMap<>();
+        result.setData(configService.openShake() > 0);
         return result;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shake/closeShark", method = RequestMethod.POST)
-    public JsonResult<Boolean> closeShark(){
-        JsonResult<Boolean> result = new JsonResult<>();
-        result.setData(configService.closeShark() > 0);
+    @RequestMapping(value = "/shake/closeShake", method = RequestMethod.POST)
+    public JsonResult<UserShakeVo> closeShake(){
+        configService.closeShake();
+        JsonResult<UserShakeVo> result = new JsonResult<>();
+        NonThreadSafeDescSortedMostNList sortList = new NonThreadSafeDescSortedMostNList(1);
+        Map<Integer, UserShakeVo> temp = new HashMap<>();
+        temp.putAll(shakeCountMap);
+        Iterator<Map.Entry<Integer, UserShakeVo>> entries = temp.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry<Integer, UserShakeVo> entry = entries.next();
+            sortList.put(entry.getValue());
+        }
+        LinkedList<Comparable> topList = sortList.getResult();
+        Comparable topUser = topList.getFirst();
+        if(topUser != null){
+            result.setData((UserShakeVo)topUser);
+        }
+        shakeCountMap = new ConcurrentHashMap<>();
         return result;
     }
 

@@ -25,7 +25,7 @@ public class TestConfigManager extends BaseTest {
 
     @Test
     public void testIsCanShark(){
-        Assert.assertEquals(false,configManager.isCanShark());
+        Assert.assertEquals(false,configManager.isCanShake());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class TestConfigManager extends BaseTest {
     }
     @Test
     public void testCloseShark(){
-        Assert.assertEquals(true,configManager.closeShark() > 0);
+        Assert.assertEquals(true,configManager.closeShake() > 0);
     }
     @Test
     public void testOpenCpsign(){
@@ -52,7 +52,7 @@ public class TestConfigManager extends BaseTest {
 
     @Test
     public void testOpenShark(){
-        Assert.assertEquals(true,configManager.openShark() > 0);
+        Assert.assertEquals(true,configManager.openShake() > 0);
     }
 
 

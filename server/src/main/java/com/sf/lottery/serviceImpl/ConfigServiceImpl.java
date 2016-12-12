@@ -25,18 +25,18 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
-    public Boolean isCanShark() {
-        return configManager.isCanShark();
+    public Boolean isCanShake() {
+        return configManager.isCanShake();
     }
 
     @Override
-    public int closeShark() {
-        return configManager.closeShark();
+    public int closeShake() {
+        return configManager.closeShake();
     }
 
     @Override
-    public int openShark() {
-        return configManager.openShark();
+    public int openShake() {
+        return configManager.openShake();
     }
 
     @Override
