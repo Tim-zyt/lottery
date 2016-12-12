@@ -1,5 +1,5 @@
 //
-   Created by 01170626 on 2016/12/2.
+   Created by 01170626 on 2016/12/11.
 extends jade/common/layout
 block header
     link(rel="shortcut icon",href="../favicon.ico")
@@ -12,15 +12,15 @@ block header
     script(src="js/statistics/sidebar/modernizr.custom.js")
     script(src="js/statistics/sidebar/GoogleTemp.js")
 
+
 block content
     include jade/statistics/sidebar
 
-    include jade/statistics/PeopleCount
-        
+    include jade/statistics/programCount
+
 block extends
     //script(src="js/statistics/sidebar/classie.js")
     //script(src="js/statistics/sidebar/gnmenu.js")
     //script(src="js/statistics/sidebar/GoogleTemp2.js")
     script(src="js/statistics/chart.min.js")
     script(src="js/statistics.min.js")
-
