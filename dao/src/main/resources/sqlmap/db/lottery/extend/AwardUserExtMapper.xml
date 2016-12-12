@@ -6,6 +6,12 @@
         <result column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="award_id" property="awardId" jdbcType="INTEGER" />
     </resultMap>
+    <resultMap id="AwardUserVoResultMap" type="com.sf.lottery.common.vo.AwardUserVo" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="aw_name" property="awName" jdbcType="VARCHAR" />
+        <result column="sf_num" property="sfNum" jdbcType="INTEGER" />
+        <result column="sf_name" property="sfName" jdbcType="VARCHAR" />
+    </resultMap>
     <sql id="Base_Column_List" >
         id, user_id, award_id
     </sql>
@@ -88,4 +94,11 @@
             )
         </foreach >
     </insert >
+
+    <select id="selectAllAwardUser" resultMap="AwardUserVoResultMap">
+        select
+        a.id,b.aw_name,c.sf_num,c.sf_name
+        from award_user a,award b,sf_user c
+        where a.award_id = b.id AND a.user_id = c.id
+    </select>
 </mapper>

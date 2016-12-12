@@ -1,0 +1,25 @@
+//
+   Created by 01170626 on 2016/12/5.
+extends jade/common/layout
+block header
+    link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
+
+block content
+    div.container
+        div.row
+            h3.box-title 中奖观众统计
+            div.box-body
+                div.table-responsive
+                    table.table.table-striped
+                        thead
+                        tr
+                            th 奖品名称
+                            th 获奖人姓名
+                            th 获奖人工号
+                        tbody#awardUsers
+
+block footer
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/awardUser.min.js")
