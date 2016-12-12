@@ -68,7 +68,8 @@ public class CpGiftController {
 
     @ResponseBody
     @RequestMapping(value = "/cpGift/end", method = RequestMethod.POST)
-    public String endCpGift(){
+    public JsonResult<CpGiftVo> endCpGift(){
+        JsonResult<CpGiftVo> result = new JsonResult<>();
         try {
             CpGiftVo luckCp = coupleService.getLuckCP();
             CpGiftMessage cpGiftMessage = new CpGiftMessage();
@@ -78,11 +79,11 @@ public class CpGiftController {
             webSocketClient.connectBlocking();
             webSocketClient.send(JSON.toJSONString(cpGiftMessage));
             webSocketClient.close();
-            return "true";
+            result.setData(luckCp);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "false";
+        return result;
     }
 
 }

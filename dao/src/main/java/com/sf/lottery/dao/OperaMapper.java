@@ -2,6 +2,8 @@ package com.sf.lottery.dao;
 
 import com.sf.lottery.common.model.Opera;
 
+import java.util.List;
+
 /**
  * @author wujiang
  * @version 1.0.0.
@@ -19,5 +21,7 @@ public interface OperaMapper {
     int updateByPrimaryKeySelective(Opera record);
 
     int updateByPrimaryKey(Opera record);
+
+    List<Opera> selectAllOperas();
 
 }

@@ -11,10 +11,13 @@ block content
     div.box.box-info
         div.box-header.with-border
             h3.box-title 奖品管理界面
-
             button.btn.btn-success(style="margin-left:5%;" onclick="confirmAddAward()") 添加奖品
-            button.btn.btn-info#startGift(onclick="startGift()",style="display:block;") 开始抽奖
-            button.btn.btn-danger#endGift(onclick="endGift()",style="display:none;") 结束抽奖
+
+        div(style="display: -webkit-inline-box;")
+            button.btn.btn-info#startGift(onclick="startGift()",style="display:block;width:100px;") 开始抽奖
+            button.btn.btn-danger#endGift(onclick="endGift()",style="display:none;width:100px;") 结束抽奖
+            button.btn.btn-info#startCpGift(onclick="startCpGift()",style="display:block;width:100px;") 开始CP抽奖
+            button.btn.btn-danger#endCpGift(onclick="endCpGift()",style="display:none;width:100px;") 结束CP抽奖
 
         div.box-body
             div.table-responsive

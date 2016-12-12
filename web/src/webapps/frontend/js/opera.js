@@ -19,11 +19,40 @@ function refreshOperaPage(){
             var operaHtml = "";
             var iLen = operas.length;
             for(var i = iLen - 1 ; i >=0  ; i--){
-                awardHtml+="<tr><td><span style='cursor:pointer;' class='label label-success'>"+"选中"+"</span></td><td>"+operas[i].opName+"</td><td>"+operas[i].opActor+"</td><td>"+
-                    operas[i].opDepartment+"</td><td><span style='cursor:pointer;' class='label label-info' onclick='confirmUpdateOpera("+i+")'>"+"编辑"+"</span></td><td>" +
+                operaHtml+="<tr><td><span style='cursor:pointer;' id='opera"+i+"' onclick='selectOpera("+i+","+iLen+")' class='label label-default'>"+"选中"+"</span></td><td>"+operas[i].opName+"</td><td>"+operas[i].opActor+"</td><td>"+
+                    operas[i].opDepartment+"</td><td>"+operas[i].opSort+"</td><td><span style='cursor:pointer;' class='label label-info' onclick='confirmUpdateOpera("+i+")'>"+"编辑"+"</span></td><td>" +
                     "<span class='label label-danger' style='cursor:pointer;' onclick='comfirmDeleteOpera("+operas[i].id+")'>"+"删除"+"</span></td></tr>";
             }
             $("#operas").html(operaHtml);
+        }
+    });
+}
+
+function selectOpera(i,iLen){
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/config/setCurrentOpera",
+        dataType:'json',
+        data: {
+            "operaId":operas[i].id,
+            "opName":operas[i].opName
+        },
+        success: function(data){
+            var selectSuccess = data.data;
+            if(selectSuccess){
+                var operaId = "opera"+i;
+                $("#"+operaId).attr("class","label label-success");
+                for(var m = iLen - 1 ; m >=0  ; m--){
+                    if(m!=i){
+                        var otherOperaId = "opera"+m;
+                        $("#"+otherOperaId).attr("class","label label-default");
+                    }
+                }
+            }else{
+                layer.msg('选中失败', {
+                    time: 500, //20s后自动关闭
+                });
+            }
         }
     });
 }
@@ -32,7 +61,7 @@ function comfirmDeleteOpera(operaId) {
     layer.confirm('确定要删除该节目吗？', {
         btn: ['删除','取消'] //按钮
     }, function(){
-        deleteOpera(awardId);
+        deleteOpera(operaId);
     }, function(){
         layer.msg('取消删除', {
             time: 500, //20s后自动关闭
@@ -74,7 +103,8 @@ function confirmUpdateOpera(i){
         shadeClose: true,
         content: "<div style='width:350px;'><div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目名称</p><input id='opName' class='form-control' type='text' name='opName' value='"+operas[i].opName+"'/></div>" +
         "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目演员</p><input id='opActor' class='form-control' type='text' name='opActor' value='"+operas[i].opActor+"'/></div>"+
-        "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目部门</p><input id='opDepartment' class='form-control' type='number' name='opDepartment' value='"+operas[i].opDepartment+"'/></div>"+
+        "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目部门</p><input id='opDepartment' class='form-control' type='text' name='opDepartment' value='"+operas[i].opDepartment+"'/></div>"+
+        "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目顺序</p><input id='opSort' class='form-control' type='number' name='opSort' value='"+operas[i].opSort+"'/></div>"+
         "<button style='margin-top:5%;' type='button' class='btn btn-block btn-success btn-lg' onclick='updateOpera("+operas[i].id+")'>提交</button></div>"
     });
 }
@@ -83,6 +113,7 @@ function updateOpera(operaId){
     var opName = $("#opName").val();
     var opActor = $("#opActor").val();
     var opDepartment = $("#opDepartment").val();
+    var opSort = $("#opSort").val();
     $.ajax({
         type: "post",
         url : getContextPath() + "/opera/updateOpera",
@@ -91,6 +122,7 @@ function updateOpera(operaId){
             "operaId":operaId,
             "opName":opName,
             "opActor":opActor,
+            "opSort":opSort,
             "opDepartment":opDepartment
         },
         success: function(data){
@@ -120,7 +152,8 @@ function confirmAddOpera(){
         shadeClose: true,
         content: "<div style='width:350px;'><div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目名称</p><input id='opName' class='form-control' type='text' name='opName' /></div>" +
         "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目演员</p><input id='opActor' class='form-control' type='text' name='opActor' /></div>"+
-        "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目部门</p><input id='opDepartment' class='form-control' type='number' name='opDepartment' /></div>"+
+        "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目部门</p><input id='opDepartment' class='form-control' type='text' name='opDepartment' /></div>"+
+        "<div style='width:320px;margin-left: 3%;' class='form-group has-feedback'><p>请输入节目顺序</p><input id='opSort' class='form-control' type='number' name='opSort' /></div>"+
         "<button style='margin-top:5%;'type='button' class='btn btn-block btn-success btn-lg' onclick='addOpera()'>提交</button></div>"
     });
 }
@@ -129,13 +162,15 @@ function addOpera() {
     var opName = $("#opName").val();
     var opActor = $("#opActor").val();
     var opDepartment = $("#opDepartment").val();
+    var opSort = $("#opSort").val();
     $.ajax({
         type: "post",
-        url : getContextPath() + "/opera/updateOpera",
+        url : getContextPath() + "/opera/addOpera",
         dataType:'json',
         data: {
             "opName":opName,
             "opActor":opActor,
+            "opSort":opSort,
             "opDepartment":opDepartment
         },
         success: function (data) {
