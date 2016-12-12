@@ -20,17 +20,19 @@ public class NonThreadSafeDescSortedMostNList {
     }
 
     public void put(Comparable item) {
+        boolean isPut = false;
         for (Comparable comparable : linkedList) {
             if (comparable.compareTo(item) < 0) {//如果当前位置小于item
                 linkedList.add(linkedList.indexOf(comparable), item);
+                isPut = true;
                 break;
             }
         }
+        if (!isPut) {
+            linkedList.add(item);
+        }
         if (linkedList.size() > size) {
             linkedList.removeLast();
-        }
-        if (linkedList.size() == 0) {
-            linkedList.add(item);
         }
     }
 
