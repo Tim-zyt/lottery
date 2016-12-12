@@ -2,6 +2,7 @@ package com.sf.lottery.serviceImpl;
 
 import com.sf.lottery.common.model.Award;
 import com.sf.lottery.common.utils.ExceptionUtils;
+import com.sf.lottery.common.vo.AwardUserVo;
 import com.sf.lottery.manager.AwardManager;
 import com.sf.lottery.service.AwardService;
 import org.slf4j.Logger;
@@ -97,6 +98,16 @@ public class AwardServiceImpl implements AwardService{
     public Award getCurAward() throws Exception {
         try{
             return awardManager.getCurAward();
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
+    }
+
+    @Override
+    public List<AwardUserVo> getAllAwardUser()  throws Exception {
+        try{
+            return awardManager.getAllAwardUser();
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
             throw new Exception(e);

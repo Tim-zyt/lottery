@@ -3,6 +3,7 @@ package com.sf.lottery.web.award.controller;
 import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.model.Award;
 import com.sf.lottery.common.utils.ExceptionUtils;
+import com.sf.lottery.common.vo.AwardUserVo;
 import com.sf.lottery.service.AwardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,6 +129,18 @@ public class AwardController {
         JsonResult<List<Award>> result = new JsonResult<>();
         try {
             result.setData(awardService.getAllAwards());
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/award/getAllAwardUser", method = RequestMethod.POST)
+    public JsonResult<List<AwardUserVo>> getAllAwardUser(HttpServletRequest request) {
+        JsonResult<List<AwardUserVo>> result = new JsonResult<>();
+        try {
+            result.setData(awardService.getAllAwardUser());
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }
