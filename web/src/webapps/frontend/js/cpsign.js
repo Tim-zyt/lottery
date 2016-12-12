@@ -36,9 +36,11 @@ function cpSubmit() {
                 var code = data.data;
                 if(code == "true"){
                     var p = "<p style='color:green;' >" + data.message + "</p>" ;
+                    $("#msg").html("");
                     $("#msg").append(p);
                 }else {
                     var p = "<p style='color:red;' >" + data.message + "</p>" ;
+                    $("#msg").html("");
                     $("#msg").append(p);
                 }
             }
@@ -48,7 +50,7 @@ function cpSubmit() {
 
 jQuery(function ($) {
     $(document).ready(function () {
-        $(".cpSignup").click(function () {
+        $("#cpSignup").click(function () {
             wx.chooseImage({
                 count: 1, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -78,7 +80,7 @@ jQuery(function ($) {
                         var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + serverId;
                         $("#cpDiv").css("display", "block");
                         $("#cpImg").attr("src", imgSrc);
-                        $("#imgSrc").val(imgSrc);
+                        $("#imgSrc").val(serverId);
                 }
             });
     }

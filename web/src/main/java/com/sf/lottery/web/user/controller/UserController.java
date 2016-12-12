@@ -167,21 +167,27 @@ public class UserController {
             result.setData("false");
             result.setMessage("CP签到已结束，期待明年再会~");
         }else{
-            boolean isSigned1 = userService.isSignedByUserNnm(sfnum1);
-            boolean isSigned2 = userService.isSignedByUserNnm(sfnum2);
-            if(isSigned1 && isSigned2){
-                boolean isCpSigned = userService.cpSign(sfnum1, sfnum2, imgSrc);
-                if(isCpSigned){
-                    result.setData("true");
-                    result.setMessage("CP签到成功，有情人终成眷属!");
+            if(sfnum1 == sfnum2){
+                result.setData("false");
+                result.setMessage("放你一个人生活？");
+            }else{
+                boolean isSigned1 = userService.isSignedByUserNnm(sfnum1);
+                boolean isSigned2 = userService.isSignedByUserNnm(sfnum2);
+                if(isSigned1 && isSigned2){
+                    boolean isCpSigned = userService.cpSign(sfnum1, sfnum2, imgSrc);
+                    if(isCpSigned){
+                        result.setData("true");
+                        result.setMessage("CP签到成功，有情人终成眷属!");
+                    }else{
+                        result.setData("false");
+                        result.setMessage("你这么到处组，你cp知道么!");
+                    }
                 }else{
                     result.setData("false");
-                    result.setMessage("你这么到处组，你cp知道么!");
+                    result.setMessage("工号错误或用户未签到");
                 }
-            }else{
-                result.setData("false");
-                result.setMessage("工号错误或用户未签到");
             }
+
         }
         return result;
     }
