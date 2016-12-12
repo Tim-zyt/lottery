@@ -8,17 +8,13 @@ $(document).ready(function () {
 
 function refreshShakePage(){
     $.ajax({
-        type: "post",
-        url : getContextPath() + "/shake/getTopN",
-        dataType:'json',
-        data: {
-            "topSize":6
-        },
+        type: "get",
+        url : getContextPath() + "/shake/getTopN?topSize=6",
         success: function(data){
             var shakeWinners = data.data;
             var shakeHtml = "";
-            var percentage = new Array(6);
-            for(var i = 0 ; i <=5  ; i++){
+            var percentage = new Array(shakeWinners.length);
+            for(var i = 0 ; i <shakeWinners.length  ; i++){
                 // var percentage = Math.round(shakeWinners[i].shakeCount / 24 * 10000) / 100.00 + "%";
                 // shakeHtml+="<li class='item' style='background-color:rgba(255,255,255,0);'>" +
                 //     "<div class='product-img'><img style='border-radius: 50%;max-width: 100%;height: 100px;width: 100px;' class='animated shake' src='"+shakeWinners[i].headImgUrl+"'/></div>" +

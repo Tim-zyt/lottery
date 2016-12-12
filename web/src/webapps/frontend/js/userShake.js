@@ -53,9 +53,11 @@ jQuery(function ($) {
                         var shakeInterval = setInterval(function () {
                             $.ajax({
                                 type: "post",
-                                url: getContextPath() + "/shake/saveShakeCount?shakeCount=" + shakeTimes,
+                                url: getContextPath() + "/shake/saveShakeCount",
                                 dataType: 'json',
-                                data: {},
+                                data: {
+                                    shakeCount:shakeTimes
+                                },
                                 success: function (data) {
                                 }
                             });

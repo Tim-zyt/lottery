@@ -75,7 +75,7 @@ public class ShakeController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shake/getTopN", method = RequestMethod.POST)
+    @RequestMapping(value = "/shake/getTopN", method = RequestMethod.GET)
     public JsonResult<LinkedList<Comparable>> getTopN(@RequestParam("topSize") int topSize){
         JsonResult<LinkedList<Comparable>> result = new JsonResult<>();
         NonThreadSafeDescSortedMostNList sortList = new NonThreadSafeDescSortedMostNList(topSize);

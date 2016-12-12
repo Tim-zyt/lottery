@@ -50,11 +50,7 @@ public class DanmukuController {
             if (user == null) {
                 throw new IllegalAccessException();
             }
-            WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", danmukuAddress);
-            webSocketClient.connectBlocking();
-            danmukuMessage.setSfUserName(user.getSfName());
-            danmukuMessage.setSfUserNum(String.format("%08d", user.getSfNum()));
-            danmukuMessage.setWxAvatar(user.getWxHeadimgurl());
+
             switch (danmukuMessage.getType()) {
                 case 0:
                     //普通弹幕
@@ -93,8 +89,15 @@ public class DanmukuController {
                 default:
                     throw new IllegalArgumentException();
             }
-            webSocketClient.send(JSON.toJSONString(danmukuMessage));
-            webSocketClient.close();
+            if (result.getData()) {
+                WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", danmukuAddress);
+                webSocketClient.connectBlocking();
+                danmukuMessage.setSfUserName(user.getSfName());
+                danmukuMessage.setSfUserNum(String.format("%08d", user.getSfNum()));
+                danmukuMessage.setWxAvatar(user.getWxHeadimgurl());
+                webSocketClient.send(JSON.toJSONString(danmukuMessage));
+                webSocketClient.close();
+            }
         } catch (IllegalAccessException | NullPointerException i) {
             result.setData(false);
             result.setMessage("用户信息错误，请重新登陆");
