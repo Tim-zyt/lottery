@@ -11,10 +11,14 @@ jQuery(function ($) {
             var restFlowers = getCookie("flower");
             if (restFlowers > 0) {
 
-                sendDanmuKu(1, null, function () {
-                    setCookie("flower", restFlowers - 1, 86400);
-                    $("strong.flower").html("* " + (restFlowers - 1));
-                    alert("打赏一束鲜花成功！");
+                sendDanmuKu(1, null, function (data) {
+                    if (data.data) {
+                        setCookie("flower", restFlowers - 1, 86400);
+                        $("strong.flower").html("* " + (restFlowers - 1));
+                        alert("打赏一束鲜花成功！");
+                    } else {
+                        alert(data.message);
+                    }
                 });
             } else {
                 alert("剩余礼物不足！");
@@ -25,13 +29,15 @@ jQuery(function ($) {
         $("img.car").click(function () {
             var restCars = getCookie("car");
             if (restCars > 0) {
-
-                sendDanmuKu(2, null, function () {
-                    setCookie("car", restCars - 1, 86400);
-                    $("strong.car").html("* " + (restCars - 1));
-                    alert("打赏一辆跑车成功！");
+                sendDanmuKu(2, null, function (data) {
+                    if (data.data) {
+                        setCookie("car", restCars - 1, 86400);
+                        $("strong.car").html("* " + (restCars - 1));
+                        alert("打赏一辆跑车成功！");
+                    } else {
+                        alert(data.message);
+                    }
                 });
-
             } else {
                 alert("剩余礼物不足！");
             }
@@ -41,11 +47,14 @@ jQuery(function ($) {
         $("img.rocket").click(function () {
             var restRockets = getCookie("rocket");
             if (restRockets > 0) {
-
-                sendDanmuKu(3, null, function () {
-                    setCookie("rocket", restRockets - 1, 86400);
-                    $("strong.rocket").html("* " + (restRockets - 1));
-                    alert("打赏一发火箭成功！");
+                sendDanmuKu(3, null, function (data) {
+                    if (data.data) {
+                        setCookie("rocket", restRockets - 1, 86400);
+                        $("strong.rocket").html("* " + (restRockets - 1));
+                        alert("打赏一发火箭成功！");
+                    } else {
+                        alert(data.message);
+                    }
                 });
             } else {
                 alert("剩余礼物不足！");

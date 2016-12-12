@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.common.utils.ExceptionUtils;
+import com.sf.lottery.service.ConfigService;
 import com.sf.lottery.service.UserService;
 import com.sf.lottery.web.damuku.domain.DanmukuMessage;
 import com.sf.lottery.web.utils.CookiesUtil;
 import com.sf.lottery.web.websocket.WebsocketClientFactory;
-import com.sun.javafx.binding.StringFormatter;
 import org.java_websocket.client.WebSocketClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +31,8 @@ import java.util.Map;
 @Controller
 public class DanmukuController {
     @Autowired
+    private ConfigService configService;
+    @Autowired
     private OperaController operaController;
     @Autowired
     private UserService userService;
@@ -51,30 +53,48 @@ public class DanmukuController {
             WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", danmukuAddress);
             webSocketClient.connectBlocking();
             danmukuMessage.setSfUserName(user.getSfName());
-            danmukuMessage.setSfUserNum(String.format("%08d",user.getSfNum()));
+            danmukuMessage.setSfUserNum(String.format("%08d", user.getSfNum()));
             danmukuMessage.setWxAvatar(user.getWxHeadimgurl());
-            switch (danmukuMessage.getType()){
+            switch (danmukuMessage.getType()) {
                 case 0:
                     //普通弹幕
+                    result.setData(true);
                     break;
                 case 1:
                     //鲜花
-                    operaController.updateFlower();
+                    if (configService.isCanReward()) {
+                        operaController.updateFlower();
+                        result.setData(true);
+                    } else {
+                        result.setData(false);
+                        result.setMessage("现在不能打赏");
+                    }
                     break;
                 case 2:
                     //跑车
-                    operaController.updateCar();
+                    if (configService.isCanReward()) {
+                        operaController.updateCar();
+                        result.setData(true);
+                    } else {
+                        result.setData(false);
+                        result.setMessage("现在不能打赏");
+                    }
                     break;
                 case 3:
                     //火箭
-                    operaController.updateRocket();
+                    if (configService.isCanReward()) {
+                        operaController.updateRocket();
+                        result.setData(true);
+                    } else {
+                        result.setData(false);
+                        result.setMessage("现在不能打赏");
+                    }
                     break;
                 default:
                     throw new IllegalArgumentException();
             }
             webSocketClient.send(JSON.toJSONString(danmukuMessage));
             webSocketClient.close();
-            result.setData(true);
         } catch (IllegalAccessException | NullPointerException i) {
             result.setData(false);
             result.setMessage("用户信息错误，请重新登陆");
