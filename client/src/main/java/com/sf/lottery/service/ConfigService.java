@@ -9,11 +9,11 @@ public interface ConfigService {
 
     boolean setCurrentOpera(int operaId);
 
-    Boolean isCanShark();
+    Boolean isCanShake();
 
-    int closeShark();
+    int closeShake();
 
-    int openShark();
+    int openShake();
 
 
     Boolean isCanReward();

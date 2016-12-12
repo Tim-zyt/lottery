@@ -40,7 +40,7 @@ public class ConfigManager {
     }
 
     //是否开始摇一摇
-    public Boolean isCanShark(){
+    public Boolean isCanShake(){
         Config config = configMapper.selectByIsOpen();
         if(config == null || config.getIsCanShake() == null){
             return false;
@@ -49,16 +49,16 @@ public class ConfigManager {
     }
 
     //开启摇一摇
-    public int openShark(){
-        return changeIsCanSharkState(true);
+    public int openShake(){
+        return changeIsCanShakeState(true);
     }
 
     //关闭摇一摇
-    public int closeShark(){
-        return changeIsCanSharkState(false);
+    public int closeShake(){
+        return changeIsCanShakeState(false);
     }
 
-    private int changeIsCanSharkState(Boolean state){
+    private int changeIsCanShakeState(Boolean state){
         Config config = configMapper.selectByIsOpen();
         if(config == null){
             config = new Config();
