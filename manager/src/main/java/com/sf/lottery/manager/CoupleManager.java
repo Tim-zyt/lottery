@@ -1,6 +1,5 @@
 package com.sf.lottery.manager;
 
-import com.sf.lottery.common.utils.RandomUtil;
 import com.sf.lottery.common.vo.CpGiftVo;
 import com.sf.lottery.dao.CoupleMapper;
 import org.slf4j.Logger;
@@ -41,6 +40,14 @@ public class CoupleManager {
             log.info("没有未获奖的CP");
         }
         return luckCP;
+    }
+
+    public boolean deleteCouple(int coupleId){
+        if(coupleMapper.deleteByPrimaryKey(coupleId) > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
