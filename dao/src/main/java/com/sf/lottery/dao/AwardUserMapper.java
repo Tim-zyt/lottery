@@ -1,6 +1,7 @@
 package com.sf.lottery.dao;
 
 import com.sf.lottery.common.model.AwardUser;
+import com.sf.lottery.common.vo.AwardUserVo;
 
 import java.util.List;
 
@@ -28,4 +29,5 @@ public interface AwardUserMapper {
 
     int insertBatch(List<AwardUser> list);
 
+    List<AwardUserVo> selectAllAwardUser();
 }

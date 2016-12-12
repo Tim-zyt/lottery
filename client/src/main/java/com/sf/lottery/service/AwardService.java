@@ -1,6 +1,7 @@
 package com.sf.lottery.service;
 
 import com.sf.lottery.common.model.Award;
+import com.sf.lottery.common.vo.AwardUserVo;
 
 import java.util.List;
 import java.util.Set;
@@ -67,4 +68,11 @@ public interface AwardService {
      * @throws Exception
      */
     Award getCurAward() throws Exception ;
+
+    /**
+     * 获取所用获奖观众信息
+     * @return
+     * @throws Exception
+     */
+    List<AwardUserVo> getAllAwardUser()  throws Exception;
 }
