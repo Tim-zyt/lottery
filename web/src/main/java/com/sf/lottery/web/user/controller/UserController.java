@@ -147,18 +147,6 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/user/resetUsers", method = RequestMethod.POST)
-    public JsonResult<Boolean> resetUsers() {
-        JsonResult<Boolean> result = new JsonResult<>();
-        try {
-            result.setData(userService.resetUsers());
-        } catch (Exception e) {
-            log.warn(ExceptionUtils.getStackTrace(e));
-        }
-        return result;
-    }
-
-    @ResponseBody
     @RequestMapping(value = "/cp/cpsign", method = RequestMethod.POST)
     public JsonResult<String> cpsign(@RequestParam("sfnum1") int sfnum1, @RequestParam("sfnum2") int sfnum2, @RequestParam("imgSrc") String imgSrc,HttpServletRequest request, HttpServletResponse response) throws Exception{
         JsonResult<String> result = new JsonResult<>();
