@@ -1,6 +1,5 @@
 package com.sf.lottery.serviceImpl;
 
-import com.sf.lottery.common.model.Couple;
 import com.sf.lottery.common.vo.CpGiftVo;
 import com.sf.lottery.manager.CoupleManager;
 import com.sf.lottery.service.CoupleService;
@@ -27,9 +26,13 @@ public class CoupleServiceImpl implements CoupleService {
         return coupleManager.getAllUnAwardCouple();
     }
 
-
     @Override
     public CpGiftVo getLuckCP(){
         return coupleManager.getLuckCP();
+    }
+
+    @Override
+    public boolean deleteCouple(int coupleId){
+        return coupleManager.deleteCouple(coupleId);
     }
 }

@@ -1,6 +1,5 @@
 package com.sf.lottery.service;
 
-import com.sf.lottery.common.model.Couple;
 import com.sf.lottery.common.vo.CpGiftVo;
 
 import java.util.List;
@@ -14,4 +13,6 @@ public interface CoupleService {
     List<CpGiftVo> getAllUnAwardCouple();
 
     CpGiftVo getLuckCP();
+
+    boolean deleteCouple(int coupleId);
 }
