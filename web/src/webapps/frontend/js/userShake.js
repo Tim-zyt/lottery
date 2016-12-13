@@ -4,7 +4,7 @@ jQuery(function ($) {
         var checkIfStart = setInterval(function checkStart() {
             $.ajax({
                 type: "post",
-                url: getContextPath() + "/shake/isCanShark",
+                url: getContextPath() + "/shake/isCanShake",
                 dataType: 'json',
                 data: {},
                 success: function (data) {
@@ -19,7 +19,6 @@ jQuery(function ($) {
                         var last_x = 0;
                         var last_y = 0;
                         var last_z = 0;
-
                         function deviceMotionHandler(eventData) {
                             var acceleration = eventData.accelerationIncludingGravity;
                             var curTime = new Date().getTime();
@@ -63,7 +62,7 @@ jQuery(function ($) {
                             });
                             $.ajax({
                                 type: "post",
-                                url: getContextPath() + "/shake/isCanShark",
+                                url: getContextPath() + "/shake/isCanShake",
                                 dataType: 'json',
                                 data: {},
                                 success: function (data) {

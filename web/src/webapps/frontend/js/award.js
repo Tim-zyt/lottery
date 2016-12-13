@@ -382,6 +382,10 @@ function endShake() {
             // var shakeWinner = data.data;
             $("#startShake").css("display","block");
             $("#endShake").css("display","none");
+        },error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);
         }
     });
 }

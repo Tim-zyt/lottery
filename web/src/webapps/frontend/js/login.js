@@ -1,16 +1,13 @@
-
 jQuery(function ($) {
-
-
-
-
 
 
 });
 
 $(document).ready(function () {
     var message = getUrlParam("message");
-    $("#message").html(message);
+    if (!isNull(message)) {
+        $("#message").html(message);
+    }
 });
 
 // window.onload = function(){
@@ -18,11 +15,12 @@ $(document).ready(function () {
 //     $("#message").html(message);
 // }
 
-function checkinput(f){
+function checkinput(f) {
     var sfnum = f.sfnum.value;
     var sfname = f.sfname.value;
-    if(sfnum ==  null || sfnum == ''||sfname == null || sfname == ''){
+    if (sfnum == null || sfnum == '' || sfname == null || sfname == '') {
         $("#message").html("&nbsp&nbsp&nbsp工号或姓名不能为空");
-        return false;   }
+        return false;
+    }
     return true;
 }

@@ -9,7 +9,7 @@ $(document).ready(function () {
     };
     ws.onmessage = function(message){
         var shakeWinnerMessage = JSON.parse(message.data);
-        var shakeWinnerHtml  = "<div><img src='" + shakeWinnerMessage.headImgUrl + "' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + shakeWinnerMessage.userNo + shakeWinnerMessage.userNo + "</a></div>";
+        var shakeWinnerHtml  = "<div><img src='" + shakeWinnerMessage.headImgUrl + "' style='width:40%' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + shakeWinnerMessage.userNo + shakeWinnerMessage.userName + "</a></div>";
         $("#shakeDiv").css("display","block");
         $("#shakeRace").css("display","none");
         $("#shakeWinnerDiv").html(shakeWinnerHtml);
