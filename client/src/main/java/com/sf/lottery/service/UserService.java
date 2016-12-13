@@ -92,4 +92,9 @@ public interface UserService {
      * 是否可以CP签到
      */
     boolean isCanCpsign() throws Exception;
+
+    /**
+     * 设置用户中摇一摇奖品
+     */
+    Boolean setUserShakeAward(Integer userId) throws Exception;
 }

@@ -158,4 +158,9 @@ public class UserServiceImpl implements UserService {
     public boolean isCanCpsign() throws Exception{
         return configManager.IsCanCpsign();
     }
+
+    @Override
+    public Boolean setUserShakeAward(Integer userId) throws Exception{
+        return userManager.setUserShakeAward(userId);
+    }
 }

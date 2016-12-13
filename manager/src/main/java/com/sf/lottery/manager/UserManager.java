@@ -162,4 +162,26 @@ public class UserManager {
             return false;
         }
     }
+
+    /**
+     * 设置某人中摇一摇奖品
+     * @return
+     */
+    public Boolean setUserShakeAward(Integer userId){
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(user != null){
+            user.setAwardCount(1);
+            List<Award> awards = awardMapper.selectAwardByKind("摇一摇");
+            if(awards.size() > 0){
+                Award award = awards.get(0);
+                List<AwardUser> awardUsersRele = new LinkedList<>();
+                AwardUser awardUserTe = new AwardUser();
+                awardUserTe.setUserId(userId);
+                awardUserTe.setAwardId(award.getId());
+                awardUsersRele.add(awardUserTe);
+                return (awardUserMapper.insertBatch(awardUsersRele) > 0 && userMapper.updateByPrimaryKey(user) > 0);
+            }
+        }
+        return false;
+    }
 }

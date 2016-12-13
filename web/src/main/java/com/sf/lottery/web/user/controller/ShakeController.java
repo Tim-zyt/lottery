@@ -1,5 +1,6 @@
 package com.sf.lottery.web.user.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.model.User;
 import com.sf.lottery.service.ConfigService;
@@ -7,9 +8,12 @@ import com.sf.lottery.service.UserService;
 import com.sf.lottery.web.gift.UserShakeVo;
 import com.sf.lottery.web.sort.NonThreadSafeDescSortedMostNList;
 import com.sf.lottery.web.utils.CookiesUtil;
+import com.sf.lottery.web.websocket.WebsocketClientFactory;
+import org.java_websocket.client.WebSocketClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +37,9 @@ public class ShakeController {
 
     @Autowired
     private ConfigService configService;
+
+    @Value("${shake.websocket.address}")
+    private String shakeAddress;
 
     //singleton
     private Map<Integer,UserShakeVo> shakeCountMap = new ConcurrentHashMap<>();
@@ -126,8 +133,23 @@ public class ShakeController {
         LinkedList<Comparable> topList = sortList.getResult();
         Comparable topUser = topList.getFirst();
         if(topUser != null){
-            result.setData((UserShakeVo)topUser);
+            UserShakeVo luckUser = (UserShakeVo)topUser;
+            result.setData(luckUser);
+            try {
+                //将获奖人持久化到数据库
+                 userService.setUserShakeAward(luckUser.getUserId());
+                //发送到前台显示
+                WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("shake", shakeAddress);
+                webSocketClient.connectBlocking();
+                webSocketClient.send(JSON.toJSONString(luckUser));
+                webSocketClient.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+
+
         shakeCountMap = new ConcurrentHashMap<>();
         return result;
     }
