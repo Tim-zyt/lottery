@@ -15,7 +15,7 @@ block content
                 div.col-md-12(style="text-align:center;")
                     h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2017年会摇一摇
             canvas#canvas(style="position: relative; background-color: #fed261;")
-            div(style="position: absolute;top: 15%;left:16%;right:16%;width:68%;padding-bottom:0px;")
+            div(style="position: absolute;top: 15%;left:16%;right:16%;width:68%;padding-bottom:0px;display:block;")#shakeRace
                 ul.products-list.product-list-in-boxs#shake
                     //li.item(style="background-color:rgba(255,255,255,0);")
                     //    div.product-img
@@ -26,6 +26,10 @@ block content
                     //        span.product-description(style="margin-top:2%")
                     //            div.progress.sm
                     //                div.progress-bar.progress-bar-aqua(style="width:66%")
+            div#shakeDiv.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;display:none;")
+                div.col-md-12
+                    div
+                        div#shakeWinnerDiv.box-body.no-padding.animated.bounceOut
 
 block footer
 block extends

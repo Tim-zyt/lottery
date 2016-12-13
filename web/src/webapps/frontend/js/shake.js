@@ -4,6 +4,23 @@
 $(document).ready(function () {
     time();
     refreshShakePage();
+    var ws = new WebSocket(shakeChannelAddress);
+    ws.onopen = function(){
+    };
+    ws.onmessage = function(message){
+        var shakeWinnerMessage = JSON.parse(message.data);
+        var shakeWinnerHtml  = "<div><img src='" + shakeWinnerMessage.headImgUrl + "' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + shakeWinnerMessage.userNo + shakeWinnerMessage.userNo + "</a></div>";
+        $("#shakeDiv").css("display","block");
+        $("#shakeRace").css("display","none");
+        $("#shakeWinnerDiv").html(shakeWinnerHtml);
+    };
+    function postToServer(){
+        ws.send(document.getElementById("msg").value);
+        document.getElementById("msg").value = "";
+    }
+    function closeConnect(){
+        ws.close();
+    }
 });
 
 function refreshShakePage(){
@@ -14,6 +31,12 @@ function refreshShakePage(){
             var shakeWinners = data.data;
             var shakeHtml = "";
             var percentage = new Array(shakeWinners.length);
+            for(var m = 0 ; m <shakeWinners.length-1  ; m++){
+                if(shakeWinners[m].shakeCount == shakeWinners[m+1].shakeCount ){
+                    shakeWinners[m+1].shakeCount--;
+                }
+                continue;
+            }
             for(var i = 0 ; i <shakeWinners.length  ; i++){
                 // var percentage = Math.round(shakeWinners[i].shakeCount / 24 * 10000) / 100.00 + "%";
                 // shakeHtml+="<li class='item' style='background-color:rgba(255,255,255,0);'>" +
@@ -39,5 +62,6 @@ function time()
     refreshShakePage();
     setTimeout(time,1000);
 }
+
 
 

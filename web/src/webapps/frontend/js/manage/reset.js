@@ -4,7 +4,7 @@
 function resetUsers() {
     $.ajax({
         type: "post",
-        url : getContextPath() + "/user/resetUsers",
+        url : getContextPath() + "/reset/resetData",
         dataType:'json',
         data: {
         },

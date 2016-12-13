@@ -313,12 +313,75 @@ function endCpGift() {
             var cpWinners = data.data;
             var cpHtml = "";
             cpHtml+="<tr><td>"+cpWinners.user1SfName+"</td><td>"+cpWinners.user1SfNum+"</td><td>"+
-                "<span class='label label-danger' style='cursor:pointer;'>"+"删除"+"</span></td></tr>"+
-                "<tr><td>"+cpWinners.user2SfName+"</td><td>"+cpWinners.user2SfNum+"</td><td>"+
-                "<span class='label label-danger' style='cursor:pointer;' >"+"删除"+"</span></td></tr>";
+                "<span class='label label-danger' style='cursor:pointer;' onclick='deleteCpWinner(cpWinners.id)'>"+"删除"+"</span></td></tr>"+
+                "<tr><td>"+cpWinners.user2SfName+"</td><td>"+cpWinners.user2SfNum+"</td><td>";
             $("#startCpGift").css("display","block");
             $("#endCpGift").css("display","none");
             $("#winnerTable").html(cpHtml);
+        }
+    });
+}
+
+function deleteCpWinner(cpWinnersId){
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/cpGift/deleteCpWinners?cpWinnersId="+cpWinnersId,
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            var deleteSuccess = data.data;
+            if(deleteSuccess){
+                layer.msg('删除成功', {
+                    time: 500, //20s后自动关闭
+                    // btn: ['明白了', '知道了']
+                });
+                refreshPage();
+            }else{
+                layer.msg('删除失败', {
+                    time: 500, //20s后自动关闭
+                    // btn: ['明白了', '知道了']
+                });
+            }
+        }
+    });
+}
+
+function startShake() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/shake/openShake",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            var startSuccess = data.data;
+            if(startSuccess){
+                layer.msg('摇一摇开启', {
+                    time: 500, //20s后自动关闭
+                });
+                $("#startShake").css("display","none");
+                $("#endShake").css("display","block");
+            }else{
+                layer.msg('摇一摇失败', {
+                    time: 500, //20s后自动关闭
+                });
+            }
+        }
+    });
+}
+
+function endShake() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/shake/closeShake",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            // var shakeWinner = data.data;
+            $("#startShake").css("display","block");
+            $("#endShake").css("display","none");
         }
     });
 }

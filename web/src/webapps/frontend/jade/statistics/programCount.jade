@@ -1,3 +1,20 @@
 //
    Created by 01170626 on 2016/12/11.
+div.box.box-default(style="position:absolute;top:10%;left:30%;right:10%;width:60%;text-align:center")
+    div.box-header.with-border
+        h3.box-title 节目获奖统计
 
+    div.box-body
+        div.chart
+            canvas#barChart(style="height:300px")
+
+        div.table-responsive
+            table.table.no-margin
+                thead
+                tr
+                    th 节目名称
+                    th 鲜花数量
+                    th 跑车数量
+                    th 火箭数量
+                    th 打赏总分
+                tbody#programCount
