@@ -60,7 +60,7 @@ public class ShakeController {
             int userId = Integer.parseInt(userIdStr);
             if(shakeCountMap.containsKey(userId)){
                 UserShakeVo curUserShakeVo = shakeCountMap.get(userId);
-                curUserShakeVo.setShakeCount(shakeCount);
+                curUserShakeVo.setShakeCount(curUserShakeVo.getShakeCount()+shakeCount);
                 shakeCountMap.put(userId, curUserShakeVo);//存的是引用，不用写这一句，只是为了阅读方便
             }else {
                 User user = userService.getUserById(userId);

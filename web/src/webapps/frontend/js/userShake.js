@@ -19,6 +19,7 @@ jQuery(function ($) {
                         var last_x = 0;
                         var last_y = 0;
                         var last_z = 0;
+
                         function deviceMotionHandler(eventData) {
                             var acceleration = eventData.accelerationIncludingGravity;
                             var curTime = new Date().getTime();
@@ -50,16 +51,19 @@ jQuery(function ($) {
                             alert('你的手机太差了，不能参与摇一摇抽奖，扔掉买个新的吧。--顺丰科技忠劝');
                         }
                         var shakeInterval = setInterval(function () {
-                            $.ajax({
-                                type: "post",
-                                url: getContextPath() + "/shake/saveShakeCount",
-                                dataType: 'json',
-                                data: {
-                                    shakeCount:shakeTimes
-                                },
-                                success: function (data) {
-                                }
-                            });
+                            if (shakeTimes != 0) {
+                                $.ajax({
+                                    type: "post",
+                                    url: getContextPath() + "/shake/saveShakeCount",
+                                    dataType: 'json',
+                                    data: {
+                                        shakeCount: shakeTimes
+                                    },
+                                    success: function (data) {
+                                        shakeTimes = 0;
+                                    }
+                                });
+                            }
                             $.ajax({
                                 type: "post",
                                 url: getContextPath() + "/shake/isCanShake",
