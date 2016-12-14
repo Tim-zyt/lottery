@@ -14,5 +14,7 @@ public interface ConfigMapper {
 
     Config selectByPrimaryKey(int id);
 
-    int selectCurProgromId();
+    int selectCurProgramId();
+
+    int selectCurGiftId();
 }
