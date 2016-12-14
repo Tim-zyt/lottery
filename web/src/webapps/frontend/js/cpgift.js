@@ -50,23 +50,25 @@ jQuery(function ($) {
             data: {
             },
             success: function(data){
-                var cp = data.data;
-                var cpHtml = "";
-                var iLen = cp.length;
-                for(var i = iLen - 1 ; i >=0  ; i--){
-                    cpHtml += "<div id='" + i +"' style='display: none' class='luckCp'><img src='" + cp[i].cpImg + "' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp[i].user1SfName + cp[i].user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp[i].user2SfName + cp[i].user2SfNum + "</a></div>";
-                }
-                $("#luckDiv").html(cpHtml);
-
-                start();
+                setWXImgUrl(data);
             }
         });
     }
 
     //展示获奖人的头像
     function showLuckCP(cp) {
-        var luckDivHtml  = "<div><img src='" + cp.cpImg + "' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
-        $("#luckDiv").html(luckDivHtml);
+        $.ajax({
+            type: "get",
+            url: getContextPath() + "/weixin/accessToken",
+            success: function (data) {
+                var accessToken = data;
+                var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp.cpImg;
+                var luckDivHtml  = "<div><img src='" + imgSrc + "' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
+                $("#luckDiv").html(luckDivHtml);
+            }
+        });
+
+
     }
 
     var timeout = false; //启动及关闭按钮
@@ -107,6 +109,28 @@ jQuery(function ($) {
         }
         return arr;
     }
+
+
+    function setWXImgUrl(cpdata) {
+        $.ajax({
+            type: "get",
+            url: getContextPath() + "/weixin/accessToken",
+            success: function (data) {
+                var accessToken = data;
+                var cp = cpdata.data;
+                var cpHtml = "";
+                var iLen = cp.length;
+                for(var i = iLen - 1 ; i >=0  ; i--){
+                    var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp[i].cpImg;
+                    cpHtml += "<div id='" + i +"' style='display: none' class='luckCp'><img src='" + imgSrc + "' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp[i].user1SfName + cp[i].user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp[i].user2SfName + cp[i].user2SfNum + "</a></div>";
+                }
+                $("#luckDiv").html(cpHtml);
+
+                start();
+            }
+        });
+    }
+
 
 });
 
