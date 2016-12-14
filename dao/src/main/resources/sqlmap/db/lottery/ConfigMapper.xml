@@ -27,9 +27,16 @@
         where  is_open = TRUE
     </select>
 
-  <select id="selectCurProgromId" resultType="java.lang.Integer">
+  <select id="selectCurProgramId" resultType="java.lang.Integer">
     select
     cur_program_id
+    from config
+    where is_open = TRUE
+  </select>
+
+  <select id="selectCurGiftId" resultType="java.lang.Integer">
+    select
+    cur_gift_id
     from config
     where is_open = TRUE
   </select>

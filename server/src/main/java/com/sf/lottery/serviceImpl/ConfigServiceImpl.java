@@ -70,7 +70,12 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
-    public int selectCurProgromId(){
-        return configManager.selectCurProgromId();
+    public int selectCurProgramId(){
+        return configManager.selectCurProgramId();
+    }
+
+    @Override
+    public int selectCurGiftId(){
+        return configManager.selectCurGiftId();
     }
 }

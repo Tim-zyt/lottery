@@ -27,8 +27,8 @@ public interface ConfigService {
 
     int openCpsign();
 
-    int selectCurProgromId();
+    int selectCurProgramId();
 
-
+    int selectCurGiftId();
 
 }

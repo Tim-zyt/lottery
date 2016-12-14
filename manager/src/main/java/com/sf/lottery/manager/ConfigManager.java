@@ -136,7 +136,12 @@ public class ConfigManager {
     }
 
     //查询当前节目
-    public int selectCurProgromId(){
-        return configMapper.selectCurProgromId();
+    public int selectCurProgramId(){
+        return configMapper.selectCurProgramId();
+    }
+
+    //查询当前礼物
+    public int selectCurGiftId(){
+        return configMapper.selectCurGiftId();
     }
 }
