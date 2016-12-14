@@ -16,16 +16,33 @@ function refreshPage(){
         success: function(data){
             awards = data.data;
             var awardHtml = "";
+            var currentAwardId = data.message;
             var iLen = awards.length;
             for(var i = iLen - 1 ; i >=0  ; i--){
-                awardHtml+="<tr><td><span id='span"+i+"' style='cursor:pointer;' onclick='selectAward("+i+","+iLen+")' class='label label-default'>"+"选中"+"</span></td><td>"+awards[i].awName+"</td><td>"+awards[i].awDescription+"</td><td>"+
+                var selclass = "label label-default";
+                if(awards[i].id == currentAwardId){
+                    selclass = "label label-success";
+                }
+                awardHtml+="<tr><td><span id='span"+i+"' style='cursor:pointer;' onclick='selectAward("+i+","+iLen+")' class='"+selclass+"'>"+"选中"+"</span></td><td>"+awards[i].awName+"</td><td>"+awards[i].awDescription+"</td><td>"+
                     awards[i].awUserCount+"</td><td>"+awards[i].awKind+"</td><td><span style='cursor:pointer;' class='label label-info' onclick='confirmUpdateAward("+i+")'>"+"编辑"+"</span></td><td>" +
                     "<span class='label label-danger' style='cursor:pointer;' onclick='comfirmDeleteAward("+awards[i].id+")'>"+"删除"+"</span></td></tr>";
+                // if(awards[i].id == currentAwardId){
+                //     var spanId = "span"+i;
+                //     $("#"+spanId).attr("class","label label-success");
+                // }
             }
             $("#awardTable").html(awardHtml);
         }
     });
 }
+
+// function spanSelect(i,currentAwardId){
+//     if(awards[i].id == currentAwardId){
+//         return "label label-success";
+//     }else{
+//         return "label label-default";
+//     }
+// }
 
 function selectAward(i,iLen){
     $.ajax({
@@ -313,12 +330,24 @@ function endCpGift() {
             var cpWinners = data.data;
             var cpHtml = "";
             cpHtml+="<tr><td>"+cpWinners.user1SfName+"</td><td>"+cpWinners.user1SfNum+"</td><td>"+
-                "<span class='label label-danger' style='cursor:pointer;' onclick='deleteCpWinner(cpWinners.id)'>"+"删除"+"</span></td></tr>"+
+                "<span class='label label-danger' style='cursor:pointer;' onclick='confirmDeleteCpWinner("+cpWinners.id+")'>"+"删除"+"</span></td></tr>"+
                 "<tr><td>"+cpWinners.user2SfName+"</td><td>"+cpWinners.user2SfNum+"</td><td>";
             $("#startCpGift").css("display","block");
             $("#endCpGift").css("display","none");
             $("#winnerTable").html(cpHtml);
         }
+    });
+}
+
+function confirmDeleteCpWinner(cpWinnersId){
+    layer.confirm("确定要删除这对苦命鸳鸯吗？", {
+        btn: ['删除','取消'] //按钮
+    }, function(){
+        deleteCpWinner(cpWinnersId);
+    }, function(){
+        layer.msg('取消删除', {
+            time: 500, //20s后自动关闭
+        });
     });
 }
 
@@ -336,7 +365,7 @@ function deleteCpWinner(cpWinnersId){
                     time: 500, //20s后自动关闭
                     // btn: ['明白了', '知道了']
                 });
-                refreshPage();
+                $("#winnerTable").remove();
             }else{
                 layer.msg('删除失败', {
                     time: 500, //20s后自动关闭
@@ -379,13 +408,55 @@ function endShake() {
         data: {
         },
         success: function(data){
-            // var shakeWinner = data.data;
             $("#startShake").css("display","block");
             $("#endShake").css("display","none");
+            var shakeWinner = data.data;
+            var winnerHtml = "";
+            winnerHtml+="<tr><td>"+shakeWinner.userNo+"</td><td>"+shakeWinner.userName+"</td><td>"+
+                "<span class='label label-danger' style='cursor:pointer;' onclick='confirmDeleteShakeWinner("+shakeWinner.userId+")'>"+"删除"+"</span></td></tr>";
+            $("#winnerTable").html(winnerHtml);
         },error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert(XMLHttpRequest.status);
             alert(XMLHttpRequest.readyState);
             alert(textStatus);
+        }
+    });
+}
+
+function confirmDeleteShakeWinner(winnerId){
+    layer.confirm("确定要删除该获奖用户吗？", {
+        btn: ['删除','取消'] //按钮
+    }, function(){
+        deleteShakeWinner(winnerId);
+    }, function(){
+        layer.msg('取消删除', {
+            time: 500, //20s后自动关闭
+        });
+    });
+}
+
+function deleteShakeWinner(winnerId){
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/user/deleteWinner",
+        dataType:'json',
+        data: {
+            "userId":winnerId
+        },
+        success: function(data){
+            var deleteSuccess = data.data;
+            if(deleteSuccess){
+                layer.msg('删除成功', {
+                    time: 500, //20s后自动关闭
+                    // btn: ['明白了', '知道了']
+                });
+                $("#winnerTable").remove();
+            }else{
+                layer.msg('删除失败', {
+                    time: 500, //20s后自动关闭
+                    // btn: ['明白了', '知道了']
+                });
+            }
         }
     });
 }

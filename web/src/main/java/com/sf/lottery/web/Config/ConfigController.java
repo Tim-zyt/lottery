@@ -2,7 +2,9 @@ package com.sf.lottery.web.Config;
 
 import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.service.ConfigService;
+import com.sf.lottery.web.user.controller.OperaController;
 import com.sf.lottery.web.user.controller.UserController;
+import net.sf.ehcache.config.NonstopConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class ConfigController {
     private final static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private ConfigService configService;
+    @Autowired
+    private OperaController operaController;
 
     @ResponseBody
     @RequestMapping(value = "/config/setCurrentAward", method = RequestMethod.POST)
@@ -44,6 +48,8 @@ public class ConfigController {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
             String opName = request.getParameter("opName");
+            String preOperaId = request.getParameter("preOperaId");
+            operaController.resetCount(Integer.parseInt(preOperaId));
             if("抽奖".equals(opName.trim())){
                 configService.closeReward();
             }else{
