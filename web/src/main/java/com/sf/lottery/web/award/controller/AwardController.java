@@ -5,6 +5,7 @@ import com.sf.lottery.common.model.Award;
 import com.sf.lottery.common.utils.ExceptionUtils;
 import com.sf.lottery.common.vo.AwardUserVo;
 import com.sf.lottery.service.AwardService;
+import com.sf.lottery.service.ConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class AwardController {
     private final static Logger log = LoggerFactory.getLogger(AwardController.class);
 
     @Autowired AwardService awardService;
+
+    @Autowired ConfigService configService;
 
     @ResponseBody
     @RequestMapping(value = "/award/getAwardByKind", method = RequestMethod.POST)
@@ -129,6 +132,8 @@ public class AwardController {
         JsonResult<List<Award>> result = new JsonResult<>();
         try {
             result.setData(awardService.getAllAwards());
+            result.setMessage(Integer.toString(configService.selectCurGiftId()));
+            return result;
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }
@@ -141,6 +146,7 @@ public class AwardController {
         JsonResult<List<AwardUserVo>> result = new JsonResult<>();
         try {
             result.setData(awardService.getAllAwardUser());
+            //result.setMessage();
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }

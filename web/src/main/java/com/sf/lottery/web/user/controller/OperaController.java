@@ -3,6 +3,7 @@ package com.sf.lottery.web.user.controller;
 import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.model.Opera;
 import com.sf.lottery.common.utils.ExceptionUtils;
+import com.sf.lottery.service.ConfigService;
 import com.sf.lottery.service.OperaService;
 import org.apache.zookeeper.Op;
 import org.slf4j.Logger;
@@ -28,6 +29,8 @@ public class OperaController {
     private final static Logger log = LoggerFactory.getLogger(OperaController.class);
     @Autowired
     private OperaService operaService;
+    @Autowired
+    private ConfigService configService;
     private AtomicInteger flowerCount = new AtomicInteger(0);
     private AtomicInteger carCount = new AtomicInteger(0);
     private AtomicInteger rocketCount = new AtomicInteger(0);
@@ -134,6 +137,8 @@ public class OperaController {
         JsonResult<List<Opera>> result = new JsonResult<>();
         try {
             result.setData(operaService.getAllOperas());
+            result.setMessage(Integer.toString(configService.selectCurProgramId()));
+            return result;
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }

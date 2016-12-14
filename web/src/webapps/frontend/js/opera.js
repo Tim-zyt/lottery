@@ -16,10 +16,11 @@ function refreshOperaPage(){
         },
         success: function(data){
             operas = data.data;
+            var preOperaId = data.message;
             var operaHtml = "";
             var iLen = operas.length;
             for(var i = iLen - 1 ; i >=0  ; i--){
-                operaHtml+="<tr><td><span style='cursor:pointer;' id='opera"+i+"' onclick='selectOpera("+i+","+iLen+")' class='label label-default'>"+"选中"+"</span></td><td>"+operas[i].opName+"</td><td>"+operas[i].opActor+"</td><td>"+
+                operaHtml+="<tr><td><span style='cursor:pointer;' id='opera"+i+"' onclick='selectOpera("+i+","+iLen+","+preOperaId+")' class='label label-default'>"+"选中"+"</span></td><td>"+operas[i].opName+"</td><td>"+operas[i].opActor+"</td><td>"+
                     operas[i].opDepartment+"</td><td>"+operas[i].opSort+"</td><td><span style='cursor:pointer;' class='label label-info' onclick='confirmUpdateOpera("+i+")'>"+"编辑"+"</span></td><td>" +
                     "<span class='label label-danger' style='cursor:pointer;' onclick='comfirmDeleteOpera("+operas[i].id+")'>"+"删除"+"</span></td></tr>";
             }
@@ -28,33 +29,36 @@ function refreshOperaPage(){
     });
 }
 
-function selectOpera(i,iLen){
-    $.ajax({
-        type: "post",
-        url : getContextPath() + "/config/setCurrentOpera",
-        dataType:'json',
-        data: {
-            "operaId":operas[i].id,
-            "opName":operas[i].opName
-        },
-        success: function(data){
-            var selectSuccess = data.data;
-            if(selectSuccess){
-                var operaId = "opera"+i;
-                $("#"+operaId).attr("class","label label-success");
-                for(var m = iLen - 1 ; m >=0  ; m--){
-                    if(m!=i){
-                        var otherOperaId = "opera"+m;
-                        $("#"+otherOperaId).attr("class","label label-default");
+function selectOpera(i,iLen,preOperaId){
+    if(preOperaId!=operas[i].id){
+        $.ajax({
+            type: "post",
+            url : getContextPath() + "/config/setCurrentOpera",
+            dataType:'json',
+            data: {
+                "operaId":operas[i].id,
+                "opName":operas[i].opName,
+                "preOperaId":preOperaId
+            },
+            success: function(data){
+                var selectSuccess = data.data;
+                if(selectSuccess){
+                    var operaId = "opera"+i;
+                    $("#"+operaId).attr("class","label label-success");
+                    for(var m = iLen - 1 ; m >=0  ; m--){
+                        if(m!=i){
+                            var otherOperaId = "opera"+m;
+                            $("#"+otherOperaId).attr("class","label label-default");
+                        }
                     }
+                }else{
+                    layer.msg('选中失败', {
+                        time: 500, //20s后自动关闭
+                    });
                 }
-            }else{
-                layer.msg('选中失败', {
-                    time: 500, //20s后自动关闭
-                });
             }
-        }
-    });
+        });
+    }
 }
 
 function comfirmDeleteOpera(operaId) {
