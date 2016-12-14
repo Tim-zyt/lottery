@@ -97,4 +97,10 @@ public interface UserService {
      * 设置用户中摇一摇奖品
      */
     Boolean setUserShakeAward(Integer userId) throws Exception;
+
+    boolean resetAwardUser() throws Exception;
+
+    boolean resetConfig() throws Exception;
+
+    boolean resetCouple() throws Exception;
 }

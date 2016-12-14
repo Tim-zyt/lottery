@@ -15,13 +15,11 @@ public interface ConfigService {
 
     int openShake();
 
-
     Boolean isCanReward();
 
     int closeReward();
 
     int openReward();
-
 
     Boolean IsCanCpsign();
 
@@ -29,6 +27,7 @@ public interface ConfigService {
 
     int openCpsign();
 
+    int selectCurProgromId();
 
 
 

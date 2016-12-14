@@ -68,4 +68,9 @@ public class ConfigServiceImpl implements ConfigService {
     public int openCpsign() {
         return configManager.openCpsign();
     }
+
+    @Override
+    public int selectCurProgromId(){
+        return configManager.selectCurProgromId();
+    }
 }

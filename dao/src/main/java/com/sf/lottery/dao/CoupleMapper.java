@@ -25,4 +25,5 @@ public interface CoupleMapper {
     List<CpGiftVo> selectUnAwardCouple();
 
     int updateAwardStatusById(Integer id);
+
 }

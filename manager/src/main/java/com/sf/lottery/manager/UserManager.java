@@ -130,6 +130,21 @@ public class UserManager {
         return b;
     }
 
+    public boolean resetAwardUser(){
+        boolean b = userMapper.resetAwardUser()>0;
+        return b;
+    }
+
+    public boolean resetConfig(){
+        boolean b = userMapper.resetConfig()>0;
+        return b;
+    }
+
+    public boolean resetCouple(){
+        boolean b = userMapper.resetCouple()>0;
+        return b;
+    }
+
     //删除获奖-用户临时表（未到现场）
     public boolean deleteWinner(int userId){
         if(awardUserMapper.deleteByUserId(userId)>0){
