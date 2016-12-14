@@ -27,11 +27,17 @@ public class ResetController {
     public JsonResult<Boolean> resetData() {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
+            userService.resetAwardUser();
+            userService.resetConfig();
+            userService.resetCouple();
             result.setData(userService.resetUsers());
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
+
+
+
 
 }

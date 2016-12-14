@@ -101,4 +101,29 @@
         wx_unionid = null
     </update>
 
+    <update id="resetAwardUser">
+        update award_user
+        set
+        user_id = null,
+        award_id = null
+    </update>
+
+    <update id="resetConfig">
+        update config
+        set
+        cur_gift_id = 0,
+        cur_program_id = 0,
+        is_can_reward = 0,
+        is_can_shake = 0,
+        is_can_cpsign = 0,
+        is_open = 1
+    </update>
+
+    <update id="resetCouple">
+        update couple
+        set
+        aw_count = 0,
+        aw_id = 0
+    </update>
+
 </mapper>

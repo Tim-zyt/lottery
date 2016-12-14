@@ -32,6 +32,7 @@
     delete from couple
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.sf.lottery.common.model.Couple" >
     insert into couple (id, user1_sf_num, user2_sf_num, 
       cp_img, aw_count, aw_id

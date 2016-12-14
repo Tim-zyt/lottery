@@ -134,4 +134,9 @@ public class ConfigManager {
         config.setIsCanCpsign(state);
         return configMapper.updateByIsOpen(config);
     }
+
+    //查询当前节目
+    public int selectCurProgromId(){
+        return configMapper.selectCurProgromId();
+    }
 }

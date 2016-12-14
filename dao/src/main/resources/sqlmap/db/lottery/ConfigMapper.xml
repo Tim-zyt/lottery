@@ -27,6 +27,13 @@
         where  is_open = TRUE
     </select>
 
+  <select id="selectCurProgromId" resultType="java.lang.Integer">
+    select
+    cur_program_id
+    from config
+    where is_open = TRUE
+  </select>
+
   <insert id="insert" parameterType="com.sf.lottery.common.model.Config" >
     insert into config (id, cur_gift_id, cur_program_id, is_can_reward, is_can_shake, is_can_cpsign, is_open)
     values (#{id,jdbcType=INTEGER}, #{curGiftId,jdbcType=INTEGER}, #{curProgramId,jdbcType=INTEGER},

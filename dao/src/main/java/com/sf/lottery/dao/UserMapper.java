@@ -43,4 +43,10 @@ public interface UserMapper {
     Boolean isSignedByUserNum(int sfNum);
 
     int resetUsers();
+
+    int resetAwardUser();
+
+    int resetConfig();
+
+    int resetCouple();
 }
