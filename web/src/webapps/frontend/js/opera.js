@@ -20,7 +20,12 @@ function refreshOperaPage(){
             var operaHtml = "";
             var iLen = operas.length;
             for(var i = iLen - 1 ; i >=0  ; i--){
-                operaHtml+="<tr><td><span style='cursor:pointer;' id='opera"+i+"' onclick='selectOpera("+i+","+iLen+","+preOperaId+")' class='label label-default'>"+"选中"+"</span></td><td>"+operas[i].opName+"</td><td>"+operas[i].opActor+"</td><td>"+
+                if(operas[i].id==preOperaId){
+                    operaHtml+="<tr><td><span style='cursor:pointer;' id='opera"+i+"' onclick='selectOpera("+i+","+iLen+","+preOperaId+")' class='label label-success'>";
+                }else{
+                    operaHtml+="<tr><td><span style='cursor:pointer;' id='opera"+i+"' onclick='selectOpera("+i+","+iLen+","+preOperaId+")' class='label label-default'>";
+                }
+                operaHtml+="选中"+"</span></td><td>"+operas[i].opName+"</td><td>"+operas[i].opActor+"</td><td>"+
                     operas[i].opDepartment+"</td><td>"+operas[i].opSort+"</td><td><span style='cursor:pointer;' class='label label-info' onclick='confirmUpdateOpera("+i+")'>"+"编辑"+"</span></td><td>" +
                     "<span class='label label-danger' style='cursor:pointer;' onclick='comfirmDeleteOpera("+operas[i].id+")'>"+"删除"+"</span></td></tr>";
             }
@@ -43,14 +48,7 @@ function selectOpera(i,iLen,preOperaId){
             success: function(data){
                 var selectSuccess = data.data;
                 if(selectSuccess){
-                    var operaId = "opera"+i;
-                    $("#"+operaId).attr("class","label label-success");
-                    for(var m = iLen - 1 ; m >=0  ; m--){
-                        if(m!=i){
-                            var otherOperaId = "opera"+m;
-                            $("#"+otherOperaId).attr("class","label label-default");
-                        }
-                    }
+                    refreshOperaPage();
                 }else{
                     layer.msg('选中失败', {
                         time: 500, //20s后自动关闭

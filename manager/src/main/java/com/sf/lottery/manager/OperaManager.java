@@ -18,7 +18,7 @@ public class OperaManager {
     private OperaMapper operaMapper;
 
     public int updateByPrimaryKey(Opera record){
-        return operaMapper.updateByPrimaryKey(record);
+        return operaMapper.updateByPrimaryKeySelective(record);
     }
 
     public boolean addOpera(Opera opera){

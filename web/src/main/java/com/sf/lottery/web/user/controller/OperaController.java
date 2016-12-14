@@ -48,12 +48,12 @@ public class OperaController {
     }
 
     public void resetCount(int operaId) {
-        Opera opera = new Opera();
-        opera.setId(operaId);
-        opera.setOpFlower(flowerCount.get());
-        opera.setOpCar(carCount.get());
-        opera.setOpRocket(rocketCount.get());
+
         try {
+            Opera opera = operaService.getOperaByOperaId(operaId);
+            opera.setOpFlower(opera.getOpFlower() + flowerCount.get());
+            opera.setOpCar(opera.getOpCar() + carCount.get());
+            opera.setOpRocket(opera.getOpRocket() + rocketCount.get());
             operaService.updateByPrimaryKey(opera);
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class OperaController {
         String opActor = request.getParameter("opActor");
         String s = request.getParameter("opSort");
         Integer opSort = 0;
-        if(s!=null && s!=""){
+        if (s != null && s != "") {
             opSort = Integer.valueOf(s);
         }
         String opDepartment = request.getParameter("opDepartment");
@@ -92,7 +92,7 @@ public class OperaController {
 
     @ResponseBody
     @RequestMapping(value = "/opera/deleteOpera", method = RequestMethod.POST)
-    public JsonResult<Boolean> deleteAward(@RequestParam("operaId")Integer operaId,HttpServletRequest request) {
+    public JsonResult<Boolean> deleteAward(@RequestParam("operaId") Integer operaId, HttpServletRequest request) {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
             result.setData(operaService.deleteOpera(operaId));
@@ -104,7 +104,7 @@ public class OperaController {
 
     @ResponseBody
     @RequestMapping(value = "/opera/updateOpera", method = RequestMethod.POST)
-    public JsonResult<Boolean> updateAward(@RequestParam("operaId")Integer operaId,HttpServletRequest request) {
+    public JsonResult<Boolean> updateAward(@RequestParam("operaId") Integer operaId, HttpServletRequest request) {
         JsonResult<Boolean> result = new JsonResult<>();
         String opName = request.getParameter("opName");
         String opActor = request.getParameter("opActor");
@@ -112,16 +112,16 @@ public class OperaController {
         String opDepartment = request.getParameter("opDepartment");
         try {
             Opera opera = operaService.getOperaByOperaId(operaId);
-            if(opName!=null && opName!=""){
+            if (opName != null && opName != "") {
                 opera.setOpName(opName);
             }
-            if(opSort!=null && opSort!=""){
+            if (opSort != null && opSort != "") {
                 opera.setOpSort(Integer.valueOf(opSort));
             }
-            if(opActor!=null && opActor!=""){
+            if (opActor != null && opActor != "") {
                 opera.setOpActor(opActor);
             }
-            if(opDepartment!=null && opDepartment!=""){
+            if (opDepartment != null && opDepartment != "") {
                 opera.setOpDepartment(opDepartment);
             }
             result.setData(operaService.updateOpera(opera));
