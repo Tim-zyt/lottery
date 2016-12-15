@@ -79,12 +79,6 @@ public class CoupleManager {
         }
     }
 
-    public boolean isCpSign(int sfNum){
-        if(coupleMapper.isCpSignedByUserNum(sfNum)>0){
-            return true;
-        }else{
-            return false;
-        }
-    }
+
 
 }
