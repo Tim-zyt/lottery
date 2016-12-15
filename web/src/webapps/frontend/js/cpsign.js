@@ -25,7 +25,7 @@ function cpSubmit() {
     }else{
         $.ajax({
             type: "post",
-            url : getContextPath() + "/cp/cpsign",
+            url : getContextPath() + "/cp/cpSubmit",
             dataType:'json',
             data: {
                 "sfnum1":sfnum1,
@@ -35,9 +35,9 @@ function cpSubmit() {
             success: function(data){
                 var code = data.data;
                 if(code == "true"){
-                    var p = "<p style='color:green;' >" + data.message + "</p>" ;
-                    $("#msg").html("");
-                    $("#msg").append(p);
+                    var p = "<p style='color:green;' >" + data.message + "</p>"
+                    $("#cpSign").html("");
+                    $("#cpSign").append(p);
                 }else {
                     var p = "<p style='color:red;' >" + data.message + "</p>" ;
                     $("#msg").html("");
@@ -50,6 +50,29 @@ function cpSubmit() {
 
 jQuery(function ($) {
     $(document).ready(function () {
+        $.ajax({
+            type: "get",
+            url : getContextPath() + "/cp/cpSign",
+            dataType:'json',
+            data: {
+            },
+            success: function(data){
+                var code = data.data;
+                if(code == "true"){
+                    var p = "<p style='color:green;' >" + data.message + "</p>"
+                    $("#cpSign").html("");
+                    $("#cpSign").append(p);
+                }else {
+                    bindClick();
+                }
+            }
+        });
+
+
+
+    });
+
+    function bindClick() {
         $("#cpSignup").click(function () {
             wx.chooseImage({
                 count: 1, // 默认9
@@ -69,7 +92,7 @@ jQuery(function ($) {
                 }
             });
         });
-    });
+    }
 
     function showImg(serverId) {
             $.ajax({

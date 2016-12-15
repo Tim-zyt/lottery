@@ -15,4 +15,6 @@ public interface CoupleService {
     CpGiftVo getLuckCP();
 
     boolean deleteCouple(int coupleId);
+
+    boolean isCpSign(int sfNum);
 }

@@ -35,4 +35,9 @@ public class CoupleServiceImpl implements CoupleService {
     public boolean deleteCouple(int coupleId){
         return coupleManager.deleteCouple(coupleId);
     }
+
+    @Override
+    public boolean isCpSign(int sfNum){
+        return coupleManager.isCpSign(sfNum);
+    }
 }
