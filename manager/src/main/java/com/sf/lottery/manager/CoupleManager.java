@@ -1,5 +1,6 @@
 package com.sf.lottery.manager;
 
+import com.sf.lottery.common.model.Couple;
 import com.sf.lottery.common.vo.CpGiftVo;
 import com.sf.lottery.dao.CoupleMapper;
 import org.slf4j.Logger;
