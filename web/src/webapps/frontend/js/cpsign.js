@@ -20,9 +20,9 @@ function cpSubmit() {
     var sfnum1 = $("#sfnum1").val();
     var sfnum2 = $("#sfnum2").val();
     var imgSrc = $("#imgSrc").val();
-    if(imgSrc==null||imgSrc==undefined||imgSrc==""){
-        alert("请上传图片再签到");
-    }else{
+    // if(imgSrc==null||imgSrc==undefined||imgSrc==""){
+    //     alert("请上传图片再签到");
+    // }else{
         $.ajax({
             type: "post",
             url : getContextPath() + "/cp/cpSubmit",
@@ -35,7 +35,7 @@ function cpSubmit() {
             success: function(data){
                 var code = data.data;
                 if(code == "true"){
-                    var p = "<p style='color:green;' >" + data.message + "</p>"
+                    var p = "<p style='color:green;font-size: 36px;' align='center' >" + data.message + "</p>"
                     $("#cpSign").html("");
                     $("#cpSign").append(p);
                 }else {
@@ -45,7 +45,7 @@ function cpSubmit() {
                 }
             }
         });
-     }
+     // }
 }
 
 jQuery(function ($) {
@@ -59,7 +59,7 @@ jQuery(function ($) {
             success: function(data){
                 var code = data.data;
                 if(code == "true"){
-                    var p = "<p style='color:green;' >" + data.message + "</p>"
+                    var p = "<p style='color:green;font-size: 36px;' align='center' >" + data.message + "</p>"
                     $("#cpSign").html("");
                     $("#cpSign").append(p);
                 }else {

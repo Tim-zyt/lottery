@@ -49,4 +49,6 @@ public interface UserMapper {
     int resetConfig();
 
     int resetCouple();
+
+    int selectNumById(int userId);
 }
