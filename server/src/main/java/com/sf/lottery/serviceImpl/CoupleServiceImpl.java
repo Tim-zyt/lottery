@@ -35,4 +35,14 @@ public class CoupleServiceImpl implements CoupleService {
     public boolean deleteCouple(int coupleId){
         return coupleManager.deleteCouple(coupleId);
     }
+
+    @Override
+    public int unConfirmCPImg(int coupleId){
+        return coupleManager.unConfirmCPImg(coupleId);
+    }
+
+    @Override
+    public int confirmCPImg(int coupleId){
+        return coupleManager.confirmCPImg(coupleId);
+    }
 }

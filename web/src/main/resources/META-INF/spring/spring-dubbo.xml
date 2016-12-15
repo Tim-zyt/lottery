@@ -8,10 +8,10 @@
 </dubbo:consumer>
     <dubbo:application name="com.sf.lottery" />
 <!--<dubbo:reference id="blogCommentService" interface="com.cn.hash.myspace.blog.com.sf.lottery.servicee.com.sf.lottery.com.sf.lottery.serviceimplimpl.BlogCommentService" check="false" />-->
-    <dubbo:reference id="userService" interface="com.sf.lottery.service.UserService" check="false" version="01170626"/>
-    <dubbo:reference id="awardService" interface="com.sf.lottery.service.AwardService" check="false" version="01170626"/>
-    <dubbo:reference id="operaService" interface="com.sf.lottery.service.OperaService" check="false" version="01170626"/>
-    <dubbo:reference id="configService" interface="com.sf.lottery.service.ConfigService" check="false" version="01170626"/>
-    <dubbo:reference id="coupleServiceImpl" interface="com.sf.lottery.service.CoupleService" check="false" version="01170626"/>
+    <dubbo:reference id="userService" interface="com.sf.lottery.service.UserService" check="false" />
+    <dubbo:reference id="awardService" interface="com.sf.lottery.service.AwardService" check="false" />
+    <dubbo:reference id="operaService" interface="com.sf.lottery.service.OperaService" check="false" />
+    <dubbo:reference id="configService" interface="com.sf.lottery.service.ConfigService" check="false" />
+    <dubbo:reference id="coupleService" interface="com.sf.lottery.service.CoupleService" check="false" />
 
 </beans>

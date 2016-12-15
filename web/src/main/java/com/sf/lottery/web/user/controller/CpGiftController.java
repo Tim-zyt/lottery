@@ -89,4 +89,34 @@ public class CpGiftController {
         result.setData(coupleService.deleteCouple(cpWinnersId));
         return result;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/cpGift/unConfirmCPImg", method = RequestMethod.POST)
+    public JsonResult<Integer> unConfirmCPImg(@RequestParam("cpId") int cpId){
+        JsonResult<Integer> result = new JsonResult<>();
+        result.setData(coupleService.unConfirmCPImg(cpId));
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/cpGift/confirmCPImg", method = RequestMethod.POST)
+    public JsonResult<Integer> confirmCPImg(@RequestParam("cpId") int cpId){
+        JsonResult<Integer> result = new JsonResult<>();
+        result.setData(coupleService.confirmCPImg(cpId));
+        return result;
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/cpGift/getAllCP", method = RequestMethod.POST)
+    public JsonResult<List<CpGiftVo>> getAllCP(){
+        JsonResult<List<CpGiftVo>> result = new JsonResult<List<CpGiftVo>>();
+        try {
+            result.setData(coupleService.getAllCouple());
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            return result;
+        }
+        return result;
+    }
 }

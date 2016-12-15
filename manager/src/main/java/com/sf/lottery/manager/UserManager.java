@@ -168,7 +168,7 @@ public class UserManager {
             couple.setUser1SfNum(sfNum1);
             couple.setUser2SfNum(sfNum2);
             couple.setCpImg(imgSrc);
-            int isSuccess = coupleMapper.insert(couple);
+            int isSuccess = coupleMapper.insertSelective(couple);
             if(isSuccess==1){
                 return true;
             }else
