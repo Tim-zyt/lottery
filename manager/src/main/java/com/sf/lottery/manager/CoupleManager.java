@@ -1,6 +1,5 @@
 package com.sf.lottery.manager;
 
-import com.sf.lottery.common.model.Couple;
 import com.sf.lottery.common.vo.CpGiftVo;
 import com.sf.lottery.dao.CoupleMapper;
 import org.slf4j.Logger;
@@ -68,6 +67,14 @@ public class CoupleManager {
             return coupleMapper.updateByPrimaryKeySelective(couple);
         }else {
             return -1;
+        }
+    }
+
+    public boolean isCpSign(int sfNum){
+        if(coupleMapper.isCpSignedByUserNum(sfNum)>0){
+            return true;
+        }else{
+            return false;
         }
     }
 

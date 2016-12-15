@@ -45,4 +45,9 @@ public class CoupleServiceImpl implements CoupleService {
     public int confirmCPImg(int coupleId){
         return coupleManager.confirmCPImg(coupleId);
     }
+
+    @Override
+    public boolean isCpSign(int sfNum){
+        return coupleManager.isCpSign(sfNum);
+    }
 }

@@ -16,6 +16,8 @@ public interface CoupleService {
 
     boolean deleteCouple(int coupleId);
 
+    boolean isCpSign(int sfNum);
+
     int unConfirmCPImg(int coupleId);
 
     int confirmCPImg(int coupleId);
