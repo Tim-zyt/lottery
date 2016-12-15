@@ -1,5 +1,6 @@
 package com.sf.lottery.manager;
 
+import com.sf.lottery.common.model.Couple;
 import com.sf.lottery.common.vo.CpGiftVo;
 import com.sf.lottery.dao.CoupleMapper;
 import org.slf4j.Logger;
@@ -47,6 +48,26 @@ public class CoupleManager {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public int unConfirmCPImg(Integer id){
+        Couple couple = coupleMapper.selectByPrimaryKey(id);
+        if(couple != null){
+            couple.setAwCount(100);
+            return coupleMapper.updateByPrimaryKeySelective(couple);
+        }else {
+            return -1;
+        }
+    }
+
+    public int confirmCPImg(Integer id){
+        Couple couple = coupleMapper.selectByPrimaryKey(id);
+        if(couple != null){
+            couple.setAwCount(0);
+            return coupleMapper.updateByPrimaryKeySelective(couple);
+        }else {
+            return -1;
         }
     }
 

@@ -1,0 +1,23 @@
+extends jade/common/layout
+block header
+    link(rel="stylesheet",type="text/css",href="css/signwall/normalize.css")
+    link(rel="stylesheet",type="text/css",href="css/gift/style.css")
+block content
+    div.container(style="max-width:100%;width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+        div.content(style="padding: 0px;")
+                div.row
+                    div.col-md-12(style="text-align:center;")
+                        h1(style="font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") cp图片审核
+                div.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;")
+                    div.col-md-12
+                        div
+                            div.box-body.no-padding(style="display: block;")
+                                ul#cpList.users-list.clearfix(style="height: 785px;overflow-y: auto;margin-left:20px;margin-right:20px;")
+block footer
+block extends
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/cpCheck.min.js")
+
+
+

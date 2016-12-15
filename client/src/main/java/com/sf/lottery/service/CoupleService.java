@@ -15,4 +15,8 @@ public interface CoupleService {
     CpGiftVo getLuckCP();
 
     boolean deleteCouple(int coupleId);
+
+    int unConfirmCPImg(int coupleId);
+
+    int confirmCPImg(int coupleId);
 }
