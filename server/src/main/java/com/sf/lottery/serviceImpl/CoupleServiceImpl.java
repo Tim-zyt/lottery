@@ -50,4 +50,9 @@ public class CoupleServiceImpl implements CoupleService {
     public boolean isCpSign(int sfNum){
         return coupleManager.isCpSign(sfNum);
     }
+
+    @Override
+    public boolean isCpSign(int sfNum){
+        return coupleManager.isCpSign(sfNum);
+    }
 }

@@ -21,4 +21,5 @@ public interface CoupleService {
     int unConfirmCPImg(int coupleId);
 
     int confirmCPImg(int coupleId);
+
 }
