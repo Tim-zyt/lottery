@@ -16,6 +16,13 @@
             where wx_openid = #{openId,jdbcType=VARCHAR} and is_sign=true
     </select>
 
+    <select id="selectNumById" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select
+        sf_num
+        from sf_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
     <select id="isSignedByUserNum" parameterType="java.lang.Integer" resultType="java.lang.Boolean">
     select
     is_sign

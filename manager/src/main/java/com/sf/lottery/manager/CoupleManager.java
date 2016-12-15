@@ -3,6 +3,7 @@ package com.sf.lottery.manager;
 import com.sf.lottery.common.model.Couple;
 import com.sf.lottery.common.vo.CpGiftVo;
 import com.sf.lottery.dao.CoupleMapper;
+import com.sf.lottery.dao.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class CoupleManager {
 
     @Autowired
     private CoupleMapper coupleMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     public List<CpGiftVo> getAllCouple(){
         return coupleMapper.selectAllCouple();
@@ -71,7 +75,8 @@ public class CoupleManager {
         }
     }
 
-    public boolean isCpSign(int sfNum){
+    public boolean isCpSign(int userId){
+        int sfNum = userMapper.selectNumById(userId);
         if(coupleMapper.isCpSignedByUserNum(sfNum)>0){
             return true;
         }else{
