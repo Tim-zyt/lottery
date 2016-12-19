@@ -16,6 +16,17 @@
         largeHeader = document.getElementById('large-header');
         largeHeader.style.height = height+'px';
 
+        //cpGift页面的控制 start
+        var cpGiftBox = document.getElementById('cpGiftBox');
+        if(cpGiftBox != null && cpGiftBox != undefined){
+            cpGiftBox.style.height = height+'px';
+        }
+        var luckDiv = document.getElementById('luckDiv');
+        if(luckDiv != null && luckDiv != undefined){
+            luckDiv.style.height = height+'px';
+        }
+        //cpGift页面的控制 end
+
         canvas = document.getElementById('demo-canvas');
         canvas.width = width;
         canvas.height = height;

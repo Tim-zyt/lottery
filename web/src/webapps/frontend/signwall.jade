@@ -10,13 +10,14 @@ block content
         div.content(style="padding: 0px;")
             div.large-header#large-header
                 div.row
-                    div.col-md-12(style="text-align:center;")
-                        h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2017年会签到墙
+                    div.col-md-12(style="text-align:center;margin-top: 3%;")
+                        img(src="image/mainTitle.png")
+                        //h1(style="color: #fff;font-family: 微软雅黑, 'Microsoft YaHei';font-size: 65px;") 2017迎新年会签到墙
                 canvas#demo-canvas
                 div.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;")
                     div.col-md-12
-                        div.box(style="background-color:#fff;border-top-width: 0px;filter:alpha(opacity=50);opacity:0.8")
-                            ul#users.users-list(style="height: 785px;overflow-y: auto;margin-left:20px;margin-right:20px;")
+                        div.box.centerBox
+                            ul#users.users-list(style="height: 650px;overflow-y: auto;margin-left:20px;margin-right:20px;opacity:1;")
 
 block footer
 block extends

@@ -1,43 +1,23 @@
 extends jade/common/layout
 block header
+    link(rel="shortcut icon",href="../favicon.ico")
     link(rel="stylesheet",type="text/css",href="css/signwall/normalize.css")
-    link(rel="stylesheet",type="text/css",href="css/gift/style.css")
+    link(rel="stylesheet",type="text/css",href="css/signwall/demo.css")
+    link(rel="stylesheet",type="text/css",href="css/signwall/component.css")
+    link(rel="stylesheet",type="text/css",href="css/signwall/init.css")
 block content
-    div.container(style="background-color: #fed261;max-width:100%;width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+    div.container.demo-1(style="width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
         div.content(style="padding: 0px;")
+            div.large-header#large-header
                 div.row
-                    //div(style="position: absolute;top: 30px;left: 40px;z-index: 9;")
-                    //    div.btn.btn-danger(onclick="start()") 开始抽奖
-                    //    div.btn.btn-danger(onclick="end()") 停止抽奖
-                    //    div.btn-group
-                    //        button.btn.btn-danger(type="button") Action
-                    //        button.btn.btn-danger.dropdown-toggle(type="button" data-toggle="dropdown")
-                    //            span.caret
-                    //            span.sr-only  Toggle Dropdown
-                    //        ul#giftmenu.dropdown-menu(role="menu")
-                    //            li
-                    //                a(href="#") Action
-                    //            li
-                    //                a(href="#") Another action
-                    //            li
-                    //                a(href="#") Something else here
-                    //            li.divider
-                    //            li
-                    //                a(href="#") Separated link
-                    div.col-md-12(style="text-align:center;")
-                        h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2017年会CP抽奖
-                canvas#canvas(style="position: relative; background-color: #fed261;")
-                div.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;")
-                    div.col-md-12
-                        div
-                            div#luckDiv.box-body.no-padding(style="display: block;")
+                    div#cpGiftBox.col-md-12(style="text-align:center;background-image: url('image/winningStars.png');")
+                        div#luckDiv(style="overflow-y: auto;margin-left:20px;margin-right:20px;opacity:1;")
 
 block footer
 block extends
-    script(src="lib/jquery/dist/jquery.min.js")
-    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/signwall/TweenLite.min.js")
+    script(src="js/signwall/EasePack.min.js")
+    script(src="js/signwall/rAF.min.js")
+    script(src="js/signwall/demo-1.min.js")
     script(src="js/cpgift.min.js")
-    script(src="js/gift/mathlib.min.js")
-    script(src="js/gift/k3d.min.js")
-    script(src="js/gift/radiation.min.js")
 
