@@ -7,6 +7,7 @@ jQuery(function ($) {
         ws.onmessage = function(message){
            var cpGiftMessage = JSON.parse(message.data);
            if(cpGiftMessage.flag == 0){
+               $("#cpGiftImg").remove();
                startTwinkle();
            }else if(cpGiftMessage.flag == 1){
                end();
@@ -63,7 +64,8 @@ jQuery(function ($) {
             success: function (data) {
                 var accessToken = data;
                 var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp.cpImg;
-                var luckDivHtml  = "<div><img src='" + imgSrc + "' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
+                var luckDivHtml  = "<div class='animated bounceInUp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
+                $("#cpGiftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' class='animated bounceInUp'>");
                 $("#luckDiv").html(luckDivHtml);
             }
         });
@@ -122,7 +124,7 @@ jQuery(function ($) {
                 var iLen = cp.length;
                 for(var i = iLen - 1 ; i >=0  ; i--){
                     var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp[i].cpImg;
-                    cpHtml += "<div id='" + i +"' style='display: none' class='luckCp'><img src='" + imgSrc + "' alt='CP合影'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp[i].user1SfName + cp[i].user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #0099FF;' class='users-list-name'>" + cp[i].user2SfName + cp[i].user2SfNum + "</a></div>";
+                    cpHtml += "<div style='margin-top: 10%' id='" + i +"' style='display: none' class='luckCp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp[i].user1SfName + cp[i].user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp[i].user2SfName + cp[i].user2SfNum + "</a></div>";
                 }
                 $("#luckDiv").html(cpHtml);
 
