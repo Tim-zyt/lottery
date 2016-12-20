@@ -70,9 +70,20 @@ public class UserController {
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            return "redirect:/frontend/loginError.html";
         }
         boolean exists = userService.verifyUser(sfnum, sfname);
         if (exists && userInfoReturn != null) {
+            boolean isSigned = false;
+            try {
+                isSigned = userService.isSignedByUserNnm(sfnum);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "redirect:/frontend/loginError.html";
+            }
+            if(isSigned){
+                return "redirect:/frontend/main.html";
+            }
             User user = new User();
             user.setSfNum(sfnum);
             user.setSfName(sfname);
@@ -87,7 +98,6 @@ public class UserController {
             user.setWxUnionid(userInfoReturn.getUnionid());
             user.setIsSign(true);
             user.setSignedTime(new Date());
-            int userId = 0;
             try {
                 userService.saveUser(user);
                 User user1 = userService.getUserBySfNumAndName(sfnum, sfname);
@@ -100,10 +110,11 @@ public class UserController {
                 webSocketClient.connectBlocking();
                 webSocketClient.send(JSON.toJSONString(user));
                 webSocketClient.close();
+                return "redirect:/frontend/main.html";
             } catch (Exception e) {
                 e.printStackTrace();
+                return "redirect:/frontend/loginError.html";
             }
-            return "redirect:/frontend/main.html";
         } else {
             return "redirect:/frontend/loginError.html";
         }

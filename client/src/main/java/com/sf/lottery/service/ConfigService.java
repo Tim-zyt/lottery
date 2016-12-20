@@ -31,4 +31,5 @@ public interface ConfigService {
 
     int selectCurGiftId();
 
+    boolean resetConfig() throws Exception;
 }

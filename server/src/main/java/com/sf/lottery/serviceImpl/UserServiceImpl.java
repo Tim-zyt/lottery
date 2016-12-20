@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     ConfigManager configManager;
 
     @Override
-    public int saveUser(User user) throws Exception {
+    public boolean saveUser(User user) throws Exception {
         try {
             return userManager.updateByNoAndName(user);
         } catch (Exception e) {
@@ -139,25 +139,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public boolean resetConfig() throws Exception {
-        try {
-            return userManager.resetConfig();
-        } catch (Exception e) {
-            log.warn(ExceptionUtils.getStackTrace(e));
-            throw new Exception(e);
-        }
-    }
-
-    @Override
-    public boolean resetCouple() throws Exception {
-        try {
-            return userManager.resetCouple();
-        } catch (Exception e) {
-            log.warn(ExceptionUtils.getStackTrace(e));
-            throw new Exception(e);
-        }
-    }
 
     @Override
     public boolean deleteWinner(int userId) throws Exception{

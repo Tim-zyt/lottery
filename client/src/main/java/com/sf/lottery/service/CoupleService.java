@@ -22,4 +22,5 @@ public interface CoupleService {
 
     int confirmCPImg(int coupleId);
 
+    boolean resetCouple() throws Exception;
 }

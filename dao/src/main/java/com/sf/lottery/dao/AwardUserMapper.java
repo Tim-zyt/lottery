@@ -30,4 +30,6 @@ public interface AwardUserMapper {
     int insertBatch(List<AwardUser> list);
 
     List<AwardUserVo> selectAllAwardUser();
+
+    int resetAwardUser();
 }
