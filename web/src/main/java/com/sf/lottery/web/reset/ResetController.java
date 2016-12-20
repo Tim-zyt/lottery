@@ -2,6 +2,8 @@ package com.sf.lottery.web.reset;
 
 import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.utils.ExceptionUtils;
+import com.sf.lottery.service.ConfigService;
+import com.sf.lottery.service.CoupleService;
 import com.sf.lottery.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,8 @@ public class ResetController {
     private final static Logger log = LoggerFactory.getLogger(ResetController.class);
 
     @Autowired UserService userService;
+    @Autowired ConfigService configService;
+    @Autowired CoupleService coupleService;
 
     @ResponseBody
     @RequestMapping(value = "/reset/resetData", method = RequestMethod.POST)
@@ -28,16 +32,13 @@ public class ResetController {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
             userService.resetAwardUser();
-            userService.resetConfig();
-            userService.resetCouple();
+            configService.resetConfig();
+            userService.resetAwardUser();
+            coupleService.resetCouple();
             result.setData(userService.resetUsers());
         } catch (Exception e) {
             log.warn(ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
-
-
-
-
 }
