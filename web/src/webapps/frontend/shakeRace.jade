@@ -1,41 +1,40 @@
 //
-   Created by 01170626 on 2016/12/8.
-extends jade/common/layout
+   Created by 01170626 on 2016/12/20.
 
+extends jade/common/layout
 block header
+    link(rel="shortcut icon",href="../favicon.ico")
+    link(rel="stylesheet",type="text/css",href="css/signwall/component.css")
     link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
     link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
     link(rel="stylesheet", href="lib/AdminLTE/dist/css/AdminLTE.min.css")
-    link(rel="stylesheet",type="text/css",href="css/signwall/normalize.css")
-
 block content
-    div.container(style="background-color: #fed261;max-width:100%;width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
+    div.container.demo-1(style="width:100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 0px;")
         div.content(style="padding: 0px;")
-            div.row
-                div.col-md-12(style="text-align:center;")
-                    h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;") 2017年会摇一摇
-            canvas#canvas(style="position: relative; background-color: #fed261;")
-            div(style="position: absolute;top: 15%;left:16%;right:16%;width:68%;padding-bottom:0px;display:block;")#shakeRace
-                ul.products-list.product-list-in-boxs#shake
-                    //li.item(style="background-color:rgba(255,255,255,0);")
-                    //    div.product-img
-                    //        img.animated.shake(src="img/danmuku/demo-2-bg.jpg" style="border-radius: 50%;max-width: 100%;height: 100px;width: 100px;")
-                    //    div.product-info(style="margin-left:12%")
-                    //        a.product-title(style="font-size:22px;") bilibili
-                    //            span.label.label-warning.pull-right 15/24
-                    //        span.product-description(style="margin-top:2%")
-                    //            div.progress.sm
-                    //                div.progress-bar.progress-bar-aqua(style="width:66%")
-            div#shakeDiv.row(style="position: absolute;top: 10%;width: 100%;margin-left:0px;margin-right:0px;display:none;")
-                div.col-md-12
-                    div(style="padding-left:30%;padding-right:30%")
-                        div#shakeWinnerDiv.box-body.no-padding.animated.bounceIn.text-center
+            div.large-header#large-header
+                div.row#head(style="display:block")
+                    div.col-md-12(style="text-align:center;")
+                        h1(style="color: rgb(255, 192, 0);font-family: 微软雅黑, 'Microsoft YaHei';font-size: 36px;margin-top:2%;") 2017年会摇一摇
+                div(style="position: absolute;top: 15%;left:16%;right:16%;width:68%;padding-bottom:0px;display:block;")#shakeRace
+                    ul.products-list.product-list-in-boxs#shake
+                        //li.item(style="background-color:rgba(255,255,255,0);")
+                        //    div.product-img
+                        //        img.animated.shake(src="img/danmuku/demo-2-bg.jpg" style="border-radius: 50%;max-width: 100%;height: 100px;width: 100px;")
+                        //    div.product-info(style="margin-left:12%")
+                        //        a.product-title(style="font-size:22px;") bilibili
+                        //            span.label.label-warning.pull-right 15/24
+                        //        span.product-description(style="margin-top:2%")
+                        //            div.progress.sm
+                        //                div.progress-bar.progress-bar-aqua(style="width:66%")
+                div#shakeDiv.row(style="position: absolute;width: 100%;height:100%;margin-left:0px;margin-right:0px;display:none;")
+                    div.col-md-12#radiation(style="text-align:center;height:100%;background-image: url('image/winningStars.png');" class="animated bounceIn")
+                        div(style="padding-left:30%;padding-right:30%")
+                            div#shakeWinnerDiv.box-body.no-padding.animated.bounceIn.text-center
 
 block footer
 block extends
-    script(src="lib/jquery/dist/jquery.min.js")
-    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/signwall/TweenLite.min.js")
+    script(src="js/signwall/EasePack.min.js")
+    script(src="js/signwall/rAF.min.js")
+    script(src="js/signwall/demo-1.min.js")
     script(src="js/shake.min.js")
-    script(src="js/gift/mathlib.min.js")
-    script(src="js/gift/k3d.min.js")
-    script(src="js/gift/radiation.min.js")
