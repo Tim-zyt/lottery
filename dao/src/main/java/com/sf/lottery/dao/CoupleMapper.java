@@ -26,5 +26,5 @@ public interface CoupleMapper {
 
     int updateAwardStatusById(Integer id);
 
-
+    int resetCouple();
 }

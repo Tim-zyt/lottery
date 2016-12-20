@@ -101,4 +101,8 @@
         from award_user a,award b,sf_user c
         where a.award_id = b.id AND a.user_id = c.id
     </select>
+
+    <delete id="resetAwardUser">
+        DELETE * from award_user
+    </delete>
 </mapper>

@@ -13,7 +13,7 @@ public interface UserService {
      * 并且第一次保存时，设置该用户已签到，并返回用户主键
      * @return
      */
-    int saveUser(User user) throws Exception;
+    boolean saveUser(User user) throws Exception;
 
     /**
      * 获得已签到的用户，返回对象只包含用户的ID、微信号、微信头像、工号、姓名、性别、签到时间
@@ -100,7 +100,4 @@ public interface UserService {
 
     boolean resetAwardUser() throws Exception;
 
-    boolean resetConfig() throws Exception;
-
-    boolean resetCouple() throws Exception;
 }

@@ -17,4 +17,6 @@ public interface ConfigMapper {
     int selectCurProgramId();
 
     int selectCurGiftId();
+
+    int resetConfig();
 }

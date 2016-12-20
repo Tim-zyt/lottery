@@ -1,10 +1,13 @@
 package com.sf.lottery.serviceImpl;
 
+import com.sf.lottery.common.utils.ExceptionUtils;
 import com.sf.lottery.common.vo.CpGiftVo;
 import com.sf.lottery.manager.CoupleManager;
 import com.sf.lottery.service.CoupleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -13,6 +16,8 @@ import java.util.List;
  */
 @Service
 public class CoupleServiceImpl implements CoupleService {
+    private final static Logger log = LoggerFactory.getLogger(CoupleServiceImpl.class);
+
     @Autowired
     private CoupleManager coupleManager;
 
@@ -51,5 +56,13 @@ public class CoupleServiceImpl implements CoupleService {
         return coupleManager.isCpSign(userId);
     }
 
-
+    @Override
+    public boolean resetCouple() throws Exception {
+        try {
+            return coupleManager.resetCouple();
+        } catch (Exception e) {
+            log.warn(ExceptionUtils.getStackTrace(e));
+            throw new Exception(e);
+        }
+    }
 }
