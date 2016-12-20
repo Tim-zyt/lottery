@@ -28,9 +28,12 @@
         //cpGift页面的控制 end
 
         canvas = document.getElementById('demo-canvas');
-        canvas.width = width;
-        canvas.height = height;
-        ctx = canvas.getContext('2d');
+        if(canvas != null && canvas != undefined){
+            canvas.width = width;
+            canvas.height = height;
+            ctx = canvas.getContext('2d');
+        }
+
 
         // create points
         points = [];

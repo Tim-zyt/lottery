@@ -1,6 +1,10 @@
 jQuery(function ($) {
     $(document).ready(function () {
 
+        $(window).resize(function() {
+            initWindowSize();
+        });
+
         var ws = new WebSocket(cpGiftChannelAddress);
         ws.onopen = function(){
         };
@@ -131,6 +135,13 @@ jQuery(function ($) {
                 start();
             }
         });
+    }
+
+    function initWindowSize() {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        $("#large-header").css({"width":width + "px","height": height + "px"});
+        $("#cpGiftBox").css({"width":width + "px","height": height + "px"});
     }
 
 
