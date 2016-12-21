@@ -7,41 +7,30 @@ jQuery(function ($) {
 
         initLuckman();
 
-        giftTime();
+        var ws = new WebSocket(giftChannelAddress);
+        ws.onopen = function(){
+        };
+        ws.onmessage = function(message){
+            var giftMessage = JSON.parse(message.data);
+            if(giftMessage.flag == 0){
+                $("#cpGiftImg").remove();
+                $("#luckmanList").css("margin-top","10%");
+                start(giftMessage.luckmanCount);
+            }else if(giftMessage.flag == 1){
+                $("#cpGiftImg").remove();
+                end();
+                showLuckman(giftMessage.luckmans);
+            }
+        };
+        function postToServer(){
+            ws.send(document.getElementById("msg").value);
+            document.getElementById("msg").value = "";
+        }
+        function closeConnect(){
+            ws.close();
+        }
 
     });
-
-    
-    var pageFlag = 0;
-
-    function getCurAwardState(){
-        $.ajax({
-            type: "post",
-            url : getContextPath() + "/user/getCurAwardState",
-            dataType:'json',
-            data: {
-            },
-            success: function(data){
-                var giftMessage = data.data;
-                if(giftMessage.flag == 0){
-                    $("#cpGiftImg").remove();
-                    $("#luckmanList").css("margin-top","10%");
-                    start(giftMessage.luckmanCount);
-                }else if(giftMessage.flag == 1){
-                    $("#cpGiftImg").remove();
-                    end();
-                    showLuckman(giftMessage.luckmans);
-                }
-            }
-        });
-    }
-
-    function giftTime()
-    {
-        getCurAwardState();
-        setTimeout(giftTime,1000);
-    }
-
 
     //得到当前时刻临时的获奖人，一闪而过
     function getLuckman(manCount){
