@@ -84,6 +84,9 @@ public class CoupleManager {
         }
     }
 
-
+    public boolean resetCouple(){
+        boolean b = coupleMapper.resetCouple()>0;
+        return b;
+    }
 
 }

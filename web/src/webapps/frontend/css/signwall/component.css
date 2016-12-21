@@ -10,20 +10,7 @@
 }
 
 .demo-1 .large-header {
-	background-image: url('../../img/signwall/demo-1-bg.jpg');
-}
-
-.demo-2 .large-header {
-	background-image: url('../img/demo-2-bg.jpg');
-	background-position: center bottom;
-}
-
-.demo-3 .large-header {
-	background: #7f8c8d;
-}
-
-.demo-4 .large-header {
-	background: #f9f1e9;
+	background-image: url('../../image/mainBg.png');
 }
 
 .main-title {
@@ -45,46 +32,6 @@
 	letter-spacing: 0.1em;
 }
 
-.demo-2 .main-title {
-	font-family: 'Clicker Script', cursive;
-	font-weight: normal;
-	font-size: 8em;
-	padding-left: 10px;
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-}
-
-.demo-2 .main-title::before {
-	content: '';
-	width: 20vw;
-	height: 20vw;
-	min-width: 3.5em;
-	min-height: 3.5em;
-	background: url(../img/deco.svg) no-repeat center center;
-	background-size: cover;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	border-radius: 50%;
-	z-index: -1;
-	-webkit-transform: translate3d(-50%,-50%,0);
-	transform: translate3d(-50%,-50%,0);
-}
-
-.demo-3 .main-title {
-	padding: 10px 40px;
-	border: 10px double #f9f1e9;
-	text-transform: uppercase;
-	font-family: Londrina Outline, sans-serif;
-}
-
-.demo-4 .main-title {
-	font-size: 6em;
-	font-weight: 300;
-	padding: 10px 30px;
-	text-transform: uppercase;
-	color: #222;
-}
-
 .main-title .thin {
 	font-weight: 200;
 }
@@ -99,4 +46,16 @@
 	.demo-2 .main-title {
 		font-size: 4em;
 	}
+}
+
+
+.centerBox{
+	background-color:transparent;
+	border-top-width: 0px;
+	filter:alpha(opacity=50);
+	opacity:0.8;
+	width: 86%;
+	margin-left: 7%;
+	margin-top: 5%;
+	background: rgba(22,24,98,0.73);
 }

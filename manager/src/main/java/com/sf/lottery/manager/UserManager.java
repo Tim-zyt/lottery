@@ -39,8 +39,11 @@ public class UserManager {
     @Autowired
     private RandomUtil randomUtil;
 
-    public int updateByNoAndName(User user){
-        return userMapper.updateByNoAndName(user);
+    public boolean updateByNoAndName(User user){
+        if(userMapper.updateByNoAndName(user)>0){
+            return true;
+        }else
+            return false;
     }
 
     public List<User> getSignedUser(){
@@ -131,19 +134,10 @@ public class UserManager {
     }
 
     public boolean resetAwardUser(){
-        boolean b = userMapper.resetAwardUser()>0;
+        boolean b = awardUserMapper.resetAwardUser()>0;
         return b;
     }
 
-    public boolean resetConfig(){
-        boolean b = userMapper.resetConfig()>0;
-        return b;
-    }
-
-    public boolean resetCouple(){
-        boolean b = userMapper.resetCouple()>0;
-        return b;
-    }
 
     //删除获奖-用户临时表（未到现场）
     public boolean deleteWinner(int userId){

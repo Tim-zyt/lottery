@@ -144,4 +144,9 @@ public class ConfigManager {
     public int selectCurGiftId(){
         return configMapper.selectCurGiftId();
     }
+
+    public boolean resetConfig(){
+        boolean b = configMapper.resetConfig()>0;
+        return b;
+    }
 }

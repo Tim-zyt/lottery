@@ -21,44 +21,40 @@ block content
                     div
                         div.row
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-yellow
-                                    div.inner(style="text-align:center;",onmouseover="this.style.cursor='pointer'",onClick="window.location.href='opera.html'")
-                                        h3 节目管理
+                                div.small-box.bg-yellow(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;" href="opera.html" target="_blank") 节目管理
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-red
-                                    div.inner(style="text-align:center;",onClick="window.location.href='award.html'",onmouseover="this.style.cursor='pointer'")
-                                        h3 抽奖管理
+                                div.small-box.bg-red(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;", href="award.html" target="_blank" ) 抽奖管理
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-yellow
-                                    div.inner(style="text-align:center;",onmouseover="this.style.cursor='pointer'",onClick="resetUsers()")
-                                        h3 初始化
+                                div.small-box.bg-yellow(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;",href="shakeRace.html" target="_blank") 摇一摇
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-red
-                                    div.inner(style="text-align:center;",onClick="window.location.href='statistics.html'",onmouseover="this.style.cursor='pointer'")
-                                        h3 统计
+                                div.small-box.bg-red(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;", href="statistics.html" target="_blank" ) 统计
                         div.row
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-aqua
-                                    div.inner(style="text-align:center;",onClick="window.location.href='signwall.html'",onmouseover="this.style.cursor='pointer'")
-                                        h3 签到墙
+                                div.small-box.bg-aqua(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;",href="signwall.html" target="_blank") 签到墙
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-green
-                                    div.inner(style="text-align:center;",onClick="window.location.href='danmuku.html'",onmouseover="this.style.cursor='pointer'")
-                                        h3 弹幕墙
+                                div.small-box.bg-green(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;",href="danmuku.html" target="_blank") 弹幕墙
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-aqua
-                                    div.inner(style="text-align:center;",onClick="window.location.href='gift.html'",onmouseover="this.style.cursor='pointer'")
-                                        h3 抽奖啦
+                                div.small-box.bg-aqua(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;",href="gift.html" target="_blank") 抽奖啦
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-green
-                                    div.inner(style="text-align:center;",onClick="window.location.href='cpgift.html'",onmouseover="this.style.cursor='pointer'")
-                                        h3 cp抽奖
+                                div.small-box.bg-green(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;",href="cpgift.html" target="_blank") cp抽奖
                         div.row
                             div.col-lg-3.col-xs-6
-                                div.small-box.bg-aqua
-                                    div.inner(style="text-align:center;",onClick="window.location.href='shakeRace.html'",onmouseover="this.style.cursor='pointer'")
-                                        h3 摇一摇
-
+                                div.small-box.bg-yellow(style="height: 70px;")
+                                    a.inner(style="text-align:center;font-size: 50px;color: #fff;",href="cpCheck.html" target="_blank") CP图片审核
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-aqua(style="height: 70px;")
+                                    div.inner(style="text-align:center;font-size: 50px;color: #fff;",onmouseover="this.style.cursor='pointer'",onClick="resetUsers()") 初始化
+                            div.col-lg-3.col-xs-6
+                                div.small-box.bg-red(style="height: 70px;")
+                                    div.inner(style="text-align:center;font-size: 50px;color: #fff;",onmouseover="this.style.cursor='pointer'",onClick="printCouple()") 打印CP照片
 block footer
     //script(src="js/layer/layer.js")
     //script(src="js/layer/layer_main.js")
@@ -66,6 +62,6 @@ block footer
     script(src="js/manage/rAF.min.js")
     script(src="js/manage/EasePack.min.js")
     script(src="js/manage/TweenLite.min.js")
-    script(src="js/manage/reset.min.js")
+    script(src="js/manage/manage.min.js")
 
 

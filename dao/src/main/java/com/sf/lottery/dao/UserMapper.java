@@ -44,11 +44,5 @@ public interface UserMapper {
 
     int resetUsers();
 
-    int resetAwardUser();
-
-    int resetConfig();
-
-    int resetCouple();
-
     int selectNumById(int userId);
 }
