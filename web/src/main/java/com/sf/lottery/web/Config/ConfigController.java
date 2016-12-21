@@ -62,4 +62,43 @@ public class ConfigController {
         }
         return result;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/config/getCurStateAward", method = RequestMethod.POST)
+    public JsonResult<Integer> getCurStateAward(HttpServletRequest request){
+        JsonResult<Integer> result = new JsonResult<>();
+        try {
+            result.setData(configService.getCurStateAward());
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/config/getCurStateCp", method = RequestMethod.POST)
+    public JsonResult<Integer> getCurStateCp(HttpServletRequest request){
+        JsonResult<Integer> result = new JsonResult<>();
+        try {
+            result.setData(configService.getCurStateCp());
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/config/getCurStateShake", method = RequestMethod.POST)
+    public JsonResult<Integer> getCurStateShake(HttpServletRequest request){
+        JsonResult<Integer> result = new JsonResult<>();
+        try {
+            result.setData(configService.getCurStateShake());
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
