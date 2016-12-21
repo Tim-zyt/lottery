@@ -6,9 +6,51 @@
         set
         cur_gift_id = 0,
         cur_program_id = 0,
-        is_can_reward = 0,
-        is_can_shake = 0,
-        is_can_cpsign = 1,
-        is_open = 1
+        is_can_reward = FALSE ,
+        is_can_shake = FALSE ,
+        is_can_cpsign = TRUE ,
+        is_open = TRUE ,
+        cur_state_award = 0,
+        cur_state_cp = 0,
+        cur_state_shake = 0
+    </update>
+
+    <select id="getCurStateAward"  resultType="java.lang.Integer">
+            select
+            cur_state_award
+            from config
+            where is_open = TRUE
+    </select>
+
+    <select id="getCurStateCp"  resultType="java.lang.Integer">
+        select
+        cur_state_cp
+        from config
+        where is_open = TRUE
+    </select>
+
+    <select id="getCurStateShake"  resultType="java.lang.Integer">
+        select
+        cur_state_shake
+        from config
+        where is_open = TRUE
+    </select>
+
+    <update id="setCurStateAward" parameterType="java.lang.Integer" >
+        update config
+        set cur_state_award = #{curStateAward,jdbcType=INTEGER}
+        where is_open = TRUE
+    </update>
+
+    <update id="setCurStateCp" parameterType="java.lang.Integer" >
+        update config
+        set cur_state_cp = #{curStateCp,jdbcType=INTEGER}
+        where is_open = TRUE
+    </update>
+
+    <update id="setCurStateShake" parameterType="java.lang.Integer" >
+        update config
+        set cur_state_shake = #{curStateShake,jdbcType=INTEGER}
+        where is_open = TRUE
     </update>
 </mapper>

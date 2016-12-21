@@ -55,5 +55,33 @@ public class TestConfigManager extends BaseTest {
         Assert.assertEquals(true,configManager.openShake() > 0);
     }
 
+    @Test
+    public void testgetCurStateAward(){
+        Assert.assertEquals(0,configManager.getCurStateAward());
+    }
 
+    @Test
+    public void testgetCurStateCp(){
+        Assert.assertEquals(0,configManager.getCurStateCp());
+    }
+
+    @Test
+    public void testgetCurStateShake(){
+        Assert.assertEquals(0,configManager.getCurStateShake());
+    }
+
+    @Test
+    public void testsetCurStateAward(){
+        Assert.assertEquals(1,configManager.setCurStateAward(1));
+    }
+
+    @Test
+    public void testsetCurStateCp(){
+        Assert.assertEquals(1,configManager.setCurStateCp(1));
+    }
+
+    @Test
+    public void testsetCurStateShake(){
+        Assert.assertEquals(1,configManager.setCurStateShake(1));
+    }
 }
