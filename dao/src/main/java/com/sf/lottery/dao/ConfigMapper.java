@@ -19,4 +19,16 @@ public interface ConfigMapper {
     int selectCurGiftId();
 
     int resetConfig();
+
+    int getCurStateAward();
+
+    int getCurStateCp();
+
+    int getCurStateShake();
+
+    int setCurStateAward(int curStateAward);
+
+    int setCurStateCp(int curStateCp);
+
+    int setCurStateShake(int curStateShake);
 }

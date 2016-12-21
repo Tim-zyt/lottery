@@ -23,6 +23,12 @@ public class Config implements Serializable {
 
     private Boolean isOpen;
 
+    private Integer curStateAward;
+
+    private Integer curStateCp;
+
+    private Integer curStateShake;
+
     public Integer getId() {
         return id;
     }
