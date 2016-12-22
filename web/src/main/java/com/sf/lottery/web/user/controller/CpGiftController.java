@@ -3,6 +3,7 @@ package com.sf.lottery.web.user.controller;
 import com.alibaba.fastjson.JSON;
 import com.sf.lottery.common.dto.JsonResult;
 import com.sf.lottery.common.vo.CpGiftVo;
+import com.sf.lottery.service.ConfigService;
 import com.sf.lottery.service.CoupleService;
 import com.sf.lottery.web.gift.CpGiftMessage;
 import com.sf.lottery.web.websocket.WebsocketClientFactory;
@@ -29,8 +30,10 @@ public class CpGiftController {
     @Autowired
     private CoupleService coupleService;
 
-    @Value("${cpGift.websocket.address}")
-    private String cpGiftAddress;
+    @Autowired
+    private ConfigService configService;
+
+    private CpGiftVo cacheLuckCp = new CpGiftVo();
 
     @ResponseBody
     @RequestMapping(value = "/cpGift/init", method = RequestMethod.POST)
@@ -45,16 +48,12 @@ public class CpGiftController {
         return result;
     }
 
+    //节目管理页面的“开始CP抽奖”按钮的事件
     @ResponseBody
     @RequestMapping(value = "/cpGift/start", method = RequestMethod.POST)
     public  String startCpGift(){
         try {
-            CpGiftMessage cpGiftMessage = new CpGiftMessage();
-            cpGiftMessage.setFlag(0);
-            WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("cpGift", cpGiftAddress);
-            webSocketClient.connectBlocking();
-            webSocketClient.send(JSON.toJSONString(cpGiftMessage));
-            webSocketClient.close();
+            configService.setCurStateCp(1);
         } catch (Exception e) {
             e.printStackTrace();
             return "false";
@@ -62,25 +61,35 @@ public class CpGiftController {
         return "true";
     }
 
+    //节目管理页面的“结束CP抽奖”按钮的事件
     @ResponseBody
     @RequestMapping(value = "/cpGift/end", method = RequestMethod.POST)
     public JsonResult<CpGiftVo> endCpGift(){
         JsonResult<CpGiftVo> result = new JsonResult<>();
         try {
             CpGiftVo luckCp = coupleService.getLuckCP();
-            CpGiftMessage cpGiftMessage = new CpGiftMessage();
-            cpGiftMessage.setFlag(1);
-            cpGiftMessage.setLuckCP(luckCp);
-            WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("cpGift", cpGiftAddress);
-            webSocketClient.connectBlocking();
-            webSocketClient.send(JSON.toJSONString(cpGiftMessage));
-            webSocketClient.close();
+            cacheLuckCp = luckCp;
+            configService.setCurStateCp(2);
             result.setData(luckCp);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/cpGift/getCacheLuckCp", method = RequestMethod.POST)
+    public JsonResult<CpGiftVo> getCacheLuckCp(){
+        JsonResult<CpGiftVo> result = new JsonResult<>();
+        try {
+            result.setData(cacheLuckCp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 
     @ResponseBody
     @RequestMapping(value = "/cpGift/deleteCpWinners", method = RequestMethod.POST)

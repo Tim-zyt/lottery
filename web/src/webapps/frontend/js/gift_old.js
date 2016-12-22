@@ -1,89 +1,36 @@
 jQuery(function ($) {
     $(document).ready(function () {
 
-        pageStateAward = 0;
-
         $(window).resize(function() {
             initWindowSize();
         });
 
+        initLuckman();
 
-        giftTime();
+        var ws = new WebSocket(giftChannelAddress);
+        ws.onopen = function(){
+        };
+        ws.onmessage = function(message){
+            var giftMessage = JSON.parse(message.data);
+            if(giftMessage.flag == 0){
+                $("#cpGiftImg").remove();
+                $("#luckmanList").css("margin-top","10%");
+                start(giftMessage.luckmanCount);
+            }else if(giftMessage.flag == 1){
+                $("#cpGiftImg").remove();
+                end();
+                showLuckman(giftMessage.luckmans);
+            }
+        };
+        function postToServer(){
+            ws.send(document.getElementById("msg").value);
+            document.getElementById("msg").value = "";
+        }
+        function closeConnect(){
+            ws.close();
+        }
 
     });
-
-    
-    var pageStateAward = 0;
-
-    function pageController(){
-        $.ajax({
-            type: "post",
-            url : getContextPath() + "/config/getCurStateAward",
-            dataType:'json',
-            data: {
-            },
-            success: function(data){
-                //获取config表里的CurStateAward的值
-                var curStateAward = data.data
-                if(curStateAward == 0){
-                    //把页面图片和人头抹掉
-                    $("#cpGiftImg").remove();
-                    $(".luckman").remove();
-                    pageStateAward = curStateAward;
-                }else if(pageStateAward != 1 && curStateAward == 1){
-                    //头像闪烁
-                    //获取当前奖品获奖人数
-                    $.ajax({
-                        type: "post",
-                        url : getContextPath() + "/gift/getLuckManCount",
-                        dataType:'json',
-                        data: {
-                        },
-                        success: function(data1){
-                            var luckmanCount = data1.data;
-                            $("#cpGiftImg").remove();
-                            $("#luckmanList").css("margin-top","10%");
-                            start(luckmanCount);
-                            pageStateAward = curStateAward;
-                        }
-                    });
-                }else if(pageStateAward == 1 && curStateAward == 1){
-                    pageStateAward = curStateAward;
-                } else if(pageStateAward != 2 && curStateAward == 2){
-                    //读Controller里的获奖人缓存
-                    $.ajax({
-                        type: "post",
-                        url : getContextPath() + "/gift/getCacheLuckMans",
-                        dataType:'json',
-                        data: {
-                        },
-                        success: function(data2){
-                            var luckmans = data2.data;
-                            $("#cpGiftImg").remove();
-                            end();
-                            showLuckman(luckmans);
-                            pageStateAward = curStateAward;
-                        }
-                    });
-                }else if (pageStateAward == 2 && curStateAward == 2){
-                    //什么都不做
-                    pageStateAward = curStateAward;
-                }
-
-
-            }
-        });
-    }
-
-
-
-    //页面轮询
-    function giftTime()
-    {
-        pageController();
-        setTimeout(giftTime,1000);
-    }
-
 
     //得到当前时刻临时的获奖人，一闪而过
     function getLuckman(manCount){
@@ -154,7 +101,7 @@ jQuery(function ($) {
                 var liWidth = "10%";
                 var imgWidth = "100px";
                 for(var i = iLen - 1 ; i >=0  ; i--){
-                    usersHtml += "<li style='width: " + liWidth + ";height:22%;display:none' class='luckman'><div style='text-align: center;'><img class='luckImg' style='border-radius: 50%;max-width: 90%;height: " + imgWidth + ";width: " + imgWidth + ";' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + users[i].sfName + "</a><a href='#' style='font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + users[i].sfNum + "</a></div></li>";
+                    usersHtml += "<li style='width: " + liWidth + ";height:22%;display:none' class='luckman'><div style='text-align: center;'><img class='luckImg' style='border-radius: 50%;max-width: 90%;height: " + imgWidth + ";width: " + imgWidth + ";' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + users[i].sfName + "</a><a href='#' style='font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + users[i].sfNum + "</a></div></li>";
                 }
                 $("#luckmanList").html(usersHtml);
 
@@ -205,13 +152,13 @@ jQuery(function ($) {
             imgWidth = "130px";
         }
         for(var i = iLen - 1 ; i >=0  ; i--){
-            usersHtml += "<li style='width:" + liWidth + ";height:22%;' class='luckman animated bounceInUp'><div style='text-align: center;'><img class='luckImg' style='border-radius: 50%;max-width: 90%;height: " + imgWidth + ";width: " + imgWidth + ";' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + users[i].sfName + "</a><a href='#' style='font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + users[i].sfNum + "</a></div></li>";
+            usersHtml += "<li style='width:" + liWidth + ";height:22%;' class='luckman animated bounceInUp'><div style='text-align: center;'><img class='luckImg' style='border-radius: 50%;max-width: 90%;height: " + imgWidth + ";width: " + imgWidth + ";' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + users[i].sfName + "</a><a href='#' style='font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + users[i].sfNum + "</a></div></li>";
         }
         $("#giftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' class='animated bounceInUp'>");
         $("#luckmanList").css("margin-top","0").html(usersHtml);
     }
 
-    var timeout = false; //闪烁效果的启动及关闭按钮
+    var timeout = false; //启动及关闭按钮
 
     //头像闪烁
     function twinkle(manCount)
@@ -220,7 +167,7 @@ jQuery(function ($) {
             return;
         }
         getLuckman(manCount);
-        setTimeout(function(){twinkle(manCount);},150);
+        setTimeout(function(){twinkle(manCount);},100);
     }
 
     //开始抽奖

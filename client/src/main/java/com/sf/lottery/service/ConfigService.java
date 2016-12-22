@@ -32,4 +32,16 @@ public interface ConfigService {
     int selectCurGiftId();
 
     boolean resetConfig() throws Exception;
+
+    int getCurStateAward() throws Exception;
+
+    int getCurStateCp() throws Exception;
+
+    int getCurStateShake() throws Exception;
+
+    int setCurStateAward(int curStateAward) throws Exception;
+
+    int setCurStateCp(int curStateCp) throws Exception;
+
+    int setCurStateShake(int curStateShake) throws Exception;
 }

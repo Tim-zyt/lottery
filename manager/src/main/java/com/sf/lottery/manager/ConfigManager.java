@@ -149,4 +149,29 @@ public class ConfigManager {
         boolean b = configMapper.resetConfig()>0;
         return b;
     }
+
+    public int getCurStateAward(){
+        return configMapper.getCurStateAward();
+    }
+
+    public int getCurStateCp(){
+        return configMapper.getCurStateCp();
+    }
+
+    public int getCurStateShake(){
+        return configMapper.getCurStateShake();
+    }
+
+    public int setCurStateAward(int curStateAward){
+        return configMapper.setCurStateAward(curStateAward);
+    }
+
+    public int setCurStateCp(int curStateCp){
+        return configMapper.setCurStateCp(curStateCp);
+    }
+
+    public int setCurStateShake(int curStateShake){
+        return configMapper.setCurStateShake(curStateShake);
+    }
+
 }

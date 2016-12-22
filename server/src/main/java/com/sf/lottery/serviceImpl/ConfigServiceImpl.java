@@ -92,4 +92,34 @@ public class ConfigServiceImpl implements ConfigService {
             throw new Exception(e);
         }
     }
+
+    @Override
+     public int getCurStateAward() throws Exception{
+        return configManager.getCurStateAward();
+    }
+
+    @Override
+    public int getCurStateCp() throws Exception{
+        return configManager.getCurStateCp();
+    }
+
+    @Override
+    public int getCurStateShake() throws Exception{
+        return configManager.getCurStateShake();
+    }
+
+    @Override
+    public int setCurStateAward(int curStateAward) throws Exception{
+        return configManager.setCurStateAward(curStateAward);
+    }
+
+    @Override
+    public int setCurStateCp(int curStateCp) throws Exception{
+        return configManager.setCurStateCp(curStateCp);
+    }
+
+    @Override
+    public int setCurStateShake(int curStateShake) throws Exception{
+        return configManager.setCurStateShake(curStateShake);
+    }
 }
