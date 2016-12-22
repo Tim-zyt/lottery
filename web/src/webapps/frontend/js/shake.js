@@ -20,6 +20,12 @@ function time()
     setTimeout(time,1000);
 }
 
+function raceTime()
+{
+    getCurrentStatus();
+    setTimeout(time,1000);
+}
+
 function initWindowSize() {
     var width = window.innerWidth;
     var height = window.innerHeight;
@@ -46,7 +52,10 @@ function shakeController(){
                 pageShakeState = curShakeState;
                 $("#shakeRace").css("display","block");
                 $("#shakeDiv").css("display","none");
-            }else if(pageShakeState != 2 && curShakeState == 2){
+            }else if(pageShakeState == 1 && curShakeState == 1){
+                raceTime();
+            }
+            else if(pageShakeState != 2 && curShakeState == 2){
                 //从controller的缓存读到获奖者
                 getShakeWinner();
                 pageShakeState = curShakeState;
