@@ -26,23 +26,27 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by 01139954 on 2016/12/8.
+ * @author wujiang
+ * @version 1.0.0.
+ * @date 2016/12/21
  */
 @Controller
 public class ShakeController {
-    private final static Logger log = LoggerFactory.getLogger(ShakeController.class);
+    private final static Logger log = LoggerFactory.getLogger(com.sf.lottery.web.user.controller.ShakeController.class);
 
     @Autowired
     private UserService userService;
 
     @Autowired
     private ConfigService configService;
-
-    @Value("${shake.websocket.address}")
-    private String shakeAddress;
+    //
+    //@Value("${shake.websocket.address}")
+    //private String shakeAddress;
 
     //singleton
     private Map<Integer,UserShakeVo> shakeCountMap = new ConcurrentHashMap<>();
+
+    private UserShakeVo shakeWinner = new UserShakeVo();
 
 
     @ResponseBody
@@ -112,6 +116,11 @@ public class ShakeController {
     @RequestMapping(value = "/shake/openShake", method = RequestMethod.POST)
     public JsonResult<Boolean> startShake(){
         JsonResult<Boolean> result = new JsonResult<>();
+        try {
+            configService.setCurStateShake(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         shakeCountMap = new ConcurrentHashMap<>();
         result.setData(configService.openShake() > 0);
         return result;
@@ -137,21 +146,34 @@ public class ShakeController {
             result.setData(luckUser);
             try {
                 //将获奖人持久化到数据库
-                 userService.setUserShakeAward(luckUser.getUserId());
+                userService.setUserShakeAward(luckUser.getUserId());
+                shakeWinner = luckUser;
+                configService.setCurStateShake(2);
                 //发送到前台显示
-                WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("shake", shakeAddress);
-                webSocketClient.connectBlocking();
-                webSocketClient.send(JSON.toJSONString(luckUser));
-                webSocketClient.close();
+                //WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("shake", shakeAddress);
+                //webSocketClient.connectBlocking();
+                //webSocketClient.send(JSON.toJSONString(luckUser));
+                //webSocketClient.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-
-
         shakeCountMap = new ConcurrentHashMap<>();
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/shake/getShakeWinner", method = RequestMethod.POST)
+    public JsonResult<UserShakeVo> getShakeWinner(){
+        JsonResult<UserShakeVo> result = new JsonResult<>();
+        try {
+            result.setData(shakeWinner);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
+
