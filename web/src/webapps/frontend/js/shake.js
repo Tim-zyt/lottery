@@ -39,10 +39,13 @@ function shakeController(){
             var curShakeState = data.data
             if(curShakeState == 0){
                 $("#shakeRace").css("display","none");
+                $("#shakeDiv").css("display","none");
             }else if(pageShakeState != 1 && curShakeState == 1){
                 //展示摇一摇的人
                 getCurrentStatus();
                 pageShakeState = curShakeState;
+                $("#shakeRace").css("display","block");
+                $("#shakeDiv").css("display","none");
             }else if(pageShakeState != 2 && curShakeState == 2){
                 //从controller的缓存读到获奖者
                 getShakeWinner();
