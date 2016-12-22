@@ -20,54 +20,52 @@ function cpSubmit() {
     var sfnum1 = $("#sfnum1").val();
     var sfnum2 = $("#sfnum2").val();
     var imgSrc = $("#imgSrc").val();
-    // if(imgSrc==null||imgSrc==undefined||imgSrc==""){
-    //     alert("请上传图片再签到");
-    // }else{
+    if (imgSrc == null || imgSrc == undefined || imgSrc == "") {
+        alert("请上传图片再签到");
+    } else {
         $.ajax({
             type: "post",
-            url : getContextPath() + "/cp/cpSubmit",
-            dataType:'json',
+            url: getContextPath() + "/cp/cpSubmit",
+            dataType: 'json',
             data: {
-                "sfnum1":sfnum1,
-                "sfnum2":sfnum2,
-                "imgSrc":imgSrc
+                "sfnum1": sfnum1,
+                "sfnum2": sfnum2,
+                "imgSrc": imgSrc
             },
-            success: function(data){
+            success: function (data) {
                 var code = data.data;
-                if(code == "true"){
+                if (code == "true") {
                     var p = "<p style='color:green;font-size: 36px;' align='center' >" + data.message + "</p>"
                     $("#cpSign").html("");
                     $("#cpSign").append(p);
-                }else {
-                    var p = "<p style='color:red;' >" + data.message + "</p>" ;
+                } else {
+                    var p = "<p style='color:red;' >" + data.message + "</p>";
                     $("#msg").html("");
                     $("#msg").append(p);
                 }
             }
         });
-     // }
+    }
 }
 
 jQuery(function ($) {
     $(document).ready(function () {
         $.ajax({
             type: "get",
-            url : getContextPath() + "/cp/cpSign",
-            dataType:'json',
-            data: {
-            },
-            success: function(data){
+            url: getContextPath() + "/cp/cpSign",
+            dataType: 'json',
+            data: {},
+            success: function (data) {
                 var code = data.data;
-                if(code == "true"){
+                if (code == "true") {
                     var p = "<p style='color:green;font-size: 36px;' align='center' >" + data.message + "</p>"
                     $("#cpSign").html("");
                     $("#cpSign").append(p);
-                }else {
+                } else {
                     bindClick();
                 }
             }
         });
-
 
 
     });
@@ -95,17 +93,17 @@ jQuery(function ($) {
     }
 
     function showImg(serverId) {
-            $.ajax({
-                type: "get",
-                url: getContextPath() + "/weixin/accessToken",
-                success: function (data) {
-                        var accessToken = data;
-                        var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + serverId;
-                        $("#cpDiv").css("display", "block");
-                        $("#cpImg").attr("src", imgSrc);
-                        $("#imgSrc").val(serverId);
-                }
-            });
+        $.ajax({
+            type: "get",
+            url: getContextPath() + "/weixin/accessToken",
+            success: function (data) {
+                var accessToken = data;
+                var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + serverId;
+                $("#cpDiv").css("display", "block");
+                $("#cpImg").attr("src", imgSrc);
+                $("#imgSrc").val(serverId);
+            }
+        });
     }
 
 });

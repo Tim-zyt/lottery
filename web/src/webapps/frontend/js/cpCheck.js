@@ -3,7 +3,7 @@
         initAllCP();
     });
 
-    function initAllCP() {
+    function initAllCP() {  
         $.ajax({
             type: "POST",
             url: getContextPath() + "/cpGift/getAllCP",

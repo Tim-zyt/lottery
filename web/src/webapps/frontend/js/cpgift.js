@@ -1,12 +1,19 @@
 jQuery(function ($) {
     $(document).ready(function () {
-        pageStateAwardCp = 0;
 
-        $(window).resize(function() {
-            initWindowSize();
+        $.ajax({
+            type: "get",
+            url: getContextPath() + "/weixin/accessToken",
+            success: function (data) {
+                accessToken = data;
+                pageStateAwardCp = 0;
+                $(window).resize(function() {
+                    initWindowSize();
+                });
+                cpGiftTime();
+            }
         });
 
-        cpGiftTime();
 
     });
 
@@ -32,9 +39,12 @@ jQuery(function ($) {
                     //头像闪烁
                     $("#cpGiftImg").remove();
                     startTwinkle();
-                }else if(pageStateAwardCp == 1 && curStateAwarCp == 1){
                     pageStateAwardCp = curStateAwarCp;
+                }else if(pageStateAwardCp == 1 && curStateAwarCp == 1){
+
                 } else if(pageStateAwardCp != 2 && curStateAwarCp == 2){
+                    pageStateAwardCp = curStateAwarCp;
+                    end();
                     //读Controller里的获奖人缓存
                     $.ajax({
                         type: "post",
@@ -53,9 +63,6 @@ jQuery(function ($) {
                         }
                     });
                 }else if (pageStateAwardCp == 2 && curStateAwarCp == 2){
-                    //什么都不做
-                    end();
-                    //pageStateAward = curStateAward;
                 }
 
 

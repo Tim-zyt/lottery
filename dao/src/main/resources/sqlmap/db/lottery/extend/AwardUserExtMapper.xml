@@ -103,6 +103,6 @@
     </select>
 
     <delete id="resetAwardUser">
-        DELETE * from award_user
+        DELETE from award_user
     </delete>
 </mapper>

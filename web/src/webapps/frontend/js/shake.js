@@ -41,8 +41,11 @@ function refreshShakePage(){
             var shakeHtml = "";
             var percentage = new Array(shakeWinners.length);
             for(var m = 0 ; m <shakeWinners.length-1  ; m++){
-                if(shakeWinners[m].shakeCount == shakeWinners[m+1].shakeCount ){
-                    shakeWinners[m+1].shakeCount--;
+                if(shakeWinners[m].shakeCount <= shakeWinners[m+1].shakeCount ){
+                    shakeWinners[m+1].shakeCount=shakeWinners[m].shakeCount-1;
+                    if(shakeWinners[m+1].shakeCount<0){
+                        shakeWinners[m+1].shakeCount=0
+                    }
                 }
                 continue;
             }

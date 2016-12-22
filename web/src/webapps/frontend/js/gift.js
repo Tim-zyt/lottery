@@ -154,7 +154,7 @@ jQuery(function ($) {
                 var liWidth = "10%";
                 var imgWidth = "100px";
                 for(var i = iLen - 1 ; i >=0  ; i--){
-                    usersHtml += "<li style='width: " + liWidth + ";height:22%;display:none' class='luckman'><div style='text-align: center;'><img class='luckImg' style='border-radius: 50%;max-width: 90%;height: " + imgWidth + ";width: " + imgWidth + ";' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + users[i].sfName + "</a><a href='#' style='font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + users[i].sfNum + "</a></div></li>";
+                    usersHtml += "<li style='width: " + liWidth + ";height:22%;display:none' class='luckman'><div style='text-align: center;'><img class='luckImg' style='border-radius: 50%;max-width: 90%;height: " + imgWidth + ";width: " + imgWidth + ";' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + users[i].sfName + "</a><a href='#' style='font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + users[i].sfNum + "</a></div></li>";
                 }
                 $("#luckmanList").html(usersHtml);
 
@@ -205,7 +205,7 @@ jQuery(function ($) {
             imgWidth = "130px";
         }
         for(var i = iLen - 1 ; i >=0  ; i--){
-            usersHtml += "<li style='width:" + liWidth + ";height:22%;' class='luckman animated bounceInUp'><div style='text-align: center;'><img class='luckImg' style='border-radius: 50%;max-width: 90%;height: " + imgWidth + ";width: " + imgWidth + ";' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + users[i].sfName + "</a><a href='#' style='font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + users[i].sfNum + "</a></div></li>";
+            usersHtml += "<li style='width:" + liWidth + ";height:22%;' class='luckman animated bounceInUp'><div style='text-align: center;'><img class='luckImg' style='border-radius: 50%;max-width: 90%;height: " + imgWidth + ";width: " + imgWidth + ";' src='"+ users[i].wxHeadimgurl +"'alt='User Image'><a href='#' style='text-align: center;font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + users[i].sfName + "</a><a href='#' style='font-size: 28px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + users[i].sfNum + "</a></div></li>";
         }
         $("#giftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' class='animated bounceInUp'>");
         $("#luckmanList").css("margin-top","0").html(usersHtml);
