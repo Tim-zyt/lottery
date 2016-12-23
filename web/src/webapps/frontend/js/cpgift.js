@@ -1,34 +1,87 @@
 jQuery(function ($) {
     $(document).ready(function () {
 
-        $(window).resize(function() {
-            initWindowSize();
+        $.ajax({
+            type: "get",
+            url: getContextPath() + "/weixin/accessToken",
+            success: function (data) {
+                accessToken = data;
+                pageStateAwardCp = 0;
+                $(window).resize(function() {
+                    initWindowSize();
+                });
+                cpGiftTime();
+            }
         });
 
-        var ws = new WebSocket(cpGiftChannelAddress);
-        ws.onopen = function(){
-        };
-        ws.onmessage = function(message){
-           var cpGiftMessage = JSON.parse(message.data);
-           if(cpGiftMessage.flag == 0){
-               $("#cpGiftImg").remove();
-               startTwinkle();
-           }else if(cpGiftMessage.flag == 1){
-               end();
-               if(cpGiftMessage.luckCP.cpImg != null && cpGiftMessage.luckCP.cpImg != undefined && cpGiftMessage.luckCP.cpImg != ""){
-                   showLuckCP(cpGiftMessage.luckCP);
-               }
-           }
-        };
-        function postToServer(){
-           ws.send(document.getElementById("msg").value);
-           document.getElementById("msg").value = "";
-        }
-        function closeConnect(){
-           ws.close();
-        }
 
     });
+
+
+    var pageStateAwardCp = 0;
+
+    function pageController(){
+        $.ajax({
+            type: "post",
+            url : getContextPath() + "/config/getCurStateCp",
+            dataType:'json',
+            data: {
+            },
+            success: function(data){
+                //获取config表里的CurStateAward的值
+                var curStateAwarCp = data.data
+                if(curStateAwarCp == 0){
+                    //把页面图片和人头抹掉
+                    $("#cpGiftImg").remove();
+                    $("#luckDiv").html("");
+                    pageStateAwardCp = curStateAwarCp;
+                }else if(pageStateAwardCp != 1 && curStateAwarCp == 1){
+                    //头像闪烁
+                    $("#cpGiftImg").remove();
+                    startTwinkle();
+                    pageStateAwardCp = curStateAwarCp;
+                }else if(pageStateAwardCp == 1 && curStateAwarCp == 1){
+
+                } else if(pageStateAwardCp != 2 && curStateAwarCp == 2){
+                    pageStateAwardCp = curStateAwarCp;
+                    end();
+                    //读Controller里的获奖人缓存
+                    $.ajax({
+                        type: "post",
+                        url : getContextPath() + "/cpGift/getCacheLuckCp",
+                        dataType:'json',
+                        data: {
+                        },
+                        success: function(data2){
+                            var cp = data2.data;
+                            timeout = false;
+                            var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp.cpImg;
+                            var luckDivHtml  = "<div class='animated bounceInUp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
+                            $("#cpGiftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' class='animated bounceInUp'>");
+                            $("#luckDiv").html(luckDivHtml);
+                            pageStateAwardCp = curStateAwarCp;
+                        }
+                    });
+                }else if (pageStateAwardCp == 2 && curStateAwarCp == 2){
+                }
+
+
+            }
+        });
+    }
+
+
+
+    //页面轮询
+    function cpGiftTime()
+    {
+        pageController();
+        setTimeout(cpGiftTime,1000);
+    }
+
+
+
+
 
     //得到当前时刻临时的获奖人，一闪而过
     function getLuckCP(){
@@ -62,18 +115,6 @@ jQuery(function ($) {
 
     //展示获奖人的头像
     function showLuckCP(cp) {
-        $.ajax({
-            type: "get",
-            url: getContextPath() + "/weixin/accessToken",
-            success: function (data) {
-                var accessToken = data;
-                var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp.cpImg;
-                var luckDivHtml  = "<div class='animated bounceInUp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
-                $("#cpGiftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' class='animated bounceInUp'>");
-                $("#luckDiv").html(luckDivHtml);
-            }
-        });
-
 
     }
 
@@ -116,19 +157,20 @@ jQuery(function ($) {
         return arr;
     }
 
+    var accessToken = "";
 
     function setWXImgUrl(cpdata) {
         $.ajax({
             type: "get",
             url: getContextPath() + "/weixin/accessToken",
             success: function (data) {
-                var accessToken = data;
+                accessToken = data;
                 var cp = cpdata.data;
                 var cpHtml = "";
                 var iLen = cp.length;
                 for(var i = iLen - 1 ; i >=0  ; i--){
                     var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp[i].cpImg;
-                    cpHtml += "<div style='margin-top: 10%' id='" + i +"' style='display: none' class='luckCp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp[i].user1SfName + cp[i].user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp[i].user2SfName + cp[i].user2SfNum + "</a></div>";
+                    cpHtml += "<div style='margin-top: 10%' id='" + i +"' style='display: none' class='luckCp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp[i].user1SfName + cp[i].user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp[i].user2SfName + cp[i].user2SfNum + "</a></div>";
                 }
                 $("#luckDiv").html(cpHtml);
 

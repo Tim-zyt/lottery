@@ -16,9 +16,10 @@ textarea.smohan_text {
 }
 .face {
     display:block;
-    width:20px;
-    height:20px;
-    background:url(../../image/facebg_1.png) 0px -100px no-repeat;
+    width:25px;
+    height:25px;
+    background:url(../../image/phone/faceButton.png) no-repeat;
+    background-size: cover;
     float:left;
 }
 .face:hover, .face.in {

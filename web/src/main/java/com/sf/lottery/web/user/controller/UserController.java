@@ -59,6 +59,8 @@ public class UserController {
         return result;
     }
 
+
+
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public String login(@RequestParam("sfnum") int sfnum, @RequestParam("sfname") String sfname, HttpServletRequest request, HttpServletResponse response) {
         Cookie cookie = CookiesUtil.getCookieByName(request, "userJson");

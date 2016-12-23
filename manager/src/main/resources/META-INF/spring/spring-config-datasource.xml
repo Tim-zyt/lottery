@@ -32,7 +32,7 @@
 
         <property name="timeBetweenEvictionRunsMillis" value="25000" />
         <property name="minEvictableIdleTimeMillis" value="300000" />
-
+        <property name="connectionInitSqls" value="set names utf8mb4;"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

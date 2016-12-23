@@ -40,6 +40,10 @@
         <servlet-name>shakeChannel</servlet-name>
         <url-pattern>/shakeChannel</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.txt</url-pattern>
+    </servlet-mapping>
     <!-- 加载spring容器配置 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
