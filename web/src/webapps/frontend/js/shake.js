@@ -20,12 +20,6 @@ function time()
     setTimeout(time,1000);
 }
 
-function raceTime()
-{
-    getCurrentStatus();
-    setTimeout(time,1000);
-}
-
 function initWindowSize() {
     var width = window.innerWidth;
     var height = window.innerHeight;
@@ -44,16 +38,21 @@ function shakeController(){
             //获取config表里的CurStateAward的值
             var curShakeState = data.data
             if(curShakeState == 0){
+                $("#loading").css("display","block");
                 $("#shakeRace").css("display","none");
                 $("#shakeDiv").css("display","none");
             }else if(pageShakeState != 1 && curShakeState == 1){
                 //展示摇一摇的人
                 getCurrentStatus();
                 pageShakeState = curShakeState;
+                $("#loading").css("display","none");
                 $("#shakeRace").css("display","block");
                 $("#shakeDiv").css("display","none");
             }else if(pageShakeState == 1 && curShakeState == 1){
-                raceTime();
+                getCurrentStatus();
+                $("#loading").css("display","none");
+                $("#shakeRace").css("display","block");
+                $("#shakeDiv").css("display","none");
             }
             else if(pageShakeState != 2 && curShakeState == 2){
                 //从controller的缓存读到获奖者
@@ -75,6 +74,7 @@ function getShakeWinner(){
             var shakeWinnerMessage = data2.data;
             var shakeWinnerHtml  = "<div class='animated bounceIn'><img src='" + shakeWinnerMessage.headImgUrl + "' alt='摇一摇获奖者'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #ffff00;' class='users-list-name'>" + shakeWinnerMessage.userNo + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #ffff00;' class='users-list-name'>" + shakeWinnerMessage.userName + "</a></div>";
             $("#radiation").prepend("<img src='image/winningList.png' class='animated bounceIn'>");
+            $("#loading").css("display","none");
             //获奖界面显示出来
             $("#shakeDiv").css("display","block");
             // 隐藏原界面
@@ -90,6 +90,9 @@ function getCurrentStatus(){
     $.ajax({
         type: "get",
         url : getContextPath() + "/shake/getTopN?topSize=6",
+        beforeSend:function(){
+            $("#loading").css("display","block");
+        },
         success: function(data){
             var shakeWinners = data.data;
             var shakeHtml = "";
