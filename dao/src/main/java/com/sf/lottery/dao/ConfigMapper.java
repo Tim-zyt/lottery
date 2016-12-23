@@ -31,4 +31,8 @@ public interface ConfigMapper {
     int setCurStateCp(int curStateCp);
 
     int setCurStateShake(int curStateShake);
+
+    int getCurSfPay();
+
+    int setCurSfPay(int curSfPay);
 }

@@ -36,6 +36,13 @@
         where is_open = TRUE
     </select>
 
+    <select id="getCurSfPay"  resultType="java.lang.Integer">
+        select
+        cur_sfpay
+        from config
+        where is_open = TRUE
+    </select>
+
     <update id="setCurStateAward" parameterType="java.lang.Integer" >
         update config
         set cur_state_award = #{curStateAward,jdbcType=INTEGER}
@@ -51,6 +58,12 @@
     <update id="setCurStateShake" parameterType="java.lang.Integer" >
         update config
         set cur_state_shake = #{curStateShake,jdbcType=INTEGER}
+        where is_open = TRUE
+    </update>
+
+    <update id="setCurSfPay" parameterType="java.lang.Integer" >
+        update config
+        set cur_sfpay = #{curSfPay,jdbcType=INTEGER}
         where is_open = TRUE
     </update>
 </mapper>
