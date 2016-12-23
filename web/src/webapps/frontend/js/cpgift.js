@@ -38,10 +38,11 @@ jQuery(function ($) {
                 }else if(pageStateAwardCp != 1 && curStateAwarCp == 1){
                     //头像闪烁
                     $("#cpGiftImg").remove();
+                    $("#loading").css("display","none");
                     startTwinkle();
                     pageStateAwardCp = curStateAwarCp;
                 }else if(pageStateAwardCp == 1 && curStateAwarCp == 1){
-
+                    $("#loading").css("display","none");
                 } else if(pageStateAwardCp != 2 && curStateAwarCp == 2){
                     pageStateAwardCp = curStateAwarCp;
                     end();
@@ -63,6 +64,9 @@ jQuery(function ($) {
                         }
                     });
                 }else if (pageStateAwardCp == 2 && curStateAwarCp == 2){
+                    $("#loading").css("display","none");
+                }else{
+                    $("#loading").css("display","none");
                 }
 
 
@@ -106,6 +110,9 @@ jQuery(function ($) {
             url : getContextPath() + "/cpGift/init",
             dataType:'json',
             data: {
+            },
+            beforeSend:function(){
+                $("#loading").css("display","block");
             },
             success: function(data){
                 setWXImgUrl(data);
