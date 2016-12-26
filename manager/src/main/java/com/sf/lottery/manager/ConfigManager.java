@@ -174,4 +174,16 @@ public class ConfigManager {
         return configMapper.setCurStateShake(curStateShake);
     }
 
+    public int getCurSfPay(){
+        return configMapper.getCurSfPay();
+    }
+
+    public boolean setCurSfPay(int curSfPay){
+        if(configMapper.setCurSfPay(curSfPay) > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

@@ -122,4 +122,16 @@ public class ConfigServiceImpl implements ConfigService {
     public int setCurStateShake(int curStateShake) throws Exception{
         return configManager.setCurStateShake(curStateShake);
     }
+
+    @Override
+    public int getCurSfPay() throws Exception{
+         return configManager.getCurSfPay();
+    }
+
+    @Override
+    public boolean setCurSfPay(int curSfPay) throws Exception{
+        return configManager.setCurSfPay(curSfPay);
+    }
+
+
 }

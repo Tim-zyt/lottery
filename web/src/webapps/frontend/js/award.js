@@ -302,6 +302,90 @@ function deleteWinner(i) {
     });
 }
 
+function startSfPay0() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/pay/startSfPay0",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            if(data.data){
+                layer.msg('设置成功', {
+                    time: 500,
+                });
+            }else{
+                layer.msg('设置失败', {
+                    time: 500,
+                });
+            }
+        }
+    });
+}
+
+function startSfPay1() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/pay/startSfPay1",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            if(data.data){
+                layer.msg('设置成功', {
+                    time: 500,
+                });
+            }else{
+                layer.msg('设置失败', {
+                    time: 500,
+                });
+            }
+        }
+    });
+}
+
+function startSfPay2() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/pay/startSfPay2",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            if(data.data){
+                layer.msg('设置成功', {
+                    time: 500,
+                });
+            }else{
+                layer.msg('设置失败', {
+                    time: 500,
+                });
+            }
+        }
+    });
+}
+
+function startSfPay3() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/pay/startSfPay3",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            if(data.data){
+                layer.msg('设置成功', {
+                    time: 500,
+                });
+            }else{
+                layer.msg('设置失败', {
+                    time: 500,
+                });
+            }
+        }
+    });
+}
+
 function startCpGift() {
     $.ajax({
         type: "post",

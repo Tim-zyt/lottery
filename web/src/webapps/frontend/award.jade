@@ -20,6 +20,15 @@ block content
             button.btn.btn-danger#endCpGift(onclick="endCpGift()",style="display:none;width:100px;margin-left:2%;") 结束CP抽奖
             button.btn.btn-info#startShake(onclick="startShake()",style="display:block;width:100px;margin-left:2%;") 开始摇一摇
             button.btn.btn-danger#endShake(onclick="endShake()",style="display:none;width:100px;margin-left:2%;") 结束摇一摇
+            button.btn.btn-info(data-toggle="dropdown",style="display:block;width:160px;margin-left:2%;") 选择顺手付红包
+                span.caret
+                span.sr-only
+            ul.dropdown-menu(role="menu")
+                button(onclick="startSfPay0()") 活动未开始
+                button(onclick="startSfPay1()") 顺手付活动一
+                button(onclick="startSfPay2()") 顺手付活动二
+                button(onclick="startSfPay3()") 顺手付活动三
+
 
         div.box-body
             div.table-responsive

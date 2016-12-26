@@ -29,6 +29,8 @@ public class Config implements Serializable {
 
     private Integer curStateShake;
 
+    private Integer curSfPay;
+
     public Integer getId() {
         return id;
     }
@@ -83,5 +85,37 @@ public class Config implements Serializable {
 
     public void setIsOpen(Boolean isOpen) {
         this.isOpen = isOpen;
+    }
+
+    public Integer getCurStateAward() {
+        return curStateAward;
+    }
+
+    public void setCurStateAward(Integer curStateAward) {
+        this.curStateAward = curStateAward;
+    }
+
+    public Integer getCurStateCp() {
+        return curStateCp;
+    }
+
+    public void setCurStateCp(Integer curStateCp) {
+        this.curStateCp = curStateCp;
+    }
+
+    public Integer getCurStateShake() {
+        return curStateShake;
+    }
+
+    public void setCurStateShake(Integer curStateShake) {
+        this.curStateShake = curStateShake;
+    }
+
+    public Integer getCurSfPay() {
+        return curSfPay;
+    }
+
+    public void setCurSfPay(Integer curSfPay) {
+        this.curSfPay = curSfPay;
     }
 }

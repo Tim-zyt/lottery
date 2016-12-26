@@ -44,4 +44,8 @@ public interface ConfigService {
     int setCurStateCp(int curStateCp) throws Exception;
 
     int setCurStateShake(int curStateShake) throws Exception;
+
+    int getCurSfPay() throws Exception;
+
+    boolean setCurSfPay(int curSfPay) throws Exception;
 }
