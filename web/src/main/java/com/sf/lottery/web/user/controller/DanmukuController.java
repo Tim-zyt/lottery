@@ -70,12 +70,6 @@ public class DanmukuController {
     public JsonResult<Boolean> addDanmuKu(@RequestBody DanmukuMessage danmukuMessage, HttpServletRequest request) {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
-            int userId = Integer.parseInt(CookiesUtil.getCookieByName(request, "userId").getValue());
-            User user = userService.getUserById(userId);
-            if (user == null) {
-                throw new IllegalAccessException();
-            }
-
             switch (danmukuMessage.getType()) {
                 case 0:
                     //普通弹幕
@@ -114,9 +108,14 @@ public class DanmukuController {
                 default:
                     throw new IllegalArgumentException();
             }
-            if (count.incrementAndGet() > 1) {
+            if (count.incrementAndGet() > 1 && danmukuMessage.getType() != 3) {
 
             } else {
+                int userId = Integer.parseInt(CookiesUtil.getCookieByName(request, "userId").getValue());
+                User user = userService.getUserById(userId);
+                if (user == null) {
+                    throw new IllegalAccessException();
+                }
                 if (result.getData()) {
                     WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", danmukuAddress);
                     webSocketClient.connectBlocking();
@@ -144,10 +143,7 @@ public class DanmukuController {
     public JsonResult<Boolean> testAddDanmuKu(@RequestParam("userId") int userId, @RequestParam("type") int type, @RequestParam("content") String content, HttpServletRequest request) {
         JsonResult<Boolean> result = new JsonResult<>();
         try {
-            User user = userService.getUserById(userId);
-            if (user == null) {
-                throw new IllegalAccessException();
-            }
+
 
             switch (type) {
                 case 0:
@@ -190,6 +186,10 @@ public class DanmukuController {
             if (count.incrementAndGet() > 1) {
 
             } else {
+                User user = userService.getUserById(userId);
+                if (user == null) {
+                    throw new IllegalAccessException();
+                }
                 DanmukuMessage danmukuMessage = new DanmukuMessage();
                 danmukuMessage.setType(type);
                 danmukuMessage.setContent(content);

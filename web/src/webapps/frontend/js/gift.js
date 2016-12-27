@@ -34,7 +34,7 @@ jQuery(function ($) {
                 }else if(pageStateAward != 1 && curStateAward == 1){
                     //头像闪烁
                     //获取当前奖品获奖人数
-
+                    $("#loading").css("display","block");
                     $.ajax({
                         type: "post",
                         url : getContextPath() + "/gift/getLuckManCount",
@@ -42,7 +42,7 @@ jQuery(function ($) {
                         data: {
                         },
                         beforeSend:function(){
-                            $("#loading").css("display","block");
+                           
                         },
                     success: function(data1){
                             var luckmanCount = data1.data;
@@ -81,7 +81,10 @@ jQuery(function ($) {
                     $("#loading").css("display","none");
                 }
 
-
+                setTimeout(giftTime,1000);
+            },
+            error:function () {
+                setTimeout(giftTime,1000);
             }
         });
     }
@@ -92,7 +95,7 @@ jQuery(function ($) {
     function giftTime()
     {
         pageController();
-        setTimeout(giftTime,1000);
+
     }
 
 
@@ -231,7 +234,7 @@ jQuery(function ($) {
             return;
         }
         getLuckman(manCount);
-        setTimeout(function(){twinkle(manCount);},150);
+        setTimeout(function(){twinkle(manCount);},50);
     }
 
     //开始抽奖

@@ -14,7 +14,7 @@ $(function () {
             faceimg += '<li><a href="javascript:void(0)"><img src="image/face/' + (i + 1) + '.gif" face="<emt>' + (i + 1) + '</emt>"/></a></li>';
         }
         ;
-        $("#" + options.divid).prepend("<div id='SmohanFaceBox'><span class='Corner'></span><div class='Content'><h3><span>常用表情</span><a class='close' title='关闭'></a></h3><ul>" + faceimg + "</ul></div></div>");
+        $("#" + options.divid).prepend("<div id='SmohanFaceBox'><span class='Corner'></span><div class='Content'><ul>" + faceimg + "</ul></div></div>");
         $('#SmohanFaceBox').css("display", 'none');//创建完成后先将其隐藏
 //创建表情框结束
 

@@ -58,7 +58,8 @@ jQuery(function ($) {
                             timeout = false;
                             var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp.cpImg;
                             var luckDivHtml  = "<div class='animated bounceInUp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
-                            $("#cpGiftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' class='animated bounceInUp'>");
+                            $("#winningList").remove();
+                            $("#cpGiftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' id='winningList' class='animated bounceInUp'>");
                             $("#luckDiv").html(luckDivHtml);
                             pageStateAwardCp = curStateAwarCp;
                         }
@@ -69,7 +70,9 @@ jQuery(function ($) {
                     $("#loading").css("display","none");
                 }
 
-
+                setTimeout(cpGiftTime,1000);
+            },error:function () {
+                setTimeout(cpGiftTime,1000);
             }
         });
     }
@@ -80,7 +83,7 @@ jQuery(function ($) {
     function cpGiftTime()
     {
         pageController();
-        setTimeout(cpGiftTime,1000);
+
     }
 
 

@@ -17,7 +17,6 @@ var pageShakeState = 0;
 function time()
 {
     shakeController();
-    setTimeout(time,1000);
 }
 
 function initWindowSize() {
@@ -38,6 +37,7 @@ function shakeController(){
             //获取config表里的CurStateAward的值
             var curShakeState = data.data
             if(curShakeState == 0){
+                $("#head").css("display","none");
                 $("#loading").css("display","block");
                 $("#shakeRace").css("display","none");
                 $("#shakeDiv").css("display","none");
@@ -59,11 +59,17 @@ function shakeController(){
                 getShakeWinner();
                 pageShakeState = curShakeState;
             }else pageShakeState = curShakeState;
+            setTimeout(time,1000);
+        },error:function () {
+            setTimeout(time,1000);
         }
     });
 }
 
 function getShakeWinner(){
+    // 隐藏原界面
+    $("#shakeRace").css("display","none");
+    $("#loading").css("display","block");
     $.ajax({
         type: "post",
         url : getContextPath() + "/shake/getShakeWinner",
@@ -73,12 +79,11 @@ function getShakeWinner(){
         success: function(data2){
             var shakeWinnerMessage = data2.data;
             var shakeWinnerHtml  = "<div class='animated bounceIn'><img src='" + shakeWinnerMessage.headImgUrl + "' alt='摇一摇获奖者'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #ffff00;' class='users-list-name'>" + shakeWinnerMessage.userNo + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #ffff00;' class='users-list-name'>" + shakeWinnerMessage.userName + "</a></div>";
-            $("#radiation").prepend("<img src='image/winningList.png' class='animated bounceIn'>");
+            $("#winningList").remove();
+            $("#radiation").prepend("<img src='image/winningList.png' id='winningList' class='animated bounceIn'>");
             $("#loading").css("display","none");
             //获奖界面显示出来
             $("#shakeDiv").css("display","block");
-            // 隐藏原界面
-            $("#shakeRace").css("display","none");
             $("#head").css("display","none");
             //拼出获奖者头像、工号和姓名
             $("#shakeWinnerDiv").html(shakeWinnerHtml);
@@ -109,9 +114,9 @@ function getCurrentStatus(){
             for(var i = 0 ; i <shakeWinners.length  ; i++){
                 percentage[i] = (Math.round(shakeWinners[i].shakeCount / shakeWinners[0].shakeCount * 10000) / 100.00-5*i) + "%";
                 shakeHtml+="<li class='item' style='background-color:rgba(255,255,255,0);'>" +
-                    "<div class='product-img'><img style='border-radius: 50%;max-width: 100%;height: 100px;width: 100px;' class='animated shake' src='"+shakeWinners[i].headImgUrl+"'/></div>" +
+                    "<div class='product-img'><img style='border-radius: 50%;max-width: 100%;height: 100px;width: 100px;' class='animated infinite shake' src='"+shakeWinners[i].headImgUrl+"'/></div>" +
                     "<div class='product-info' style='margin-left:12%'>" +
-                    "<a class='product-title' style='font-size:22px;'>"+shakeWinners[i].userName+"<span class='label label-warning pull-right'>"+shakeWinners[i].shakeCount+"</span></a>" +
+                    "<a class='product-title' style='font-size:22px;color:#fff'>"+shakeWinners[i].userName+"<span class='label label-warning pull-right'>"+shakeWinners[i].shakeCount+"</span></a>" +
                     "<span class='product-description' style='margin-top:2%'><div class='progress sm'><div class='progress-bar progress-bar-yellow' style='width:"+percentage[i]+"'></div></div></span></div></li>";
             }
             $("#shake").html(shakeHtml);

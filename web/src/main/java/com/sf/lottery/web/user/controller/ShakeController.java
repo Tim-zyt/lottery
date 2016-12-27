@@ -190,7 +190,6 @@ public class ShakeController {
             }
         }
 
-        shakeCountMap = new ConcurrentHashMap<>();
         return result;
     }
 
