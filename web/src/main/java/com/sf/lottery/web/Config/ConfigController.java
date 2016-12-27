@@ -43,6 +43,24 @@ public class ConfigController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/config/initAward", method = RequestMethod.POST)
+    public JsonResult<Boolean> suspendAward(){
+        JsonResult<Boolean> result = new JsonResult<>();
+        try {
+            int a = configService.setCurStateAward(0);
+            int b = configService.setCurStateCp(0);
+            int c = configService.setCurStateShake(0);
+            result.setData(a > 0 && b > 0 && c > 0);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+
+    @ResponseBody
     @RequestMapping(value = "/config/setCurrentOpera", method = RequestMethod.POST)
     public JsonResult<Boolean> setCurrentOpera(@RequestParam("operaId") Integer operaId,HttpServletRequest request){
         JsonResult<Boolean> result = new JsonResult<>();
