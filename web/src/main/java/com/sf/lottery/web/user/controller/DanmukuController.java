@@ -39,7 +39,7 @@ public class DanmukuController {
             public void run() {
                 count.set(0);
             }
-        }, 0, 50, TimeUnit.MILLISECONDS);
+        }, 0, 1000, TimeUnit.MILLISECONDS);
     }
 
     private ThreadLocal<WebSocketClient> danmuKuClientPool = new ThreadLocal<WebSocketClient>() {
@@ -108,7 +108,7 @@ public class DanmukuController {
                 default:
                     throw new IllegalArgumentException();
             }
-            if (count.incrementAndGet() > 1 && danmukuMessage.getType() != 3) {
+            if (count.incrementAndGet() > 100 && danmukuMessage.getType() != 3) {
 
             } else {
                 int userId = Integer.parseInt(CookiesUtil.getCookieByName(request, "userId").getValue());
@@ -117,13 +117,23 @@ public class DanmukuController {
                     throw new IllegalAccessException();
                 }
                 if (result.getData()) {
-                    WebSocketClient webSocketClient = WebsocketClientFactory.getWebsocketClient("danmuku", danmukuAddress);
-                    webSocketClient.connectBlocking();
                     danmukuMessage.setSfUserName(user.getSfName());
                     danmukuMessage.setSfUserNum(String.format("%08d", user.getSfNum()));
                     danmukuMessage.setWxAvatar(user.getWxHeadimgurl());
-                    webSocketClient.send(JSON.toJSONString(danmukuMessage));
-                    webSocketClient.close();
+                    try {
+                        danmuKuClientPool.get().send(JSON.toJSONString(danmukuMessage));
+                    } catch (Exception e) {
+                        log.warn(ExceptionUtils.getStackTrace(e));
+                        try {
+                            danmuKuClientPool.get().close();
+                        } catch (Exception e1) {
+
+                        }
+                        WebSocketClient danmuku = WebsocketClientFactory.getWebsocketClient("danmuku", danmukuAddress);
+                        danmuku.connectBlocking();
+                        danmuKuClientPool.set(danmuku);
+                        danmuKuClientPool.get().send(JSON.toJSONString(danmukuMessage));
+                    }
                 }
             }
         } catch (IllegalAccessException | NullPointerException i) {
@@ -183,7 +193,7 @@ public class DanmukuController {
                 default:
                     throw new IllegalArgumentException();
             }
-            if (count.incrementAndGet() > 1) {
+            if (count.incrementAndGet() > 100) {
 
             } else {
                 User user = userService.getUserById(userId);

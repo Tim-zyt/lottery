@@ -20,9 +20,9 @@ jQuery(function ($) {
             var danmukuMessage = JSON.parse(message.data);
             count += 1;
             intervalMessageCount += 1;
-            if(intervalMessageCount>1){
-                return;
-            }
+            // if(intervalMessageCount>1){
+            //     return;
+            // }
             var present = [{},
                 {
                     div: "<div style='position:absolute;top:" + (count % 5 + 1) * 100 + "px;padding-left:" + (count % 7 + 1) * 10 + "%' class='col-lg-12'><p><img src='image/present/flower.gif' style='height: 60px' class='img-responsive'></p></div>",
@@ -87,3 +87,4 @@ jQuery(function ($) {
         }
     });
 });
+
