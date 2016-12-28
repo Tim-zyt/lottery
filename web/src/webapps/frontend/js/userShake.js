@@ -10,7 +10,7 @@ jQuery(function ($) {
                 success: function (data) {
                     if (data.data) {
                         shakeImg.html("");
-                        shakeImg.append($("<img src='image/phone/shake.png'/ style='width:100%'>"));
+                        shakeImg.append($("<img src='image/phone/shake.png'/ style='width:60%'>"));
                         shakeImg.removeClass("animated tada");
                         shakeImg.addClass("animated tada");
                         clearInterval(checkIfStart);

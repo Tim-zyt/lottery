@@ -7,7 +7,11 @@ jQuery(function ($) {
         });
         var restFlowers = getCookie("flower");
         $("span.flower").html("* " + (restFlowers));
-        $("img.flower").click(function () {
+        $("div.flower").click(function () {
+            $("img.flower").addClass("bounce");
+            setTimeout(function () {
+                $("img.flower").removeClass("bounce");
+            },1000);
             var restFlowers = getCookie("flower");
             if (restFlowers > 0) {
 
@@ -26,7 +30,11 @@ jQuery(function ($) {
         });
         var restCars = getCookie("car");
         $("span.car").html("* " + (restCars));
-        $("img.car").click(function () {
+        $("div.car").click(function () {
+            $("img.car").addClass("bounce");
+            setTimeout(function () {
+                $("img.car").removeClass("bounce");
+            },1000);
             var restCars = getCookie("car");
             if (restCars > 0) {
                 sendDanmuKu(2, null, function (data) {
@@ -44,7 +52,11 @@ jQuery(function ($) {
         });
         var restRockets = getCookie("rocket");
         $("span.rocket").html("* " + (restRockets));
-        $("img.rocket").click(function () {
+        $("div.rocket").click(function () {
+            $("img.rocket").addClass("bounce");
+            setTimeout(function () {
+                $("img.rocket").removeClass("bounce");
+            },1000);
             var restRockets = getCookie("rocket");
             if (restRockets > 0) {
                 sendDanmuKu(3, null, function (data) {
