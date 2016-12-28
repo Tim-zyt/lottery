@@ -34,6 +34,7 @@ jQuery(function ($) {
                     //把页面图片和人头抹掉
                     $("#cpGiftImg").remove();
                     $("#luckDiv").html("");
+                    $("#loading").css("display","block");
                     pageStateAwardCp = curStateAwarCp;
                 }else if(pageStateAwardCp != 1 && curStateAwarCp == 1){
                     //头像闪烁

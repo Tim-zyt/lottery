@@ -30,6 +30,8 @@ jQuery(function ($) {
                     // $("#loading").style("display","block");
                     $("#cpGiftImg").remove();
                     $(".luckman").remove();
+                    $("#luckmanList").css("margin-top","10%");
+                    $("#loading").css("display","block");
                     pageStateAward = curStateAward;
                 }else if(pageStateAward != 1 && curStateAward == 1){
                     //头像闪烁
