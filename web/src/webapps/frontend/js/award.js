@@ -544,3 +544,24 @@ function deleteShakeWinner(winnerId){
         }
     });
 }
+
+
+
+function initAward() {
+    $.ajax({
+        type: "post",
+        url : getContextPath() + "/config/initAward",
+        dataType:'json',
+        data: {
+        },
+        success: function(data){
+            var startSuccess = data.data;
+            if(startSuccess){
+                alert("初始化抽奖成功");
+            }else{
+                alert("初始化抽奖失败");
+            }
+        }
+    });
+}
+

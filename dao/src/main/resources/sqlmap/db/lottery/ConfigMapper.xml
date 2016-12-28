@@ -9,9 +9,13 @@
     <result column="is_can_shake" property="isCanShake" jdbcType="BIT" />
     <result column="is_can_cpsign" property="isCanCpsign" jdbcType="BIT" />
     <result column="is_open" property="isOpen" jdbcType="BIT" />
+    <result column="cur_state_award" property="curStateAward" jdbcType="INTEGER" />
+    <result column="cur_state_cp" property="curStateCp" jdbcType="INTEGER" />
+    <result column="cur_state_shake" property="curStateShake" jdbcType="INTEGER" />
+    <result column="cur_sfpay" property="curSfPay" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, cur_gift_id, cur_program_id, is_can_reward, is_can_shake ,is_can_cpsign , is_open
+    id, cur_gift_id, cur_program_id, is_can_reward, is_can_shake ,is_can_cpsign , is_open , cur_state_award , cur_state_cp , cur_state_shake , cur_sfpay
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -44,7 +48,9 @@
   <insert id="insert" parameterType="com.sf.lottery.common.model.Config" >
     insert into config (id, cur_gift_id, cur_program_id, is_can_reward, is_can_shake, is_can_cpsign, is_open)
     values (#{id,jdbcType=INTEGER}, #{curGiftId,jdbcType=INTEGER}, #{curProgramId,jdbcType=INTEGER},
-      #{isCanReward,jdbcType=BIT}, #{isCanShake,jdbcType=BIT},  #{isCanCpsign,jdbcType=BIT} ,  #{isOpen,jdbcType=BIT})
+      #{isCanReward,jdbcType=BIT}, #{isCanShake,jdbcType=BIT},  #{isCanCpsign,jdbcType=BIT} ,  #{isOpen,jdbcType=BIT} ,
+      #{curStateAward,jdbcType=INTEGER} ,#{curStateCp,jdbcType=INTEGER} , #{curStateShake,jdbcType=INTEGER} , #{curSfPay,jdbcType=INTEGER}
+      )
   </insert>
 
   <update id="updateByIsOpen" parameterType="com.sf.lottery.common.model.Config">
@@ -54,7 +60,11 @@
       is_can_reward = #{isCanReward,jdbcType=BIT},
       is_can_shake = #{isCanShake,jdbcType=BIT},
       is_can_cpsign = #{isCanCpsign,jdbcType=BIT},
-      is_open = #{isOpen,jdbcType=BIT}
+      is_open = #{isOpen,jdbcType=BIT},
+      cur_state_award = #{curStateAward,jdbcType=INTEGER} ,
+      cur_state_cp = #{curStateCp,jdbcType=INTEGER} ,
+      cur_state_shake = #{curStateShake,jdbcType=INTEGER} ,
+      cur_sfpay = #{curSfPay,jdbcType=INTEGER}
     where is_open = TRUE
   </update>
 </mapper>
