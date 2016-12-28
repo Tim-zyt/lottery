@@ -39,7 +39,7 @@ public class DanmukuController {
             public void run() {
                 count.set(0);
             }
-        }, 0, 1000, TimeUnit.MILLISECONDS);
+        }, 0, 50, TimeUnit.MILLISECONDS);
     }
 
     private ThreadLocal<WebSocketClient> danmuKuClientPool = new ThreadLocal<WebSocketClient>() {
@@ -108,7 +108,7 @@ public class DanmukuController {
                 default:
                     throw new IllegalArgumentException();
             }
-            if (count.incrementAndGet() > 100 && danmukuMessage.getType() != 3) {
+            if (count.incrementAndGet() > 3 && danmukuMessage.getType() != 3) {
 
             } else {
                 int userId = Integer.parseInt(CookiesUtil.getCookieByName(request, "userId").getValue());
@@ -193,7 +193,7 @@ public class DanmukuController {
                 default:
                     throw new IllegalArgumentException();
             }
-            if (count.incrementAndGet() > 100) {
+            if (count.incrementAndGet() > 3) {
 
             } else {
                 User user = userService.getUserById(userId);
