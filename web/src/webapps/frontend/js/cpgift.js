@@ -3,32 +3,24 @@ jQuery(function ($) {
 
         initWindowSize();
 
-        pageStateAwardCp = 0;
-        $(window).resize(function() {
-            initWindowSize();
-        });
-        cpGiftTime();
-
-        // $.ajax({
-        //     type: "get",
-        //     url: getContextPath() + "/weixin/accessToken",
-        //     success: function (data) {
-        //         accessToken = data;
-        //         pageStateAwardCp = 0;
-        //         $(window).resize(function() {
-        //             initWindowSize();
-        //         });
-        //         cpGiftTime();
-        //     },
-        //     error:function (data) {
-        //         accessToken = "123";
-        //         pageStateAwardCp = 0;
-        //         $(window).resize(function() {
-        //             initWindowSize();
-        //         });
-        //         cpGiftTime();
-        //     }
+        // pageStateAwardCp = 0;
+        // $(window).resize(function() {
+        //     initWindowSize();
         // });
+        // cpGiftTime();
+
+        $.ajax({
+            type: "get",
+            url: getContextPath() + "/weixin/accessToken",
+            success: function (data) {
+                accessToken = data;
+                pageStateAwardCp = 0;
+                $(window).resize(function() {
+                    initWindowSize();
+                });
+                cpGiftTime();
+            }
+        });
 
 
     });
