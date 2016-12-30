@@ -1,5 +1,5 @@
 jQuery(function ($) {
-    $(document).ready(function () {
+    $(document).ready(function () { 
         var payImg = $("div#sfpay");
 
         function checkStart() {
