@@ -9,13 +9,17 @@
         initAllCP();
     }
 
+    var cpCount = -1;
+
     function initAllCP() {  
         $.ajax({
             type: "POST",
             url: getContextPath() + "/cpGift/getAllCP",
             success: function (data) {
-                setWXImgUrl(data);
-                setTimeout(refreshPage,5000);
+                if(cpCount == -1 || cpCount != data.data.length){
+                    setWXImgUrl(data);
+                    setTimeout(refreshPage,5000);
+                }
             },error:function () {
                 setTimeout(refreshPage,5000);
             }
@@ -60,6 +64,9 @@
                 var cp = cpdata.data;
                 var cpHtml = "";
                 var iLen = cp.length;
+
+                cpCount = iLen;
+
                 for(var i = iLen - 1 ; i >=0  ; i--){
                     var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp[i].cpImg;
                     cpHtml += "<li style='width: 20%;height:45%;'>" +
