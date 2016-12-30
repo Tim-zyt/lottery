@@ -1,6 +1,14 @@
 jQuery(function ($) {
     $(document).ready(function () {
 
+        initWindowSize();
+
+        // pageStateAwardCp = 0;
+        // $(window).resize(function() {
+        //     initWindowSize();
+        // });
+        // cpGiftTime();
+
         $.ajax({
             type: "get",
             url: getContextPath() + "/weixin/accessToken",
@@ -17,7 +25,7 @@ jQuery(function ($) {
 
     });
 
-
+ 
     var pageStateAwardCp = 0;
 
     function pageController(){
@@ -58,7 +66,7 @@ jQuery(function ($) {
                             var cp = data2.data;
                             timeout = false;
                             var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp.cpImg;
-                            var luckDivHtml  = "<div class='animated bounceInUp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
+                            var luckDivHtml  = "<div class='animated bounceInUp'><img src='" + imgSrc + "' alt='CP合影'  style='border-radius: 50%;' width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
                             $("#winningList").remove();
                             $("#cpGiftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' id='winningList' class='animated bounceInUp'>");
                             $("#luckDiv").html(luckDivHtml);
@@ -79,16 +87,11 @@ jQuery(function ($) {
     }
 
 
-
     //页面轮询
     function cpGiftTime()
     {
         pageController();
-
     }
-
-
-
 
 
     //得到当前时刻临时的获奖人，一闪而过
@@ -115,18 +118,13 @@ jQuery(function ($) {
             dataType:'json',
             data: {
             },
-            beforeSend:function(){
-                $("#loading").css("display","block");
-            },
+            // beforeSend:function(){
+            //     $("#loading").css("display","block");
+            // },
             success: function(data){
                 setWXImgUrl(data);
             }
         });
-    }
-
-    //展示获奖人的头像
-    function showLuckCP(cp) {
-
     }
 
     var timeout = false; //启动及关闭按钮
@@ -181,7 +179,7 @@ jQuery(function ($) {
                 var iLen = cp.length;
                 for(var i = iLen - 1 ; i >=0  ; i--){
                     var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp[i].cpImg;
-                    cpHtml += "<div style='margin-top: 10%' id='" + i +"' style='display: none' class='luckCp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp[i].user1SfName + cp[i].user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp[i].user2SfName + cp[i].user2SfNum + "</a></div>";
+                    cpHtml += "<div style='margin-top: 10%' id='" + i +"' style='display: none' class='luckCp'><img src='" + imgSrc + "' alt='CP合影' style='border-radius: 50%;' width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp[i].user1SfName + cp[i].user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #f39c12;' class='users-list-name'>" + cp[i].user2SfName + cp[i].user2SfNum + "</a></div>";
                 }
                 $("#luckDiv").html(cpHtml);
 
@@ -195,6 +193,7 @@ jQuery(function ($) {
         var height = window.innerHeight;
         $("#large-header").css({"width":width + "px","height": height + "px"});
         $("#cpGiftBox").css({"width":width + "px","height": height + "px"});
+        $("#luckDiv").css({"height": height + "px"});
     }
 
 
