@@ -127,6 +127,7 @@
         FROM couple a, sf_user b,  sf_user c
         where a.user1_sf_num = b.sf_num
         AND a.user2_sf_num = c.sf_num
+        ORDER BY a.id DESC
     </select>
 
     <select id="selectUnAwardCouple" resultMap="CpGiftResultMap">
@@ -135,6 +136,7 @@
         where a.user1_sf_num = b.sf_num
         AND a.user2_sf_num = c.sf_num
         AND a.aw_count = 0
+        ORDER BY a.id DESC
     </select>
 
     <update id="updateAwardStatusById" parameterType="java.lang.Integer" >
