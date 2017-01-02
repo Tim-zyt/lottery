@@ -34,6 +34,7 @@ jQuery(function ($) {
                     $("#loading").css("display","block");
                     pageStateAward = curStateAward;
                 }else if(pageStateAward != 1 && curStateAward == 1){
+                    $("#loading").css("display","block");
                     //头像闪烁
                     //获取当前奖品获奖人数
                     $("#loading").css("display","block");
@@ -44,10 +45,11 @@ jQuery(function ($) {
                         data: {
                         },
                         beforeSend:function(){
-                           
+
                         },
                     success: function(data1){
-                            var luckmanCount = data1.data;
+                        $("#loading").css("display","none");
+                        var luckmanCount = data1.data;
                             $("#cpGiftImg").remove();
                             $("#luckmanList").css("margin-top","10%");
                             $("#loading").css("display","none");
@@ -59,7 +61,7 @@ jQuery(function ($) {
                     pageStateAward = curStateAward;
                     $("#loading").css("display","none");
                 } else if(pageStateAward != 2 && curStateAward == 2){
-                    $("#loading").css("display","none");
+                    $("#loading").css("display","block");
                     //读Controller里的获奖人缓存
                     $.ajax({
                         type: "post",
@@ -68,6 +70,7 @@ jQuery(function ($) {
                         data: {
                         },
                         success: function(data2){
+                            $("#loading").css("display","none");
                             var luckmans = data2.data;
                             $("#cpGiftImg").remove();
                             end();
@@ -273,6 +276,7 @@ jQuery(function ($) {
         var height = window.innerHeight;
         $("#large-header").css({"width":width + "px","height": height + "px"});
         $("#giftBox").css({"width":width + "px","height": height + "px"});
+        $("#loading").css({"margin-left":width/2-200+"px"});
     }
 
 });
