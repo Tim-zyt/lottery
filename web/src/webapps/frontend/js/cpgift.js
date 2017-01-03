@@ -191,7 +191,4 @@ jQuery(function ($) {
         $("#loading").css({"margin-left":width/2-200+"px"});
     }
 
-
 });
-
-
