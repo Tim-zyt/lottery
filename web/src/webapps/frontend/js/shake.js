@@ -14,6 +14,11 @@ $(document).ready(function () {
 
 var pageShakeState = 0;
 
+function time()
+{
+    shakeController();
+}
+
 
 function initWindowSize() {
     var width = window.innerWidth;
@@ -34,25 +39,27 @@ function shakeController(){
             //获取config表里的CurStateAward的值
             var curShakeState = data.data
             if(curShakeState == 0){
-                $("#head").css("display","none");
+                $("#head").css("display","block");
                 $("#loading").css("display","block");
                 $("#shakeRace").css("display","none");
                 $("#shakeDiv").css("display","none");
             }else if(pageShakeState != 1 && curShakeState == 1){
+                $("#head").css("display","block");
                 $("#loading").css("display","block");
                 //展示摇一摇的人
                 getCurrentStatus();
                 pageShakeState = curShakeState;
-                $("#loading").css("display","none");
                 $("#shakeRace").css("display","block");
                 $("#shakeDiv").css("display","none");
             }else if(pageShakeState == 1 && curShakeState == 1){
-                getCurrentStatus();
                 $("#loading").css("display","none");
+                getCurrentStatus();
+                $("#head").css("display","block");
                 $("#shakeRace").css("display","block");
                 $("#shakeDiv").css("display","none");
             }
             else if(pageShakeState != 2 && curShakeState == 2){
+                $("#head").css("display","none");
                 $("#loading").css("display","block");
                 //从controller的缓存读到获奖者
                 getShakeWinner();
@@ -81,7 +88,6 @@ function getShakeWinner(){
             var shakeWinnerHtml  = "<div class='animated bounceIn'><img src='" + shakeWinnerMessage.headImgUrl + "' alt='摇一摇获奖者'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #ffff00;' class='users-list-name'>" + shakeWinnerMessage.userNo + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #ffff00;' class='users-list-name'>" + shakeWinnerMessage.userName + "</a></div>";
             $("#winningList").remove();
             $("#radiation").prepend("<img src='http://hashzhang.com/data/frontend/image/winningList.png' id='winningList' class='animated bounceIn'>");
-            $("#loading").css("display","none");
             //获奖界面显示出来
             $("#shakeDiv").css("display","block");
             $("#head").css("display","none");
@@ -124,4 +130,3 @@ function getCurrentStatus(){
         }
     });
 }
-

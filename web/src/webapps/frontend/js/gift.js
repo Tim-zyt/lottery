@@ -3,6 +3,8 @@ jQuery(function ($) {
 
         pageStateAward = 0;
 
+        initWindowSize();
+
         $(window).resize(function() {
             initWindowSize();
         });
@@ -26,15 +28,14 @@ jQuery(function ($) {
                 //获取config表里的CurStateAward的值
                 var curStateAward = data.data
                 if(curStateAward == 0){
+                    $("#loading").css("display","block");
                     //把页面图片和人头抹掉
-                    // $("#loading").style("display","block");
                     $("#cpGiftImg").remove();
                     $(".luckman").remove();
                     $("#luckmanList").css("margin-top","10%");
-                    $("#loading").css("display","block");
+                    // $("#loading").css("display","none");
                     pageStateAward = curStateAward;
                 }else if(pageStateAward != 1 && curStateAward == 1){
-                    $("#loading").css("display","block");
                     //头像闪烁
                     //获取当前奖品获奖人数
                     $("#loading").css("display","block");
@@ -43,9 +44,6 @@ jQuery(function ($) {
                         url : getContextPath() + "/gift/getLuckManCount",
                         dataType:'json',
                         data: {
-                        },
-                        beforeSend:function(){
-
                         },
                     success: function(data1){
                         $("#loading").css("display","none");
@@ -280,5 +278,3 @@ jQuery(function ($) {
     }
 
 });
-
-

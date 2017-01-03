@@ -1,13 +1,6 @@
 jQuery(function ($) {
     $(document).ready(function () {
-
         initWindowSize();
-
-        // pageStateAwardCp = 0;
-        // $(window).resize(function() {
-        //     initWindowSize();
-        // });
-        // cpGiftTime();
 
         $.ajax({
             type: "get",
@@ -122,7 +115,6 @@ jQuery(function ($) {
             data: {
             },
             success: function(data){
-                $("#loading").css("display","none");
                 setWXImgUrl(data);
             }
         });
@@ -174,6 +166,7 @@ jQuery(function ($) {
             type: "get",
             url: getContextPath() + "/weixin/accessToken",
             success: function (data) {
+                $("#loading").css("display","none");
                 accessToken = data;
                 var cp = cpdata.data;
                 var cpHtml = "";
@@ -198,7 +191,4 @@ jQuery(function ($) {
         $("#loading").css({"margin-left":width/2-200+"px"});
     }
 
-
 });
-
-
