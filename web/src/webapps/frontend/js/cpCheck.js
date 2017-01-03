@@ -18,8 +18,8 @@
             success: function (data) {
                 if(cpCount == -1 || cpCount != data.data.length){
                     setWXImgUrl(data);
-                    setTimeout(refreshPage,5000);
                 }
+                setTimeout(refreshPage,5000);
             },error:function () {
                 setTimeout(refreshPage,5000);
             }

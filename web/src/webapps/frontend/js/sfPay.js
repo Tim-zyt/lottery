@@ -14,7 +14,7 @@ jQuery(function ($) {
                     function judge() {
                         if (temp == 1) {
                             payImg.html("");
-                            payImg.append($("<a href='http://www.baidu.com' style='font-size:25px;font-family: Microsoft Yahei;color: white'>点我抢顺手付红包啦1</a>"));
+                            payImg.append($("<a href='https://m.sf-pay.com/syf-redpackets/insiderActRedenvelope/L1l0QUtkL2UzU0V5NThFeUlRQWJ1YTluaHZJUDhkRGc' style='font-size:25px;font-family: Microsoft Yahei;color: white'>数据灯塔带你浪啦1</a>"));
                             payImg.removeClass("animated tada");
                             payImg.addClass("animated tada");
 
@@ -51,7 +51,7 @@ jQuery(function ($) {
                             });
                         } else if (temp == 3) {
                             payImg.html("");
-                            payImg.append($("<a href='http://www.so.com' style='font-size:25px;font-family: Microsoft Yahei;color: white''>点我抢顺手付红包啦3</a>"));
+                            payImg.append($("<a href='https://m.sf-pay.com/syf-redpackets/insiderActRedenvelope/VEZqRlFtdUFJQ2o4UlpwZFE0Z1RERWtMVEFIeFF2Q0M' style='font-size:25px;font-family: Microsoft Yahei;color: white''>数据灯塔带你浪啦3</a>"));
                             payImg.removeClass("animated tada");
                             payImg.addClass("animated tada");
 

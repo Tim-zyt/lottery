@@ -11,7 +11,7 @@ $(function () {
 //创建表情框
         var faceimg = '';
         for (i = 0; i < 60; i++) {  //通过循环创建60个表情，可扩展
-            faceimg += '<li><a href="javascript:void(0)"><img src="image/face/' + (i + 1) + '.gif" face="<emt>' + (i + 1) + '</emt>"/></a></li>';
+            faceimg += '<li><a href="javascript:void(0)"><img src="http://hashzhang.com/data/frontend/image/face/' + (i + 1) + '.gif" face="<emt>' + (i + 1) + '</emt>"/></a></li>';
         }
         ;
         $("#" + options.divid).prepend("<div id='SmohanFaceBox'><span class='Corner'></span><div class='Content'><ul>" + faceimg + "</ul></div></div>");
@@ -91,7 +91,7 @@ $(function () {
     $.fn.extend({
         replaceface: function (faces) {
             for (i = 0; i < 60; i++) {
-                faces = faces.replace('<emt>' + (i + 1) + '</emt>', '<img src="image/face/' + (i + 1) + '.gif">');
+                faces = faces.replace('<emt>' + (i + 1) + '</emt>', '<img src="http://hashzhang.com/data/frontend/image/face/' + (i + 1) + '.gif">');
             }
             $(this).html(faces);
         }

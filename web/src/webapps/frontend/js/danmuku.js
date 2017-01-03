@@ -25,19 +25,19 @@ jQuery(function ($) {
             // }
             var present = [{},
                 {
-                    div: "<div style='position:absolute;top:" + (count % 5 + 1) * 100 + "px;padding-left:" + (count % 7 + 1) * 10 + "%' class='col-lg-12'><p><img src='image/present/flower.gif' style='height: 60px' class='img-responsive'></p></div>",
+                    div: "<div style='position:absolute;top:" + (count % 5 + 1) * 100 + "px;padding-left:" + (count % 7 + 1) * 10 + "%' class='col-lg-12'><p><img src='http://hashzhang.com/data/frontend/image/present/flower.gif' style='height: 60px' class='img-responsive'></p></div>",
                     description: "送出了一束鲜花！",
                     animationIn: "animated bounceIn",
                     animationOut: "animated bounceOut"
                 },
                 {
-                    div: "<div style='position:absolute;top:" + (count % 5 + 1) * 100 + "px;padding-left:30%;padding-right:30%' class='col-lg-12'><p><img src='image/present/plane.png' style='width: 120px' class='img-responsive'></p></div>",
+                    div: "<div style='position:absolute;top:" + (count % 5 + 1) * 100 + "px;padding-left:30%;padding-right:30%' class='col-lg-12'><p><img src='http://hashzhang.com/data/frontend/image/present/plane.png' style='width: 120px' class='img-responsive'></p></div>",
                     description: "送出了一架飞机！！",
                     animationIn: "animated bounceInRight",
                     animationOut: "animated bounceOutLeft"
                 },
                 {
-                    div: "<div style='position:absolute;top:25%;padding-left:" + (count % 7 + 1) * 10 + "%;'class='col-lg-12'><p><img src='image/present/rocket.png' style='height:250px' class='img-responsive'></p></div>",
+                    div: "<div style='position:absolute;top:25%;padding-left:" + (count % 7 + 1) * 10 + "%;'class='col-lg-12'><p><img src='http://hashzhang.com/data/frontend/image/present/rocket.png' style='height:250px' class='img-responsive'></p></div>",
                     description: "送出了一发火箭！！！",
                     animationIn: "animated bounceInUp",
                     animationOut: "animated bounceOutUp"
@@ -49,7 +49,7 @@ jQuery(function ($) {
                     danmuCount+=1;
                     for (i = 0; i < 60; i++) {
                         var reg=new RegExp('<emt>' + (i + 1) + '</emt>',"g");
-                        danmukuMessage.content = danmukuMessage.content.replace(reg, '<img src="image/face/' + (i + 1) + '.gif">');
+                        danmukuMessage.content = danmukuMessage.content.replace(reg, '<img src="http://hashzhang.com/data/frontend/image/face/' + (i + 1) + '.gif">');
                     }
                     danmukuWall.append($("<div id='" + danmuCount + "' class='direct-chat-msg animated " + animation[count % animation.length] + "'style='opacity:1' >" +
                         "<div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>" + danmukuMessage.sfUserNum + "&nbsp" + danmukuMessage.sfUserName + "</span><span class='direct-chat-timestamp pull-right'>" + myDate.Format("hh:mm:ss") + "</span></div>" +

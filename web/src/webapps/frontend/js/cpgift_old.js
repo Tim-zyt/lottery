@@ -69,7 +69,7 @@ jQuery(function ($) {
                 var accessToken = data;
                 var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp.cpImg;
                 var luckDivHtml  = "<div class='animated bounceInUp'><img src='" + imgSrc + "' alt='CP合影'  width='480px' height='550px'><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp.user1SfName + cp.user1SfNum + "</a><a href='#' style='text-align: center;font-size: 24px;font-family: 微软雅黑, Microsoft YaHei;color: #fff;' class='users-list-name'>" + cp.user2SfName + cp.user2SfNum + "</a></div>";
-                $("#cpGiftBox").prepend("<img id='cpGiftImg' src='image/winningList.png' class='animated bounceInUp'>");
+                $("#cpGiftBox").prepend("<img id='cpGiftImg' src='http://hashzhang.com/data/frontend/image/winningList.png' class='animated bounceInUp'>");
                 $("#luckDiv").html(luckDivHtml);
             }
         });
