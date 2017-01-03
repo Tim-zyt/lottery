@@ -22,6 +22,8 @@ public interface CoupleMapper {
 
     List<CpGiftVo> selectAllCouple();
 
+    List<CpGiftVo> selectAwardCouple();
+
     List<CpGiftVo> selectUnAwardCouple();
 
     int updateAwardStatusById(Integer id);

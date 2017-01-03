@@ -1,0 +1,24 @@
+//
+   Created by 01170626 on 2016/12/5.
+extends jade/common/layout
+block header
+    link(rel="shortcut icon",href="../favicon.ico")
+    link(rel="stylesheet", type="text/css",href="css/statistics/sidebar/normalize.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/sidebar/demo.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/sidebar/component.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/ionicons.css")
+    link(rel="stylesheet", type="text/css",href="css/statistics/_all-skins.css")
+
+    script(src="js/statistics/sidebar/modernizr.custom.js")
+    //script(src="js/statistics/sidebar/GoogleTemp.js")
+
+block content
+    block content
+        include jade/statistics/sidebar
+        include jade/statistics/awardCPCount
+
+
+block footer
+    script(src="lib/jquery/dist/jquery.min.js")
+    script(src="lib/jquery-ui/jquery-ui.min.js")
+    script(src="js/awardCP.min.js")

@@ -28,6 +28,10 @@ public class CoupleManager {
         return coupleMapper.selectAllCouple();
     }
 
+    public List<CpGiftVo> getAllAwardCouple(){
+        return coupleMapper.selectAwardCouple();
+    }
+
     public List<CpGiftVo> getAllUnAwardCouple(){
         return coupleMapper.selectUnAwardCouple();
     }

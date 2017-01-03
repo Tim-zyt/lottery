@@ -128,4 +128,17 @@ public class CpGiftController {
         }
         return result;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/cpGift/getAllAwardCP", method = RequestMethod.POST)
+    public JsonResult<List<CpGiftVo>> getAllAwardCP(){
+        JsonResult<List<CpGiftVo>> result = new JsonResult<List<CpGiftVo>>();
+        try {
+            result.setData(coupleService.getAllAwardCouple());
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            return result;
+        }
+        return result;
+    }
 }
