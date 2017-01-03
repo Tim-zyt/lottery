@@ -10,6 +10,8 @@ import java.util.List;
 public interface CoupleService {
     List<CpGiftVo> getAllCouple();
 
+    List<CpGiftVo> getAllAwardCouple();
+
     List<CpGiftVo> getAllUnAwardCouple();
 
     CpGiftVo getLuckCP();

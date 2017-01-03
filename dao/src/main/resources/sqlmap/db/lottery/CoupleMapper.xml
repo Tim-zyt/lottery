@@ -145,4 +145,13 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <select id="selectAwardCouple" resultMap="CpGiftResultMap">
+        select a.id, user1_sf_num, user2_sf_num, cp_img, aw_count, aw_id ,b.sf_name as user1_sf_name,c.sf_name as user2_sf_name
+        FROM couple a, sf_user b,  sf_user c
+        where a.user1_sf_num = b.sf_num
+        AND a.user2_sf_num = c.sf_num
+        AND a.aw_count = 1
+        ORDER BY a.id DESC
+    </select>
+
 </mapper>

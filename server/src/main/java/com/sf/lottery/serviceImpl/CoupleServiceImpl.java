@@ -27,6 +27,11 @@ public class CoupleServiceImpl implements CoupleService {
     }
 
     @Override
+    public List<CpGiftVo> getAllAwardCouple(){
+            return coupleManager.getAllAwardCouple();
+    }
+
+    @Override
     public List<CpGiftVo> getAllUnAwardCouple() {
         return coupleManager.getAllUnAwardCouple();
     }
