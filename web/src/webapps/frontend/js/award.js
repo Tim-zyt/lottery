@@ -314,6 +314,7 @@ function startSfPay0() {
                 layer.msg('设置成功', {
                     time: 500,
                 });
+                $("#sfPayChoice").text("活动未开始")
             }else{
                 layer.msg('设置失败', {
                     time: 500,
@@ -335,6 +336,7 @@ function startSfPay1() {
                 layer.msg('设置成功', {
                     time: 500,
                 });
+                $("#sfPayChoice").text("顺手付活动一")
             }else{
                 layer.msg('设置失败', {
                     time: 500,
@@ -356,6 +358,7 @@ function startSfPay2() {
                 layer.msg('设置成功', {
                     time: 500,
                 });
+                $("#sfPayChoice").text("顺手付活动二")
             }else{
                 layer.msg('设置失败', {
                     time: 500,
@@ -377,6 +380,7 @@ function startSfPay3() {
                 layer.msg('设置成功', {
                     time: 500,
                 });
+                $("#sfPayChoice").text("顺手付活动三")
             }else{
                 layer.msg('设置失败', {
                     time: 500,
