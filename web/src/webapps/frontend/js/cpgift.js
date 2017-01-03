@@ -25,7 +25,7 @@ jQuery(function ($) {
 
     });
 
- 
+
     var pageStateAwardCp = 0;
 
     function pageController(){
@@ -45,14 +45,16 @@ jQuery(function ($) {
                     $("#loading").css("display","block");
                     pageStateAwardCp = curStateAwarCp;
                 }else if(pageStateAwardCp != 1 && curStateAwarCp == 1){
+                    $("#loading").css("display","block");
                     //头像闪烁
                     $("#cpGiftImg").remove();
-                    $("#loading").css("display","none");
+                    // $("#loading").css("display","none");
                     startTwinkle();
                     pageStateAwardCp = curStateAwarCp;
                 }else if(pageStateAwardCp == 1 && curStateAwarCp == 1){
                     $("#loading").css("display","none");
                 } else if(pageStateAwardCp != 2 && curStateAwarCp == 2){
+                    $("#loading").css("display","block");
                     pageStateAwardCp = curStateAwarCp;
                     end();
                     //读Controller里的获奖人缓存
@@ -63,6 +65,7 @@ jQuery(function ($) {
                         data: {
                         },
                         success: function(data2){
+                            $("#loading").css("display","none");
                             var cp = data2.data;
                             timeout = false;
                             var imgSrc = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + cp.cpImg;
@@ -118,10 +121,8 @@ jQuery(function ($) {
             dataType:'json',
             data: {
             },
-            // beforeSend:function(){
-            //     $("#loading").css("display","block");
-            // },
             success: function(data){
+                $("#loading").css("display","none");
                 setWXImgUrl(data);
             }
         });
@@ -194,6 +195,7 @@ jQuery(function ($) {
         $("#large-header").css({"width":width + "px","height": height + "px"});
         $("#cpGiftBox").css({"width":width + "px","height": height + "px"});
         $("#luckDiv").css({"height": height + "px"});
+        $("#loading").css({"margin-left":width/2-200+"px"});
     }
 
 

@@ -26,27 +26,30 @@ public class saveCoupleImg {
             Class.forName("com.mysql.jdbc.Driver");
 
             //2、建立连接 建立连接很耗时间 因为连接内部其实包含了Socket对象，是一个远程的连接。比较耗时。
-            //后期使用连接池连接
             Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://118.89.21.105:3306/lottery?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true",
-                    "root", "kingzhx9");
+                    "jdbc:mysql://xxxxx:xxxxx/lottery?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true",
+                    "xxx", "xxxxxx");
 
             PreparedStatement query=
                     conn.prepareStatement("select * from couple");
 
             ResultSet rs = query.executeQuery();
 
-            String s = getToken.sendGet("https://api.weixin.qq.com/cgi-bin/token", StrUtils
-                    .makeString("grant_type=client_credential&appid=", appId, "&secret=", appSecret));
-            AccessTokenReturn accessTokenReturn = JSON.parseObject(s, AccessTokenReturn.class);
+            String s = getToken.sendGet("http://xxxxxx.xxxx/weixin/accessToken","");
+
+            File file =new File("D:\\cp");
+            //如果文件夹不存在则创建
+            if  (!file .exists()  && !file .isDirectory())
+            {
+                file .mkdir();
+            }
 
             while(rs.next()){
                 int user1_sf_num = rs.getInt("user1_sf_num");
                 int user2_sf_num = rs.getInt("user2_sf_num");
-                String imgName = "D:\\cp\\"+user1_sf_num+""+user2_sf_num + ".jpg";
-                System.out.println(user1_sf_num);
-                //String cp_img = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessTokenReturn + "&media_id=" + rs.getString("cp_img");
-                String cp_img = rs.getString("cp_img");
+                String imgName = "D:\\cp\\"+user1_sf_num+"&"+user2_sf_num + ".jpg";
+                String cp_img = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + s + "&media_id=" + rs.getString("cp_img");
+                //String cp_img = rs.getString("cp_img");
                 printImg(imgName,cp_img);
             }
 
